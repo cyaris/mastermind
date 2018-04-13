@@ -4,15 +4,15 @@ except ImportError:
     from distutuls.core import setup
 
 config = {
-    'description': 'ex45',
+    'description': 'mastermind',
     'author': 'Charlie',
     'url': 'https://github.com/cyaris',
     'author_email': 'charlieyaris@gmail.com',
     'version': '0.1',
     'install_requires': ['nose'],
-    'packages': ['ex45'],
+    'packages': ['mastermind'],
     'scripts': [],
-    'name': 'ex45'
+    'name': 'mastermind'
 }
 
 setup(**config)
