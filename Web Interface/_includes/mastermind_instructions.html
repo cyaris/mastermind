@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>Mastermind</title>
+	  <style type="text/css">
+
+			h1 {
+			  display: block;
+			  font-size: 2.5em;
+			  margin-top: 0.67em;
+			  margin-bottom: 0.67em;
+			  margin-left: 0;
+			  margin-right: 0;
+			  font-weight: bold;
+			}
+
+			#introduction {
+			    text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+			}
+
+			.center {
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				/* width: 50px; */
+			}
+
+			.btn-group button {
+			  background-color: #4CAF50; /* Green background */
+			  border: 1px solid green; /* Green border */
+			  color: white; /* White text */
+			  padding: 10px 24px; /* Some padding */
+			  cursor: pointer; /* Pointer/hand icon */
+			  float: center; /* Float the buttons side by side */
+			}
+
+			.btn-group button:not(:last-child) {
+			  border-right: none; /* Prevent double borders */
+			}
+			/* Clear floats (clearfix hack) */
+			.btn-group:after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
+			/* Add a background color on hover */
+			.btn-group button:hover {
+			  background-color: #3e8e41;
+			}
+
+	  </style>
+	</head>
+	<body>
+		<div class="center">
+			<div class="btn-group">
+				<a href="../play_mastermind/"><button class="button">Play Game</button></a>
+			</div>
+		</div>
+		<div id="introduction" style="margin-bottom:-40px;">
+			<p align="left" style="margin-top:12px;">The computer will pick a secret four color code with a specific order. Each turn, you will try to guess the code. For each guess, the computer will score you in two columns. The W column denotes right colors in the wrong place, while the B column denotes right colors in the right place. If you can get four right colors in the right place before the board is completely filled, then you win!</p>
+		</div>
+	</body>
+	<br>
+	<br>
+	<br>
+	<br>
+</html>

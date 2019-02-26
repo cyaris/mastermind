@@ -52,12 +52,7 @@ class Level(object):
         self.generate_code()
 
     def generate_code(self):
-        bashCommand = "pwd"
-        import subprocess
-        process = subprocess.Popen(bashCommand, stdout=subprocess.PIPE)
-        output, error = process.communicate()
-        print(output)
-        pieces = open("/Users/charlieyaris/lpthw/lpthw/projects/ex45/ex45/mastermind_pieces.txt")
+        pieces = open("mastermind_pieces.txt")
         pieces.seek(0)
         for piece in pieces:
             self.piece_list.append(piece.strip("[,],\n"))
