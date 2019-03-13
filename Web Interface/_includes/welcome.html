@@ -34,19 +34,78 @@
 			  background-color: #3e8e41;
 			}
 
+			#levels_overview {
+				font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				font-weight: 800;
+				cursor: pointer;
+			}
+
+			#levels_list {
+				display: none;
+			}
+
+			ul {
+					display: inline-block;
+			    padding-left: 0;
+			    text-align: left;
+					margin-left: 115px;
+			}
+
 	  </style>
+		<script>
+
+		function toggleLevelsList() {
+			if ( document.getElementById("levels_list").style.display=="none" )
+			{ document.getElementById("levels_list").style.display = "block" }
+			else
+			{ document.getElementById("levels_list").style.display = "none" }
+		};
+
+		</script>
 	</head>
 	<body>
-		<div class="center">
+		<div class="center" style="margin-bottom:15px;">
 			<div class="btn-group">
 				<a href="../mastermind_level_1/"><button>Level 1</button></a>
 				<a href="../mastermind_level_2/"><button>Level 2</button></a>
+			</div>
+		</div>
+		<div class="center" style="margin-bottom:0px;">
+			<div class="btn-group">
 				<a href="../mastermind_level_3/"><button>Level 3</button></a>
+				<a href="../mastermind_level_4/"><button>Level 4</button></a>
+			</div>
+		</div>
+		<div id="levels_toggle" style="margin-top:15px; margin-bottom:30px;">
+			<div id="levels_overview" align="center">
+				<font size="5.5"><b><a onclick="toggleLevelsList()">Levels Overview</a></b></font>
+			</div>
+			<div id="levels_list" align="center" style="margin-left:-160px; margin-top:15px;">
+				<h4>Level 1</h4>
+				<ul>
+				  <li>4 color code</li>
+					<li>6 possible colors</li>
+				  <li>8 guesses</li>
+				</ul>
+				<h4>Level 2</h4>
+				<ul>
+				  <li>4 color code</li>
+					<li>8 possible colors</li>
+				  <li>8 guesses</li>
+				</ul>
+				<h4>Level 3</h4>
+				<ul>
+				  <li>5 color code</li>
+					<li>6 possible colors</li>
+				  <li>9 guesses</li>
+				</ul>
+				<h4>Level 4</h4>
+				<ul>
+				  <li>5 color code</li>
+					<li>8 possible colors</li>
+				  <li>10 guesses</li>
+				</ul>
 			</div>
 		</div>
 	</body>
-	<br>
-	<br>
-	<br>
-	<br>
 </html>
