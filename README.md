@@ -2,6 +2,5 @@ I first learned how to code while reading the book Learn Python the Hard Way. Fo
 
 Two existing D3.js projects really helped me in seeing this project through.
 
-* ["Customizing Heatmap in D3.js"](https://www.d3-graph-gallery.com/graph/heatmap_style.html){:target="_blank"}
-* ["Drawing Circles on the Circumference of Another Circle"](http://jsfiddle.net/ksWDN/){:target="_blank"}
-
+* <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank">Customizing Heatmap in D3.js</a>
+* <a href="http://jsfiddle.net/ksWDN//" target="_blank">Drawing Circles on the Circumference of Another Circle</a>
