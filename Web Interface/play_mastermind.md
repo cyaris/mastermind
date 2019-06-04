@@ -5,4 +5,4 @@ subtitle: Choose Your Level
 social-share: true
 ---
 
-{% include welcome.html %}
+{% include /mastermind/welcome.html %}
