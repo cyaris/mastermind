@@ -72,10 +72,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
 
+		/* svg {
+			border: 1px solid #000;
+		} */
+
 		@media (max-width:602px){
         #color_buttons {
             margin-left:22.5%;
         }
+	      #game_board_tooltip_div {
+						display: none;
+	      }
     }
 
     @media (min-width:602px){
@@ -179,6 +186,7 @@
 		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 		<!-- Create a div where the graph will take place -->
 		<div id="game_board" align="center"></div>
+		<div id="game_board_tooltip_div" align="center"></div>
 		<div id="end_game" align="center"></div>
 		<div id="hidden-button-win">
 			<div id="hidden-button-win-text">
@@ -295,14 +303,14 @@
 		    .append('g')
 		    	.attr('transform', 'translate(' + circ_radius + ',' + circ_radius + ')');
 
-		d3.select("#game_board")
+		d3.select("#game_board_tooltip_div")
 			.attr("pointer-events", "none")
 			.append("div")
 				.attr("class", "tooltip")
 				.attr("id", "game_board_tooltip")
 				.style("opacity", 0);
 		//Read the data
-		d3.csv("/assets/mastermind/game_board" + String(level) + ".csv", function(data) {
+		d3.csv("/assets/csv/mastermind/game_board" + String(level) + ".csv", function(data) {
 			// Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
 			var turnSlots = d3.map(data, function(d){ return d.group; }).keys(),
 					numTurns = d3.map(data, function(d){ return d.variable; }).keys(),
@@ -335,9 +343,10 @@
 					d3.select("#game_board_tooltip")
 						.style("opacity", 1)
 					d3.select(this)
-					 .style("stroke-width", 4)
-					 .style("stroke", "black")
-					 .style("opacity", 1)
+						.style("stroke-width", 4)
+						.style("stroke", "black")
+						.style("opacity", 1)
+						.style("cursor", "help");
 				 }}
 				else if ( hoverID=="color_buttons" ) {
 					d3.select(this)
@@ -618,7 +627,7 @@
 							document.getElementById("color_buttons").style.display = "none";
 							document.getElementById("hidden-button-lose").style.display = "block";
 
-							d3.csv("/assets/mastermind/end_game" + colorCodeLength[level] + ".csv", function(data) {
+							d3.csv("/assets/csv/mastermind/end_game" + colorCodeLength[level] + ".csv", function(data) {
 								// set the dimensions and margins of the graph
 								var rightDic = { 1: 123, 2: 123, 3: 108, 4: 108 },
 										margin = { top: 23.5, right: rightDic[level], bottom: 150, left: 25 },
