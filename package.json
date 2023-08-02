@@ -1,0 +1,43 @@
+{
+  "name": "mastermind",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host",
+    "dev:open": "vite --host --open",
+    "build": "vite build",
+    "package": "vite package",
+    "preview": "vite preview",
+    "deploy:dev": "deploy.sh && vite --host",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+    "format": "prettier --ignore-path .gitignore --write '**/*.{css,cjs,html,js,json,svelte,svg}'",
+    "format:check": "prettier --ignore-path ../.gitignore --check '**/*.{css,cjs,html,js,json,svelte,svg}'",
+    "lint": "eslint '**/*.{cjs,html,js,svelte}'",
+    "lint:fix": "eslint --fix '**/*.{cjs,html,js,svelte}'",
+    "rollup": "rollup -c rollup.config.js"
+  },
+  "eslintIgnore": [
+    ".svelte-kit",
+    "node_modules"
+  ],
+  "dependencies": {
+    "svelte-lib": "file:../svelte-lib/svelte",
+    "vite": "^4.4.8"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^6.0.0",
+    "@shopify/prettier-plugin-liquid": "^1.2.1",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-gitignore": "^0.1.0",
+    "eslint-plugin-css": "^0.6.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-svelte3": "^3.4.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-svelte": "^3.0.3",
+    "rollup": "^3.26.2"
+  }
+}
