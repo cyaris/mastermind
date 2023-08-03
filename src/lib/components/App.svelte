@@ -1,17 +1,52 @@
 <script>
-  import { Text } from "svelte-lib/components"
+  import { tooltip } from "svelte-lib/functions"
+
+  export let level = 1
+
+  let colors = ["yellow", "blue", "red", "green", "orange", "purple", "brown", "pink"]
+  let levels = [
+    { codeLength: 4, maxTurns: 8 },
+    { codeLength: 4, maxTurns: 9 },
+    { codeLength: 5, maxTurns: 9 },
+    { codeLength: 5, maxTurns: 10 },
+  ]
+
+  let rectWidth = 45
+  let rectHeight = 35
+  let padding = 5
+
+  let levelSettings
+  let board
+  let svgWidth
+  let svgHeight
+  $: {
+    levelSettings = levels[level - 1]
+
+    svgWidth = (rectWidth + padding) * (levelSettings.codeLength + 2)
+    svgHeight = (rectHeight + padding) * levelSettings.maxTurns
+  }
 </script>
 
-<div>
-  <svg class="w-full inline-block" width={100} height={100}>
-    <Text
-      classes="text-right fill-red-200"
-      overflowBody={false}
-      wrapBody={false}
-      width={100}
-      height={100}
-      bodyPadding={{ top: 10, right: 0, bottom: 0, left: 0 }}
-      bodyText="hi there, is this thing on?"
-    />
+{#if levelSettings}
+  <svg class="inline-block" width={svgWidth} height={svgHeight}>
+    {#each Array.from({ length: levelSettings.maxTurns }) as d, i}
+      {#each Array.from({ length: levelSettings.codeLength + 2 }) as dd, ii}
+
+        <rect
+
+          x={ii * (rectWidth + padding)}
+          y={i * (rectHeight + padding)}
+          rx={3}
+          ry={3}
+          width={rectWidth}
+          height={rectHeight}
+          fill={ii >= levelSettings.codeLength ? "rgb(211,211,211)" : "transparent"}
+          stroke="black"
+          title="hi"
+          use:tooltip
+        />
+
+      {/each}
+    {/each}
   </svg>
-</div>
+{/if}
