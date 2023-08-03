@@ -1,1 +1,1 @@
-export { default as Mastermind } from "./Mastermind.svelte"
+export { default as App } from "./App.svelte"

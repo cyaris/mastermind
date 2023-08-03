@@ -1,9 +1,9 @@
-import Mastermind from "./src/lib/components/Mastermind.svelte"
+import App from "./src/lib/components/App.svelte"
 
 let div = document.createElement("div")
 let script = document.currentScript
 script.parentNode.insertBefore(div, script)
 
-const mastermind = new Mastermind({
+const app = new App({
   target: div,
 })
