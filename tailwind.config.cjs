@@ -5,7 +5,7 @@ const plugin = require("tailwindcss/plugin")
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./node_modules/visor/**/*.{html,js,svelte,ts}",
+    "./node_modules/svelte-lib/**/*.{html,js,svelte,ts}",
     "./package/**/*.{html,js,svelte,ts}",
     "./public/**/*.{html,js,svelte,ts}",
     "./src/**/*.{html,js,svelte,ts}",
