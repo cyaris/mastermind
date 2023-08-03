@@ -20,9 +20,13 @@
   },
   "eslintIgnore": [
     ".svelte-kit",
+    "build",
+    "dist",
     "node_modules"
   ],
   "dependencies": {
+    "rollup-plugin-image": "^1.0.2",
+    "rollup-plugin-svg": "^2.0.0",
     "svelte-lib": "file:../svelte-lib/svelte",
     "vite": "^4.4.8"
   },
@@ -38,6 +42,8 @@
     "eslint-plugin-svelte3": "^3.4.0",
     "prettier": "^3.0.0",
     "prettier-plugin-svelte": "^3.0.3",
-    "rollup": "^3.26.2"
+    "rollup": "^3.27.0",
+    "rollup-plugin-svelte": "^7.1.6",
+    "svelte": "^3.59.2"
   }
 }

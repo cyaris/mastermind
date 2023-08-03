@@ -14,7 +14,6 @@ const config = {
   ],
   kit: {
     adapter: adapter(),
-    files: { assets: "src/lib/static" },
   },
 }
 
