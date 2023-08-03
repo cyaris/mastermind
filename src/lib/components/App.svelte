@@ -31,9 +31,7 @@
   <svg class="inline-block" width={svgWidth} height={svgHeight}>
     {#each Array.from({ length: levelSettings.maxTurns }) as d, i}
       {#each Array.from({ length: levelSettings.codeLength + 2 }) as dd, ii}
-
         <rect
-
           x={ii * (rectWidth + padding)}
           y={i * (rectHeight + padding)}
           rx={3}
@@ -45,7 +43,6 @@
           title="hi"
           use:tooltip
         />
-
       {/each}
     {/each}
   </svg>
