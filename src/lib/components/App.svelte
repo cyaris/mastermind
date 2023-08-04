@@ -33,15 +33,13 @@
       {#each Array.from({ length: levelSettings.maxTurns }) as d, i}
         {#each Array.from({ length: levelSettings.codeLength + 2 }) as dd, ii}
           <rect
-            class="non-reactive"
+            class="non-reactive stroke-black {ii >= levelSettings.codeLength ? 'fill-gray-300' : 'fill-transparent'}"
             x={ii * (rectWidth + padding)}
             y={i * (rectHeight + padding)}
             rx={3}
             ry={3}
             width={rectWidth}
             height={rectHeight}
-            fill={ii >= levelSettings.codeLength ? "rgb(211,211,211)" : "transparent"}
-            stroke="black"
           />
           <foreignObject
             x={ii * (rectWidth + padding) - padding * 0.5}
