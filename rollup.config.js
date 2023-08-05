@@ -10,28 +10,29 @@ import postcss from "rollup-plugin-postcss"
 import postcssImport from "postcss-import"
 import tailwindcss from "tailwindcss"
 import tailwindConfig from "./tailwind.config.cjs"
+import addScopedClass from "./add-scoped-class-plugin.cjs"
 
 export default {
-  input: "ssr.js", // Update this to your main Svelte component file
+  input: "src/main.js", // Update this to your main Svelte component file
   output: {
     format: "iife", // Output format for using the component in non-Svelte environments
-    file: "dist/ssr.js",
+    file: "dist/bundle.js",
   },
   plugins: [
     svelte({
       emitCss: true,
     }),
     postcss({
-      plugins: [tailwindcss(tailwindConfig)],
-      extract: path.resolve("dist/ssr.css"),
+      plugins: [addScopedClass(), tailwindcss(tailwindConfig)],
+      extract: true,
       minimize: true,
       config: {
         path: "./postcss.config.cjs",
       },
       extensions: [".css"],
-      inject: {
-        insertAt: "top",
-      },
+      // inject: {
+      //   insertAt: "top",
+      // },
       sourceMap: false,
     }),
     resolve({

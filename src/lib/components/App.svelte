@@ -49,7 +49,7 @@
               y={i * (rectHeight + padding) - padding * 0.5}
               width={rectWidth + padding}
               height={rectHeight + padding}
-              title="hi"
+              title="hello world"
               use:tooltip
             />
           {/each}
