@@ -13,7 +13,7 @@
 
   let rectWidth = 45
   let rectHeight = 35
-  let padding = 5
+  let padding = 3
 
   let levelSettings
   let board
