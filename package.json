@@ -16,7 +16,8 @@
     "format:check": "prettier --ignore-path ../.gitignore --check '**/*.{css,cjs,html,js,json,svelte,svg}'",
     "lint": "eslint '**/*.{cjs,html,js,svelte}'",
     "lint:fix": "eslint --fix '**/*.{cjs,html,js,svelte}'",
-    "rollup": "rollup -c rollup.config.js"
+    "rollup": "rollup -c rollup.config.js",
+    "rollup:watch": "rollup -c rollup.config.js -w"
   },
   "eslintIgnore": [
     ".svelte-kit",

@@ -42,7 +42,7 @@ export default {
       config: {
         path: "./postcss.config.cjs",
       },
-      extensions: [".css", ".cjs"],
+      extensions: [".css"],
       inject: {
         insertAt: "top",
       },
