@@ -3,7 +3,6 @@ import path from "path"
 import svelte from "rollup-plugin-svelte"
 import resolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
-// import ignore from "rollup-plugin-ignore"
 import url from "@rollup/plugin-url"
 import svg from "rollup-plugin-svg"
 import image from "rollup-plugin-image"
@@ -37,7 +36,7 @@ export default {
     postcss({
       plugins: [],
       extract: path.resolve("dist/ssr.css"),
-      minimize: true, // Minify CSS in production mode.
+      minimize: false,
     }),
   ],
 }
