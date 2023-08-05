@@ -27,7 +27,7 @@
   "dependencies": {
     "rollup-plugin-image": "^1.0.2",
     "rollup-plugin-svg": "^2.0.0",
-    "svelte-lib": "file:../svelte-lib/svelte",
+    "svelte-lib": "file:../svelte-lib",
     "vite": "^4.4.8"
   },
   "devDependencies": {
