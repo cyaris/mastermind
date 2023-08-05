@@ -1,3 +1,5 @@
+import path from "path"
+
 import svelte from "rollup-plugin-svelte"
 import resolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
@@ -5,6 +7,7 @@ import commonjs from "@rollup/plugin-commonjs"
 import url from "@rollup/plugin-url"
 import svg from "rollup-plugin-svg"
 import image from "rollup-plugin-image"
+import postcss from "rollup-plugin-postcss"
 
 export default {
   input: "ssr.js", // Update this to your main Svelte component file
@@ -14,7 +17,7 @@ export default {
   },
   plugins: [
     svelte({
-      emitCss: false,
+      emitCss: true,
     }),
     resolve({
       browser: true,
@@ -31,5 +34,10 @@ export default {
     }),
     svg(),
     image(),
+    postcss({
+      plugins: [],
+      extract: path.resolve("dist/ssr.css"),
+      minimize: true, // Minify CSS in production mode.
+    }),
   ],
 }
