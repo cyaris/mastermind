@@ -20,6 +20,18 @@ export default {
     svelte({
       emitCss: true,
     }),
+    postcss({
+      plugins: [tailwindcss(tailwindConfig)],
+      extract: path.resolve("dist/ssr.css"),
+      minimize: true,
+      config: {
+        path: "./postcss.config.cjs",
+      },
+      extensions: [".css"],
+      inject: {
+        insertAt: "top",
+      },
+    }),
     resolve({
       browser: true,
       dedupe: ["svelte"],
@@ -35,17 +47,5 @@ export default {
     }),
     svg(),
     image(),
-    postcss({
-      plugins: [tailwindcss(tailwindConfig)],
-      extract: path.resolve("dist/ssr.css"),
-      minimize: true,
-      config: {
-        path: "./postcss.config.cjs",
-      },
-      extensions: [".css"],
-      inject: {
-        insertAt: "top",
-      },
-    }),
   ],
 }
