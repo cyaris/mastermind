@@ -7,6 +7,8 @@ import url from "@rollup/plugin-url"
 import svg from "rollup-plugin-svg"
 import image from "rollup-plugin-image"
 import postcss from "rollup-plugin-postcss"
+import tailwindcss from "tailwindcss"
+import tailwindConfig from "./tailwind.config.cjs"
 
 export default {
   input: "ssr.js", // Update this to your main Svelte component file
@@ -34,9 +36,16 @@ export default {
     svg(),
     image(),
     postcss({
-      plugins: [],
+      plugins: [tailwindcss(tailwindConfig)],
       extract: path.resolve("dist/ssr.css"),
-      minimize: false,
+      minimize: true,
+      config: {
+        path: "./postcss.config.cjs",
+      },
+      extensions: [".css", ".cjs"],
+      inject: {
+        insertAt: "top",
+      },
     }),
   ],
 }
