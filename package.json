@@ -9,7 +9,6 @@
     "build": "vite build",
     "package": "vite package",
     "preview": "vite preview",
-    "deploy:dev": "deploy.sh && vite --host",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
     "format": "prettier --ignore-path .gitignore --write '**/*.{css,cjs,html,js,json,svelte,svg}'",
