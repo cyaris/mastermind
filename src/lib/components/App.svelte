@@ -15,16 +15,27 @@
   let rectWidth = 45
   let rectHeight = 35
   let padding = 3
-
-  let levelSettings
-  let board
   let svgWidth
   let svgHeight
+
+  let levelSettings
+  let codeColors
+  let colorCode
   $: {
     levelSettings = levels[level - 1]
 
     svgWidth = (rectWidth + padding) * (levelSettings.codeLength + 2) + 1
     svgHeight = (rectHeight + padding) * levelSettings.maxTurns + 1
+
+    codeColors = colors.slice(0, levelSettings.possibleColors)
+
+    if (!colorCode) {
+      colorCode = Array.from({ length: levelSettings.codeLength }).map(
+        () => codeColors[Math.floor(Math.random() * codeColors.length)]
+      )
+    }
+
+    console.log(colorCode)
   }
 </script>
 
@@ -49,7 +60,7 @@
                 height={rectHeight}
                 fill={i >= levelSettings.codeLength
                   ? "rgb(211,211,211)"
-                  : colors[Math.floor(Math.random() * colors.length)]}
+                  : codeColors[Math.floor(Math.random() * codeColors.length)]}
                 stroke="black"
               />
               {#if i == 0}

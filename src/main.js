@@ -9,6 +9,6 @@ div.classList.add("mastermind")
 let script = document.currentScript
 script.parentNode.insertBefore(div, script)
 
-const app = new App({
+new App({
   target: div,
 })

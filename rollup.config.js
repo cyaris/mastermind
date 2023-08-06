@@ -1,14 +1,12 @@
-import path from "path"
-
-import svelte from "rollup-plugin-svelte"
-import resolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
-import url from "@rollup/plugin-url"
-import svg from "rollup-plugin-svg"
 import image from "@rollup/plugin-image"
+import resolve from "@rollup/plugin-node-resolve"
+import url from "@rollup/plugin-url"
 import postcss from "rollup-plugin-postcss"
-import postcssImport from "postcss-import"
+import svelte from "rollup-plugin-svelte"
+import svg from "rollup-plugin-svg"
 import tailwindcss from "tailwindcss"
+
 import tailwindConfig from "./tailwind.config.cjs"
 import addScopedClass from "./add-scoped-class-plugin.cjs"
 
