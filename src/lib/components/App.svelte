@@ -45,6 +45,18 @@
               fill={i >= levelSettings.codeLength ? "rgb(211,211,211)" : "transparent"}
               stroke="black"
             />
+            {#if i == 0}
+              <Text
+                classes="non-reactive text-center"
+                overflowBody={true}
+                wrapBody={false}
+                width={rectWidth + padding}
+                height={rectHeight}
+                y={(ii + 1) * rectHeight}
+                bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                bodyText={String(ii + 1)}
+              />
+            {/if}
             {#if i >= levelSettings.codeLength}
               <foreignObject
                 x={i * (rectWidth + padding) - padding / 2}
