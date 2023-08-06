@@ -66,7 +66,7 @@
                 y={ii * (rectHeight + padding) - padding / 2}
                 width={rectWidth + padding}
                 height={rectHeight + padding}
-                title="hello world"
+                title="This round hasn't<br />been played yet."
                 use:tooltip
               />
             {/if}

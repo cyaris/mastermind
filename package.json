@@ -34,7 +34,6 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-url": "^8.0.1",
-    "@shopify/prettier-plugin-liquid": "^1.2.1",
     "postcss-import": "^15.1.0",
     "rollup-plugin-ignore": "^1.0.10",
     "rollup-plugin-url": "^3.0.1",
