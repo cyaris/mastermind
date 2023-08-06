@@ -1,5 +1,6 @@
 <script>
   import { tooltip } from "svelte-lib/functions"
+  import { Text } from "svelte-lib/components"
 
   export let level = 1
 
@@ -31,28 +32,40 @@
   <div class="flex justify-center w-full h-full">
     <svg class="inline-block" width={svgWidth} height={svgHeight}>
       <g transform="translate({1}, {1})">
-        {#each Array.from({ length: levelSettings.maxTurns }) as d, i}
-          {#each Array.from({ length: levelSettings.codeLength + 2 }) as dd, ii}
+        {#each Array.from({ length: levelSettings.codeLength + 2 }) as d, i}
+          {#each Array.from({ length: levelSettings.maxTurns }) as dd, ii}
             <rect
               class="non-reactive"
-              x={ii * (rectWidth + padding)}
-              y={i * (rectHeight + padding)}
+              x={i * (rectWidth + padding)}
+              y={ii * (rectHeight + padding)}
               rx={3}
               ry={3}
               width={rectWidth}
               height={rectHeight}
-              fill={ii >= levelSettings.codeLength ? "rgb(211,211,211)" : "transparent"}
+              fill={i >= levelSettings.codeLength ? "rgb(211,211,211)" : "transparent"}
               stroke="black"
             />
-            <foreignObject
-              x={ii * (rectWidth + padding) - padding * 0.5}
-              y={i * (rectHeight + padding) - padding * 0.5}
-              width={rectWidth + padding}
-              height={rectHeight + padding}
-              title="hello world"
-              use:tooltip
-            />
+            {#if i >= levelSettings.codeLength}
+              <foreignObject
+                x={i * (rectWidth + padding) - padding / 2}
+                y={ii * (rectHeight + padding) - padding / 2}
+                width={rectWidth + padding}
+                height={rectHeight + padding}
+                title="hello world"
+                use:tooltip
+              />
+            {/if}
           {/each}
+          <Text
+            classes="non-reactive text-center"
+            overflowBody={true}
+            wrapBody={false}
+            width={rectWidth + padding}
+            height={rectHeight}
+            x={i * (rectWidth + padding)}
+            bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
+            bodyText={i < levelSettings.codeLength ? String(i + 1) : i == levelSettings.codeLength ? "W" : "B"}
+          />
         {/each}
       </g>
     </svg>
