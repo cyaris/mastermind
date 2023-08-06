@@ -30,9 +30,11 @@
 
 {#if levelSettings}
   <div class="flex justify-center w-full h-full">
-    <div class="flex flex-col items-center">
-      <span>{levelSettings.maxTurns + " tries to crack the " + levelSettings.codeLength + " color code."}</span>
-      <span>? possible colors.</span>
+    <div>
+      <div class="flex flex-col items-center mb-8">
+        <span>{levelSettings.maxTurns + " tries to crack the " + levelSettings.codeLength + " color code."}</span>
+        <span>? possible colors.</span>
+      </div>
       <svg class="inline-block" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
           {#each Array.from({ length: levelSettings.codeLength + 2 }) as d, i}
