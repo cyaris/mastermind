@@ -61,6 +61,7 @@
             {/if}
             {#if i >= levelSettings.codeLength}
               <foreignObject
+              class='cursor-help'
                 x={i * (rectWidth + padding) - padding / 2}
                 y={ii * (rectHeight + padding) - padding / 2}
                 width={rectWidth + padding}
