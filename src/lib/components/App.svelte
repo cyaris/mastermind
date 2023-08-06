@@ -19,8 +19,8 @@
   let rectWidth = 45
   let rectHeight = 35
   let padding = 3
-  let circleRadius = 10
-  let circleDegrees
+  let outerCircleRadius = 100
+  let circleSepDegrees
   let svgWidth
   let svgHeight
 
@@ -38,10 +38,10 @@
 
     codeColors = colors.slice(0, levelSettings.colorsLength)
 
-    svgWidth2 = circleRadius * codeColors.length * 4.5
-    svgHeight2 = circleRadius * codeColors.length * 4.5
+    svgWidth2 = outerCircleRadius * 3
+    svgHeight2 = svgWidth2
 
-    circleDegrees = 360 / levelSettings.colorsLength
+    circleSepDegrees = 360 / levelSettings.colorsLength
 
     if (!colorCode) {
       colorCode = Array.from({ length: levelSettings.codeLength }).map(
@@ -117,14 +117,14 @@
       <div class="mt-8">
         <span>Choose a color:</span>
         <svg class="flex overflow-visible" width={svgWidth2} height={svgHeight2}>
-          <g transform="translate({1}, {1})">
+          <g transform="translate({outerCircleRadius * 1.5 + 1}, {outerCircleRadius + 1})">
             {#each codeColors.sort() as codeColor, i}
               <g
-                transform="translate({(svgWidth2 / codeColors.length - circleRadius) *
-                  Math.cos((circleDegrees * i * Math.PI) / 180)}, {(svgHeight2 / codeColors.length - circleRadius) *
-                  Math.sin((circleDegrees * i * Math.PI) / 180)})"
+                transform="translate({(svgWidth2 / 2 - outerCircleRadius) *
+                  Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerCircleRadius) *
+                  Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
               >
-                <circle r={circleRadius} fill={codeColor} stroke="black" />
+                <circle r={(svgWidth2 / circleSepDegrees) * 2.5} fill={codeColor} stroke="black" />
               </g>
             {/each}
           </g>
