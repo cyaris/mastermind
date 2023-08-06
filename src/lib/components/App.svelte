@@ -124,7 +124,7 @@
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerCircleRadius) *
                   Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
               >
-                <circle r={(svgWidth2 / circleSepDegrees) * 2.5} fill={codeColor} stroke="black" />
+                <circle class="cursor-pointer hover:stroke-3" r={(svgWidth2 / circleSepDegrees) * 2.5} fill={codeColor} stroke="black" />
               </g>
             {/each}
           </g>
