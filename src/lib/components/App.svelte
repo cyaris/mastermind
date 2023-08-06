@@ -42,7 +42,9 @@
               ry={3}
               width={rectWidth}
               height={rectHeight}
-              fill={i >= levelSettings.codeLength ? "rgb(211,211,211)" : "transparent"}
+              fill={i >= levelSettings.codeLength
+                ? "rgb(211,211,211)"
+                : colors[Math.floor(Math.random() * colors.length)]}
               stroke="black"
             />
             {#if i == 0}
