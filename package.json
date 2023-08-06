@@ -42,6 +42,6 @@
     "rollup": "^3.27.2",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.1.6",
-    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-svg": "^2.0.0"
   }
 }
