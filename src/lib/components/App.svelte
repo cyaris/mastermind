@@ -66,7 +66,7 @@
                 y={ii * (rectHeight + padding) - padding / 2}
                 width={rectWidth + padding}
                 height={rectHeight + padding}
-                title="This round hasn'tN<br />been played yet."
+                title="This round hasn't<br />been played yet."
                 use:tooltip
               />
             {/if}
