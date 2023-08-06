@@ -1,6 +1,7 @@
 import adapter from "@sveltejs/adapter-auto"
-import sveltePreprocess from "svelte-preprocess"
 import { mdsvex } from "mdsvex"
+import sveltePreprocess from "svelte-preprocess"
+
 import mdsvexConfig from "./mdsvex.config.js"
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -14,6 +15,7 @@ const config = {
   ],
   kit: {
     adapter: adapter(),
+    files: { assets: "src/lib/static" },
   },
 }
 
