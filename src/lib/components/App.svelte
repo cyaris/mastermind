@@ -6,10 +6,10 @@
 
   let colors = ["yellow", "blue", "red", "green", "orange", "purple", "brown", "pink"]
   let levels = [
-    { codeLength: 4, maxTurns: 8 },
-    { codeLength: 4, maxTurns: 9 },
-    { codeLength: 5, maxTurns: 9 },
-    { codeLength: 5, maxTurns: 10 },
+    { codeLength: 4, maxTurns: 8, possibleColors: 6 },
+    { codeLength: 4, maxTurns: 9, possibleColors: 8 },
+    { codeLength: 5, maxTurns: 9, possibleColors: 6 },
+    { codeLength: 5, maxTurns: 10, possibleColors: 8 },
   ]
 
   let rectWidth = 45
@@ -32,8 +32,8 @@
   <div class="flex justify-center w-full h-full">
     <div>
       <div class="flex flex-col items-center mb-8">
-        <span>{levelSettings.maxTurns + " tries to crack the " + levelSettings.codeLength + " color code."}</span>
-        <span>? possible colors.</span>
+        <span>{levelSettings.maxTurns} tries to crack the {levelSettings.codeLength} color code.</span>
+        <span>{levelSettings.possibleColors} possible colors.</span>
       </div>
       <svg class="inline-block" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
