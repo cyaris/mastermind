@@ -1,22 +1,31 @@
 <script>
+  import * as d3 from "d3"
+  import Pluralize from "pluralize"
+
   import { tooltip } from "svelte-lib/functions"
   import { Text } from "svelte-lib/components"
 
   export let level = 1
 
-  let colors = ["yellow", "blue", "red", "green", "orange", "purple", "brown", "pink"]
+  let colors = d3.schemeSet1
+
   let levels = [
-    { codeLength: 4, maxTurns: 8, possibleColors: 6 },
-    { codeLength: 4, maxTurns: 9, possibleColors: 8 },
-    { codeLength: 5, maxTurns: 9, possibleColors: 6 },
-    { codeLength: 5, maxTurns: 10, possibleColors: 8 },
+    { codeLength: 4, colorsLength: 6, maxTurns: 8 },
+    { codeLength: 4, colorsLength: 8, maxTurns: 9 },
+    { codeLength: 5, colorsLength: 6, maxTurns: 9 },
+    { codeLength: 5, colorsLength: 8, maxTurns: 10 },
   ]
 
   let rectWidth = 45
   let rectHeight = 35
   let padding = 3
+  let circleRadius = 10
+  let circleDegrees
   let svgWidth
   let svgHeight
+
+  let svgWidth2
+  let svgHeight2
 
   let levelSettings
   let codeColors
@@ -27,7 +36,12 @@
     svgWidth = (rectWidth + padding) * (levelSettings.codeLength + 2) + 1
     svgHeight = (rectHeight + padding) * levelSettings.maxTurns + 1
 
-    codeColors = colors.slice(0, levelSettings.possibleColors)
+    codeColors = colors.slice(0, levelSettings.colorsLength)
+
+    svgWidth2 = circleRadius * codeColors.length * 4.5
+    svgHeight2 = circleRadius * codeColors.length * 4.5
+
+    circleDegrees = 360 / levelSettings.colorsLength
 
     if (!colorCode) {
       colorCode = Array.from({ length: levelSettings.codeLength }).map(
@@ -44,9 +58,9 @@
     <div>
       <div class="flex flex-col items-center mb-8">
         <span>{levelSettings.maxTurns} tries to crack the {levelSettings.codeLength} color code.</span>
-        <span>{levelSettings.possibleColors} possible colors.</span>
+        <span>{levelSettings.colorsLength} possible colors.</span>
       </div>
-      <svg class="inline-block" width={svgWidth} height={svgHeight}>
+      <svg class="flex" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
           {#each Array.from({ length: levelSettings.codeLength + 2 }) as d, i}
             {#each Array.from({ length: levelSettings.maxTurns }) as dd, ii}
@@ -100,6 +114,42 @@
           {/each}
         </g>
       </svg>
+      <div class="mt-8">
+        <span>Choose a color:</span>
+        <svg class="flex overflow-visible" width={svgWidth2} height={svgHeight2}>
+          <g transform="translate({1}, {1})">
+            {#each codeColors.sort() as codeColor, i}
+              <g
+                transform="translate({(svgWidth2 / codeColors.length - circleRadius) *
+                  Math.cos((circleDegrees * i * Math.PI) / 180)}, {(svgHeight2 / codeColors.length - circleRadius) *
+                  Math.sin((circleDegrees * i * Math.PI) / 180)})"
+              >
+                <circle r={circleRadius} fill={codeColor} stroke="black" />
+              </g>
+            {/each}
+          </g>
+        </svg>
+      </div>
+      <div class="mt-8">
+        <span>Here's the code:</span>
+        <svg class="flex" width={svgWidth} height={svgHeight}>
+          <g transform="translate({1}, {1})">
+            {#each Array.from({ length: levelSettings.codeLength }) as d, i}
+              <rect
+                class="non-reactive"
+                x={i * (rectWidth + padding)}
+                y={0}
+                rx={3}
+                ry={3}
+                width={rectWidth}
+                height={rectHeight}
+                fill={colorCode[i]}
+                stroke="black"
+              />
+            {/each}
+          </g>
+        </svg>
+      </div>
     </div>
   </div>
 {/if}
