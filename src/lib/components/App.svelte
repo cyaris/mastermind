@@ -47,7 +47,7 @@
             />
             {#if i == 0}
               <Text
-                classes="non-reactive text-center"
+                classes="non-reactive text-center text-sm"
                 overflowBody={true}
                 wrapBody={false}
                 width={rectWidth + padding}
@@ -69,7 +69,7 @@
             {/if}
           {/each}
           <Text
-            classes="non-reactive text-center"
+            classes="non-reactive text-center text-sm"
             overflowBody={true}
             wrapBody={false}
             width={rectWidth + padding}
