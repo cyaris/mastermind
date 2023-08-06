@@ -23,8 +23,8 @@
   $: {
     levelSettings = levels[level - 1]
 
-    svgWidth = (rectWidth + padding) * (levelSettings.codeLength + 3) + 1
-    svgHeight = (rectHeight + padding) * (levelSettings.maxTurns + 1) + 1
+    svgWidth = (rectWidth + padding) * (levelSettings.codeLength + 2) + 1
+    svgHeight = (rectHeight + padding) * levelSettings.maxTurns + 1
   }
 </script>
 
@@ -36,8 +36,8 @@
           {#each Array.from({ length: levelSettings.maxTurns }) as dd, ii}
             <rect
               class="non-reactive"
-              x={(i + 1) * (rectWidth + padding)}
-              y={(ii + 1) * (rectHeight + padding)}
+              x={i * (rectWidth + padding)}
+              y={ii * (rectHeight + padding)}
               rx={3}
               ry={3}
               width={rectWidth}
@@ -49,12 +49,12 @@
             />
             {#if i == 0}
               <Text
-                classes="non-reactive text-right text-sm"
+                classes="non-reactive text-center text-sm"
                 overflowBody={true}
                 wrapBody={false}
                 width={rectWidth + padding}
                 height={rectHeight}
-                y={(ii + 1.5) * rectHeight}
+                y={(ii + 1) * rectHeight}
                 bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
                 bodyText={String(ii + 1)}
               />
@@ -66,7 +66,7 @@
                 y={ii * (rectHeight + padding) - padding / 2}
                 width={rectWidth + padding}
                 height={rectHeight + padding}
-                title="This round hasn't<br />been played yet."
+                title="This round hasn'tN<br />been played yet."
                 use:tooltip
               />
             {/if}
@@ -77,7 +77,7 @@
             wrapBody={false}
             width={rectWidth + padding}
             height={rectHeight}
-            x={(i + 1) * (rectWidth + padding)}
+            x={i * (rectWidth + padding)}
             bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
             bodyText={i < levelSettings.codeLength ? String(i + 1) : i == levelSettings.codeLength ? "W" : "B"}
           />
