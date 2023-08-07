@@ -153,11 +153,9 @@
         </svg>
       </div>
       {#if gameOver}
-        <div class="mt-8">
-          <div class="flex flex-col items-start mb-8">
-            <span class="font-bold">YOU {win ? "WIN" : "LOSE"}!</span>
-            <span>Here's the code:</span>
-          </div>
+        <div class="flex flex-col items-start mb-8 mt-8">
+          <span class="font-bold">YOU {win ? "WIN" : "LOSE"}!</span>
+          <span>Here's the code:</span>
           <svg class="flex" width={svgWidth} height={svgHeight}>
             <g transform="translate({1}, {1})">
               {#each colorCode as color, i}
