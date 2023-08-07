@@ -146,10 +146,10 @@
         </g></svg
       >
       {#if win || gameOver}
-        <div class="flex flex-col items-start mb-8 mt-8">
-          <span class="font-bold">YOU {win ? "WIN" : "LOSE"}!</span>
+        <div class="flex flex-col items-start -mt-20">
+          <span class="font-black animate-bounce">YOU {win ? "WIN" : "LOSE"}!</span>
           <span>Here's the code:</span>
-          <svg class="flex" width={svgWidth} height={svgHeight}>
+          <svg class="flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
               {#each colorCode as color, i}
                 <rect
