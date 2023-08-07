@@ -27,43 +27,47 @@
   let svgWidth2
   let svgHeight2
 
-  let levelSettings
+  let settings
   let codeColors
   let colorCode
   $: {
-    levelSettings = levels[level - 1]
+    settings = levels[level - 1]
 
-    svgWidth = (rectWidth + padding) * (levelSettings.codeLength + 2) + 1
-    svgHeight = (rectHeight + padding) * levelSettings.maxTurns + 1
+    svgWidth = (rectWidth + padding) * (settings.codeLength + 2) + 1
+    svgHeight = (rectHeight + padding) * settings.maxTurns + 1
 
-    codeColors = colors.slice(0, levelSettings.colorsLength)
+    codeColors = colors.slice(0, settings.colorsLength)
 
     svgWidth2 = outerCircleRadius * 3
-    svgHeight2 = svgWidth2
+    svgHeight2 = outerCircleRadius * 2
 
-    circleSepDegrees = 360 / levelSettings.colorsLength
+    circleSepDegrees = 360 / settings.colorsLength
 
     if (!colorCode) {
-      colorCode = Array.from({ length: levelSettings.codeLength }).map(
+      console.log("hi")
+      colorCode = Array.from({ length: settings.codeLength }).map(
         () => codeColors[Math.floor(Math.random() * codeColors.length)]
       )
     }
 
     console.log(colorCode)
   }
+
+  let colorClicks = []
+  let codeGuess = []
 </script>
 
-{#if levelSettings}
+{#if settings}
   <div class="flex justify-center w-full h-full">
     <div>
       <div class="flex flex-col items-center mb-8">
-        <span>{levelSettings.maxTurns} tries to crack the {levelSettings.codeLength} color code.</span>
-        <span>{levelSettings.colorsLength} possible colors.</span>
+        <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
+        <span>{settings.colorsLength} possible colors.</span>
       </div>
       <svg class="flex" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
-          {#each Array.from({ length: levelSettings.codeLength + 2 }) as d, i}
-            {#each Array.from({ length: levelSettings.maxTurns }) as dd, ii}
+          {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
+            {#each Array.from({ length: settings.maxTurns }) as dd, ii}
               <rect
                 class="non-reactive"
                 x={i * (rectWidth + padding)}
@@ -72,9 +76,11 @@
                 ry={3}
                 width={rectWidth}
                 height={rectHeight}
-                fill={i >= levelSettings.codeLength
+                fill={i >= settings.codeLength
                   ? "rgb(211,211,211)"
-                  : codeColors[Math.floor(Math.random() * codeColors.length)]}
+                  : colorClicks[ii * settings.codeLength + i]
+                  ? colorClicks[ii * settings.codeLength + i]
+                  : "transparent"}
                 stroke="black"
               />
               {#if i == 0}
@@ -89,7 +95,7 @@
                   bodyText={String(ii + 1)}
                 />
               {/if}
-              {#if i >= levelSettings.codeLength}
+              {#if i >= settings.codeLength}
                 <foreignObject
                   class="cursor-help"
                   x={i * (rectWidth + padding) - padding / 2}
@@ -109,14 +115,14 @@
               height={rectHeight}
               x={i * (rectWidth + padding)}
               bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
-              bodyText={i < levelSettings.codeLength ? String(i + 1) : i == levelSettings.codeLength ? "W" : "B"}
+              bodyText={i < settings.codeLength ? String(i + 1) : i == settings.codeLength ? "W" : "B"}
             />
           {/each}
         </g>
       </svg>
       <div class="mt-8">
         <span>Choose a color:</span>
-        <svg class="flex overflow-visible" width={svgWidth2} height={svgHeight2}>
+        <svg class="flex" width={svgWidth2} height={svgHeight2}>
           <g transform="translate({outerCircleRadius * 1.5 + 1}, {outerCircleRadius + 1})">
             {#each codeColors.sort() as codeColor, i}
               <g
@@ -124,7 +130,22 @@
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerCircleRadius) *
                   Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
               >
-                <circle class="cursor-pointer hover:stroke-3" r={(svgWidth2 / circleSepDegrees) * 2.5} fill={codeColor} stroke="black" />
+                <circle
+                  class="cursor-pointer hover:stroke-3"
+                  r={(svgWidth2 / circleSepDegrees) * 2.5}
+                  fill={codeColor}
+                  stroke="black"
+                  on:click={() => {
+                    colorClicks = [...colorClicks, codeColor]
+                    codeGuess = [...codeGuess, codeColor]
+                    console.log(codeGuess)
+                    if (String(codeGuess) == String(colorCode)) {
+                      console.log("you win")
+                    } else if (codeGuess.length == settings.codeLength) {
+                      codeGuess = []
+                    }
+                  }}
+                />
               </g>
             {/each}
           </g>
@@ -134,7 +155,7 @@
         <span>Here's the code:</span>
         <svg class="flex" width={svgWidth} height={svgHeight}>
           <g transform="translate({1}, {1})">
-            {#each Array.from({ length: levelSettings.codeLength }) as d, i}
+            {#each colorCode as color, i}
               <rect
                 class="non-reactive"
                 x={i * (rectWidth + padding)}
@@ -143,7 +164,7 @@
                 ry={3}
                 width={rectWidth}
                 height={rectHeight}
-                fill={colorCode[i]}
+                fill={color}
                 stroke="black"
               />
             {/each}
