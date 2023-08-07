@@ -47,8 +47,8 @@
       colorCode = Array.from({ length: settings.codeLength }).map(
         () => codeColors[Math.floor(Math.random() * codeColors.length)]
       )
+      console.log(colorCode)
     }
-    console.log(colorCode)
   }
 
   let colorClicks = []
