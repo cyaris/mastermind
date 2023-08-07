@@ -78,7 +78,13 @@
                   : colorClicks[ii * settings.codeLength + i]
                   ? colorClicks[ii * settings.codeLength + i]
                   : "transparent"}
-                title={i >= settings.codeLength ? "This round hasn't<br />been played yet." : ""}
+                title={i < settings.codeLength
+                  ? ""
+                  : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength
+                  ? "WHITE score."
+                  : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength + 1
+                  ? "BLACK score."
+                  : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
               {#if i == 0}
