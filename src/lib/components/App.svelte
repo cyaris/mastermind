@@ -38,8 +38,8 @@
 
     codeColors = colors.slice(0, settings.colorsLength)
 
-    svgWidth2 = outerCircleRadius * 3
-    svgHeight2 = outerCircleRadius * 2
+    svgWidth2 = svgWidth
+    svgHeight2 = svgWidth * (2 / 3)
 
     circleSepDegrees = 360 / settings.colorsLength
 
@@ -56,12 +56,12 @@
 
 {#if settings}
   <div class="flex justify-center w-full h-full">
-    <div>
+    <div class="flex flex-col items-center">
       <div class="flex flex-col items-center mb-8">
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
-      <svg class="flex" width={svgWidth} height={svgHeight}>
+      <svg width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
           {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
             {#each Array.from({ length: settings.maxTurns }) as dd, ii}
