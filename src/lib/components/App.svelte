@@ -54,14 +54,38 @@
   let win = false
 
   function getWScore(colorGuess) {
-    // console.log(colorGuess)
-    return 1
+    let score = 0
+    let colorGuessCopy = [...colorGuess]
+    let colorCodeCopy = [...colorCode]
+    colorCode.forEach((d, i) => {
+      if (d == colorGuess[i]) {
+        colorGuessCopy.splice(i, 1)
+        colorCodeCopy.splice(i, 1)
+      }
+    })
+
+    colorGuessCopy.forEach(d => {
+      if (colorCodeCopy.includes(d)) {
+        colorCodeCopy.splice(colorCodeCopy.indexOf(d), 1)
+        score += 1
+      }
+    })
+
+    return score
   }
 
   function getBScore(colorGuess) {
-    // console.log(colorGuess)
-    return 1
+    let score = 0
+    colorCode.forEach((d, i) => {
+      if (d == colorGuess[i]) {
+        score += 1
+      }
+    })
+    return score
   }
+
+  let wScores = []
+  let bScores = []
 </script>
 
 {#if settings}
@@ -91,21 +115,9 @@
                 title={i < settings.codeLength
                   ? ""
                   : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength
-                  ? String(getWScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))) +
-                    " " +
-                    Pluralize(
-                      "color",
-                      getWScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))
-                    ) +
-                    " in the wrong place."
+                  ? String(wScores[ii]) + " " + Pluralize("color", wScores[ii]) + " in the wrong place."
                   : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength + 1
-                  ? String(getBScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))) +
-                    " " +
-                    Pluralize(
-                      "color",
-                      getWScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))
-                    ) +
-                    " in the right place."
+                  ? String(bScores[ii]) + " " + Pluralize("color", bScores[ii]) + " in the right place."
                   : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
@@ -154,6 +166,10 @@
                 on:click={() => {
                   colorClicks = [...colorClicks, codeColor]
 
+                  if (colorClicks.length % settings.codeLength == 0) {
+                    wScores = [...wScores, getWScore(colorClicks.slice(-settings.codeLength))]
+                    bScores = [...bScores, getBScore(colorClicks.slice(-settings.codeLength))]
+                  }
                   if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
                     win = true
                   } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
