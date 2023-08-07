@@ -34,12 +34,21 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-url": "^8.0.1",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-gitignore": "^0.1.0",
+    "eslint-plugin-css": "^0.6.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-svelte3": "^3.4.0",
+    "prettier": "^2.8.6",
+    "prettier-plugin-svelte": "^2.10.0",
     "postcss-import": "^15.1.0",
-    "rollup-plugin-ignore": "^1.0.10",
-    "rollup-plugin-url": "^3.0.1",
     "rollup": "^3.27.2",
+    "rollup-plugin-ignore": "^1.0.10",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.1.6",
-    "rollup-plugin-svg": "^2.0.0"
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-url": "^3.0.1"
   }
 }

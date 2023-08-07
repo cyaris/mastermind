@@ -10,24 +10,24 @@
   let colors = d3.schemeSet1
 
   let levels = [
-    { codeLength: 4, colorsLength: 6, maxTurns: 8 },
-    { codeLength: 4, colorsLength: 8, maxTurns: 9 },
-    { codeLength: 5, colorsLength: 6, maxTurns: 9 },
-    { codeLength: 5, colorsLength: 8, maxTurns: 10 },
+    { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
+    { codeLength: 4, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 },
+    { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
+    { codeLength: 5, colorsLength: 8, maxTurns: 10, buttonSpacer: 2 },
   ]
 
   let rectWidth = 45
   let rectHeight = 35
   let padding = 2
-  let outerRadius = 100
-  let circleSepDegrees
+
+  let settings
   let svgWidth
   let svgHeight
 
-  let svgWidth2
-  let svgHeight2
-
-  let settings
+  let outerRadius = 100
+  let svgWidth2 = outerRadius * 3
+  let svgHeight2 = svgWidth2
+  let circleSepDegrees
   let codeColors
   let colorCode
   $: {
@@ -37,9 +37,6 @@
     svgHeight = (rectHeight + padding) * settings.maxTurns + 1
 
     codeColors = colors.slice(0, settings.colorsLength)
-
-    svgWidth2 = svgWidth
-    svgHeight2 = svgWidth * (2 / 3)
 
     circleSepDegrees = 360 / settings.colorsLength
 
@@ -112,8 +109,8 @@
       </svg>
       <div class="mt-8">
         <span>Choose a color:</span>
-        <svg class="flex" width={svgWidth2} height={svgHeight2}>
-          <g transform="translate({outerRadius * 1.5 + 1}, {outerRadius + 1})">
+        <svg class="flex overflow-visible" width={svgWidth2} height={svgHeight2}>
+          <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
             {#each codeColors.sort() as codeColor, i}
               <g
                 transform="translate({(svgWidth2 / 2 - outerRadius) *
@@ -122,7 +119,7 @@
               >
                 <circle
                   class="cursor-pointer hover:stroke-3"
-                  r={(svgWidth2 / circleSepDegrees) * 2.5}
+                  r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
                   fill={codeColor}
                   stroke="black"
                   on:click={() => {
@@ -137,8 +134,9 @@
                 />
               </g>
             {/each}
-          </g>
-        </svg>
+            <!-- </g> -->
+          </g></svg
+        >
       </div>
       {#if win || gameOver}
         <div class="flex flex-col items-start mb-8 mt-8">
