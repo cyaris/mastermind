@@ -18,7 +18,7 @@
 
   let rectWidth = 45
   let rectHeight = 35
-  let padding = 3
+  let padding = 2
   let outerRadius = 100
   let circleSepDegrees
   let svgWidth
