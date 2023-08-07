@@ -52,6 +52,8 @@
   }
 
   let colorClicks = []
+  let gameOver = false
+  let win = false
 </script>
 
 {#if settings}
@@ -134,10 +136,14 @@
                   stroke="black"
                   on:click={() => {
                     colorClicks = [...colorClicks, codeColor]
+
                     if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
                       console.log("you win")
+                      gameOver = true
+                      win = true
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
                       console.log("you lose")
+                      gameOver = true
                     }
                   }}
                 />
@@ -146,26 +152,31 @@
           </g>
         </svg>
       </div>
-      <div class="mt-8">
-        <span>Here's the code:</span>
-        <svg class="flex" width={svgWidth} height={svgHeight}>
-          <g transform="translate({1}, {1})">
-            {#each colorCode as color, i}
-              <rect
-                class="non-reactive"
-                x={i * (rectWidth + padding)}
-                y={0}
-                rx={3}
-                ry={3}
-                width={rectWidth}
-                height={rectHeight}
-                fill={color}
-                stroke="black"
-              />
-            {/each}
-          </g>
-        </svg>
-      </div>
+      {#if gameOver}
+        <div class="mt-8">
+          <div class="flex flex-col items-start mb-8">
+            <span class="font-bold">YOU {win ? "WIN" : "LOSE"}!</span>
+            <span>Here's the code:</span>
+          </div>
+          <svg class="flex" width={svgWidth} height={svgHeight}>
+            <g transform="translate({1}, {1})">
+              {#each colorCode as color, i}
+                <rect
+                  class="non-reactive"
+                  x={i * (rectWidth + padding)}
+                  y={0}
+                  rx={3}
+                  ry={3}
+                  width={rectWidth}
+                  height={rectHeight}
+                  fill={color}
+                  stroke="black"
+                />
+              {/each}
+            </g>
+          </svg>
+        </div>
+      {/if}
     </div>
   </div>
 {/if}
