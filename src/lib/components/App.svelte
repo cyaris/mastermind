@@ -69,7 +69,7 @@
           {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
             {#each Array.from({ length: settings.maxTurns }) as dd, ii}
               <rect
-                class="non-reactive"
+                class="stroke-black {i >= settings.codeLength ? 'cursor-help hover:stroke-2' : ''}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
                 rx={3}
@@ -81,7 +81,8 @@
                   : colorClicks[ii * settings.codeLength + i]
                   ? colorClicks[ii * settings.codeLength + i]
                   : "transparent"}
-                stroke="black"
+                title={i >= settings.codeLength ? "This round hasn't<br />been played yet." : ""}
+                use:tooltip
               />
               {#if i == 0}
                 <Text
@@ -93,17 +94,6 @@
                   y={(ii + 1) * rectHeight}
                   bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
                   bodyText={String(ii + 1)}
-                />
-              {/if}
-              {#if i >= settings.codeLength}
-                <foreignObject
-                  class="cursor-help"
-                  x={i * (rectWidth + padding) - padding / 2}
-                  y={ii * (rectHeight + padding) - padding / 2}
-                  width={rectWidth + padding}
-                  height={rectHeight + padding}
-                  title="This round hasn't<br />been played yet."
-                  use:tooltip
                 />
               {/if}
             {/each}
