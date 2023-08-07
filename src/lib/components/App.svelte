@@ -19,7 +19,7 @@
   let rectWidth = 45
   let rectHeight = 35
   let padding = 3
-  let outerCircleRadius = 100
+  let outerRadius = 100
   let circleSepDegrees
   let svgWidth
   let svgHeight
@@ -52,6 +52,7 @@
   }
 
   let colorClicks = []
+
   let gameOver = false
   let win = false
 </script>
@@ -122,11 +123,11 @@
       <div class="mt-8">
         <span>Choose a color:</span>
         <svg class="flex" width={svgWidth2} height={svgHeight2}>
-          <g transform="translate({outerCircleRadius * 1.5 + 1}, {outerCircleRadius + 1})">
+          <g transform="translate({outerRadius * 1.5 + 1}, {outerRadius + 1})">
             {#each codeColors.sort() as codeColor, i}
               <g
-                transform="translate({(svgWidth2 / 2 - outerCircleRadius) *
-                  Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerCircleRadius) *
+                transform="translate({(svgWidth2 / 2 - outerRadius) *
+                  Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
                   Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
               >
                 <circle
@@ -138,11 +139,8 @@
                     colorClicks = [...colorClicks, codeColor]
 
                     if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
-                      console.log("you win")
-                      gameOver = true
                       win = true
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
-                      console.log("you lose")
                       gameOver = true
                     }
                   }}
@@ -152,7 +150,7 @@
           </g>
         </svg>
       </div>
-      {#if gameOver}
+      {#if win || gameOver}
         <div class="flex flex-col items-start mb-8 mt-8">
           <span class="font-bold">YOU {win ? "WIN" : "LOSE"}!</span>
           <span>Here's the code:</span>
