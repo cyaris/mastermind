@@ -61,7 +61,7 @@
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
-      <svg width={svgWidth} height={svgHeight}>
+      <svg class="overflow-visible" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
           {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
             {#each Array.from({ length: settings.maxTurns }) as dd, ii}
@@ -83,21 +83,23 @@
               />
               {#if i == 0}
                 <Text
-                  classes="non-reactive text-center text-sm"
+                  classes="non-reactive text-end text-sm font-medium"
                   wrapBody={false}
                   width={rectWidth + padding}
                   height={rectHeight}
-                  y={(ii + 1) * rectHeight}
+                  x={-(rectWidth + padding) - 2.5}
+                  y={(ii + 0.25) * (rectHeight + padding)}
                   bodyText={String(ii + 1)}
                 />
               {/if}
             {/each}
             <Text
-              classes="non-reactive text-center text-sm"
+              classes="non-reactive text-center text-sm font-medium"
               wrapBody={false}
               width={rectWidth + padding}
               height={rectHeight}
               x={i * (rectWidth + padding)}
+              y={-20}
               bodyText={i < settings.codeLength ? String(i + 1) : i == settings.codeLength ? "W" : "B"}
             />
           {/each}
