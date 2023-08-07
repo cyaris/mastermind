@@ -69,7 +69,7 @@
           {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
             {#each Array.from({ length: settings.maxTurns }) as dd, ii}
               <rect
-                class="stroke-black {i >= settings.codeLength ? 'cursor-help hover:stroke-2' : ''}"
+                class="stroke-black {i >= settings.codeLength ? 'cursor-help hover:stroke-4' : ''}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
                 rx={3}

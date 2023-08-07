@@ -24,6 +24,7 @@ module.exports = {
       },
       strokeWidth: {
         3: "3px",
+        4: "4px",
       },
     },
   },
