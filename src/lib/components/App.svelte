@@ -44,17 +44,14 @@
     circleSepDegrees = 360 / settings.colorsLength
 
     if (!colorCode) {
-      console.log("hi")
       colorCode = Array.from({ length: settings.codeLength }).map(
         () => codeColors[Math.floor(Math.random() * codeColors.length)]
       )
     }
-
     console.log(colorCode)
   }
 
   let colorClicks = []
-  let codeGuess = []
 </script>
 
 {#if settings}
@@ -137,12 +134,10 @@
                   stroke="black"
                   on:click={() => {
                     colorClicks = [...colorClicks, codeColor]
-                    codeGuess = [...codeGuess, codeColor]
-                    console.log(codeGuess)
-                    if (String(codeGuess) == String(colorCode)) {
+                    if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
                       console.log("you win")
-                    } else if (codeGuess.length == settings.codeLength) {
-                      codeGuess = []
+                    } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
+                      console.log("you lose")
                     }
                   }}
                 />
