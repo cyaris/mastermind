@@ -57,10 +57,12 @@
     let score = 0
     let colorGuessCopy = [...colorGuess]
     let colorCodeCopy = [...colorCode]
+    let deleteCount = 0
     colorCode.forEach((d, i) => {
       if (d == colorGuess[i]) {
-        colorGuessCopy.splice(i, 1)
-        colorCodeCopy.splice(i, 1)
+        colorGuessCopy.splice(i - deleteCount, 1)
+        colorCodeCopy.splice(i - deleteCount, 1)
+        deleteCount += 1
       }
     })
 
@@ -86,6 +88,8 @@
 
   let wScores = []
   let bScores = []
+
+  let pieces = { 0: "", 1: ".", 2: ":", 3: ":.", 4: "::", 5: "★" }
 </script>
 
 {#if settings}
@@ -132,6 +136,23 @@
                   bodyText={String(ii + 1)}
                 />
               {/if}
+              {#if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
+                <Text
+                  classes="non-reactive text-center"
+                  bodyClasses="flex flex-col text-3xl justify-center"
+                  overflowBody={false}
+                  wrapBody={false}
+                  width={rectWidth}
+                  height={rectHeight}
+                  x={i * (rectWidth + padding) +
+                    ((i == settings.codeLength && wScores[ii] <= 2) ||
+                    (i == settings.codeLength + 1 && bScores[ii] <= 2)
+                      ? 5
+                      : 0)}
+                  y={ii * (rectHeight + padding) - padding}
+                  bodyText={i == settings.codeLength ? pieces[wScores[ii]] : pieces[bScores[ii]]}
+                />
+              {/if}
             {/each}
             <Text
               classes="non-reactive text-center text-sm font-medium"
@@ -159,21 +180,23 @@
                 Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
             >
               <circle
-                class="cursor-pointer hover:stroke-3"
+                class="{win || gameOver ? 'cursor-not-allowed' : 'cursor-pointer'} hover:stroke-3"
                 r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
                 fill={codeColor}
                 stroke="black"
                 on:click={() => {
-                  colorClicks = [...colorClicks, codeColor]
+                  if (!win) {
+                    colorClicks = [...colorClicks, codeColor]
 
-                  if (colorClicks.length % settings.codeLength == 0) {
-                    wScores = [...wScores, getWScore(colorClicks.slice(-settings.codeLength))]
-                    bScores = [...bScores, getBScore(colorClicks.slice(-settings.codeLength))]
-                  }
-                  if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
-                    win = true
-                  } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
-                    gameOver = true
+                    if (colorClicks.length % settings.codeLength == 0) {
+                      wScores = [...wScores, getWScore(colorClicks.slice(-settings.codeLength))]
+                      bScores = [...bScores, getBScore(colorClicks.slice(-settings.codeLength))]
+                    }
+                    if (String(colorClicks.slice(-settings.codeLength)) == String(colorCode)) {
+                      win = true
+                    } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
+                      gameOver = true
+                    }
                   }
                 }}
               />
