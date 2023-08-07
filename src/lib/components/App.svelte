@@ -54,12 +54,12 @@
   let win = false
 
   function getWScore(colorGuess) {
-    console.log(colorGuess)
+    // console.log(colorGuess)
     return 1
   }
 
   function getBScore(colorGuess) {
-    console.log(colorGuess)
+    // console.log(colorGuess)
     return 1
   }
 </script>
