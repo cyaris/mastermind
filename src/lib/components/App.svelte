@@ -84,60 +84,67 @@
               {#if i == 0}
                 <Text
                   classes="non-reactive text-center text-sm"
-                  overflowBody={true}
                   wrapBody={false}
                   width={rectWidth + padding}
                   height={rectHeight}
                   y={(ii + 1) * rectHeight}
-                  bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
                   bodyText={String(ii + 1)}
                 />
               {/if}
             {/each}
             <Text
               classes="non-reactive text-center text-sm"
-              overflowBody={true}
               wrapBody={false}
               width={rectWidth + padding}
               height={rectHeight}
               x={i * (rectWidth + padding)}
-              bodyPadding={{ top: 0, right: 0, bottom: 0, left: 0 }}
               bodyText={i < settings.codeLength ? String(i + 1) : i == settings.codeLength ? "W" : "B"}
             />
           {/each}
         </g>
       </svg>
-      <div class="mt-8">
-        <span>Choose a color:</span>
-        <svg class="flex overflow-visible" width={svgWidth2} height={svgHeight2}>
-          <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
-            {#each codeColors.sort() as codeColor, i}
-              <g
-                transform="translate({(svgWidth2 / 2 - outerRadius) *
-                  Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
-                  Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
-              >
-                <circle
-                  class="cursor-pointer hover:stroke-3"
-                  r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
-                  fill={codeColor}
-                  stroke="black"
-                  on:click={() => {
-                    colorClicks = [...colorClicks, codeColor]
+      <svg
+        class="flex overflow-visible"
+        width={svgWidth2}
+        height={svgHeight2}
+        viewBox="{-svgWidth2 / 8} {0} {svgWidth2} {svgHeight2}"
+      >
+        <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
+          {#each codeColors.sort() as codeColor, i}
+            <g
+              transform="translate({(svgWidth2 / 2 - outerRadius) *
+                Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
+                Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
+            >
+              <circle
+                class="cursor-pointer hover:stroke-3"
+                r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
+                fill={codeColor}
+                stroke="black"
+                on:click={() => {
+                  colorClicks = [...colorClicks, codeColor]
 
-                    if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
-                      win = true
-                    } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
-                      gameOver = true
-                    }
-                  }}
-                />
-              </g>
-            {/each}
-            <!-- </g> -->
-          </g></svg
-        >
-      </div>
+                  if (String(colorClicks.slice(-settings.codeLength - 1)) == String(colorCode)) {
+                    win = true
+                  } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
+                    gameOver = true
+                  }
+                }}
+              />
+            </g>
+          {/each}
+          <Text
+            classes="non-reactive text-base font-bold"
+            bodyClasses="cursive"
+            overflowBody={false}
+            x={-22}
+            y={-22}
+            width={50}
+            height={50}
+            bodyText="Choose a Color"
+          />
+        </g></svg
+      >
       {#if win || gameOver}
         <div class="flex flex-col items-start mb-8 mt-8">
           <span class="font-bold">YOU {win ? "WIN" : "LOSE"}!</span>

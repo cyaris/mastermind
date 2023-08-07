@@ -59,6 +59,9 @@ module.exports = {
           "-o-user-select": "auto" /* Opera */,
           "user-select": "auto",
         },
+        ".cursive": {
+          "font-family": "cursive",
+        },
       })
     }),
   ],
