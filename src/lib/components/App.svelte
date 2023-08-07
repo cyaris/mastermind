@@ -67,7 +67,7 @@
 {#if settings}
   <div class="flex justify-center w-full h-full">
     <div class="flex flex-col items-center">
-      <div class="flex flex-col items-center mb-8">
+      <div class="flex flex-col items-center mb-10">
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
