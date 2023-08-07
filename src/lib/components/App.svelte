@@ -52,6 +52,16 @@
 
   let gameOver = false
   let win = false
+
+  function getWScore(colorGuess) {
+    console.log(colorGuess)
+    return 1
+  }
+
+  function getBScore(colorGuess) {
+    console.log(colorGuess)
+    return 1
+  }
 </script>
 
 {#if settings}
@@ -81,9 +91,21 @@
                 title={i < settings.codeLength
                   ? ""
                   : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength
-                  ? "WHITE score."
+                  ? String(getWScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))) +
+                    " " +
+                    Pluralize(
+                      "color",
+                      getWScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))
+                    ) +
+                    " in the wrong place."
                   : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength + 1
-                  ? "BLACK score."
+                  ? String(getBScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))) +
+                    " " +
+                    Pluralize(
+                      "color",
+                      getWScore(colorClicks.slice(ii * settings.codeLength, (ii + 1) * settings.codeLength))
+                    ) +
+                    " in the right place."
                   : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
