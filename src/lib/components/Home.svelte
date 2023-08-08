@@ -4,5 +4,5 @@
 
 <nav>
   <Link to="/">Home</Link>
-  <Link to="test">Test</Link>
+  <Link to="play">Play</Link>
 </nav>

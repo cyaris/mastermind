@@ -12,6 +12,6 @@
   <!-- Use the dynamically calculated base -->
   <Router base={currentPageBase}>
     <Route path="/" component={Home} />
-    <Route path="/test" component={App} />
+    <Route path="/play" component={App} />
   </Router>
 </main>
