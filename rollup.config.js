@@ -44,9 +44,9 @@ const plugins = [
 ]
 
 const routes = [
-  { input: "src/lib/components/App.svelte", output: "dist/ssr.js" },
-  { input: "src/main.js", output: "dist/bundle.js" },
-  // "./src/lib/components/App.svelte",
+  // { input: "./src/lib/components/App.svelte", output: "dist/ssr.js" },
+  { input: "./src/main.js", output: "dist/bundle.js" },
+  // "./src/lib/componeCnts/App.svelte",
   // "./src/routes/+page.svelte",
   // "./src/routes/development/+page.svelte",
   // "./src/routes/instructions/+page.svelte",
@@ -57,11 +57,9 @@ const routes = [
   // "./src/routes/play/level_4/+page.svelte",
 ]
 
-// `
-// import App from "${v}"
 //
-// import "../node_modules/svelte-lib/src/lib/static/styles/root.css"
-// import "../node_modules/svelte-lib/src/lib/static/styles/app.css"
+// `
+// import App from "${v.input}"
 //
 // let div = document.createElement("div")
 // div.classList.add("mastermind")
@@ -70,7 +68,7 @@ const routes = [
 // script.parentNode.insertBefore(div, script)
 //
 // new App({
-//   target: div,
+//  target: div,
 // })`
 
 const config = routes.map(v => {
