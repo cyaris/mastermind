@@ -3,14 +3,13 @@
   import Home from "./Home.svelte"
   import App from "./App.svelte"
 
-  const currentPageBase = window.location.pathname.split("/")[1] || ""
+  const subpage = window.location.pathname.split("/")[1] || ""
 
-  console.log(currentPageBase)
+  console.log(subpage)
 </script>
 
 <main>
-  <!-- Use the dynamically calculated base -->
-  <Router base={currentPageBase}>
+  <Router base={subpage}>
     <Route path="/" component={Home} />
     <Route path="/play" component={App} />
   </Router>
