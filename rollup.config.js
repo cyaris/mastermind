@@ -44,13 +44,45 @@ const plugins = [
   image(),
 ]
 
-export default [
-  {
-    input: "src/main.js", // Update this to your main Svelte component file
+const routes = [
+  "src/main.js",
+  // "./src/lib/components/App.svelte",
+  // "./src/routes/+page.svelte",
+  // "./src/routes/development/+page.svelte",
+  // "./src/routes/instructions/+page.svelte",
+  // "./src/routes/play/+page.svelte",
+  // "./src/routes/play/level_1/+page.svelte",
+  // "./src/routes/play/level_2/+page.svelte",
+  // "./src/routes/play/level_3/+page.svelte",
+  // "./src/routes/play/level_4/+page.svelte",
+]
+
+// `
+// import App from "${v}"
+//
+// import "../node_modules/svelte-lib/src/lib/static/styles/root.css"
+// import "../node_modules/svelte-lib/src/lib/static/styles/app.css"
+//
+// let div = document.createElement("div")
+// div.classList.add("mastermind")
+//
+// let script = document.currentScript
+// script.parentNode.insertBefore(div, script)
+//
+// new App({
+//   target: div,
+// })`
+
+const config = routes.map((v, i) => {
+  return {
+    input: v,
     output: {
       format: "iife", // Output format for using the component in non-Svelte environments
-      file: "dist/bundle.js",
+      file: `dist/bundle.js`,
     },
     plugins: plugins,
-  },
-]
+  }
+})
+
+console.log(config)
+export default config
