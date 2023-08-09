@@ -45,7 +45,7 @@ const plugins = [
 ]
 
 const routes = [
-  "src/main.js",
+  {input: "src/main.js", output: 'dist/bundle.js',
   // "./src/lib/components/App.svelte",
   // "./src/routes/+page.svelte",
   // "./src/routes/development/+page.svelte",
@@ -75,10 +75,10 @@ const routes = [
 
 const config = routes.map((v, i) => {
   return {
-    input: v,
+    input: v.input,
     output: {
       format: "iife", // Output format for using the component in non-Svelte environments
-      file: `dist/bundle.js`,
+      file: v.output,
     },
     plugins: plugins,
   }
