@@ -53,41 +53,30 @@
   let gameOver = false
   let win = false
 
-  function getWScore(colorGuess) {
-    let score = 0
+  function getScore(colorGuess) {
+    let wScore = 0
+    let bScore = 0
     let colorGuessCopy = [...colorGuess]
     let colorCodeCopy = [...colorCode]
-    let deleteCount = 0
     colorCode.forEach((d, i) => {
       if (d == colorGuess[i]) {
-        colorGuessCopy.splice(i - deleteCount, 1)
-        colorCodeCopy.splice(i - deleteCount, 1)
-        deleteCount += 1
+        colorGuessCopy.splice(i - bScore, 1)
+        colorCodeCopy.splice(i - bScore, 1)
+        bScore += 1
       }
     })
 
     colorGuessCopy.forEach(d => {
       if (colorCodeCopy.includes(d)) {
         colorCodeCopy.splice(colorCodeCopy.indexOf(d), 1)
-        score += 1
+        wScore += 1
       }
     })
 
-    return score
+    return { w: wScore, b: bScore }
   }
 
-  function getBScore(colorGuess) {
-    let score = 0
-    colorCode.forEach((d, i) => {
-      if (d == colorGuess[i]) {
-        score += 1
-      }
-    })
-    return score
-  }
-
-  let wScores = []
-  let bScores = []
+  let scores = []
 
   let pieces = { 0: "", 1: ".", 2: ":", 3: ":.", 4: "::", 5: "★" }
 </script>
@@ -120,9 +109,9 @@
                 title={i < settings.codeLength
                   ? ""
                   : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength
-                  ? String(wScores[ii]) + " " + Pluralize("color", wScores[ii]) + " in the wrong place."
+                  ? String(scores[ii].w) + " " + Pluralize("color", scores[ii].w) + " in the wrong place."
                   : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength + 1
-                  ? String(bScores[ii]) + " " + Pluralize("color", bScores[ii]) + " in the right place."
+                  ? String(scores[ii].b) + " " + Pluralize("color", scores[ii].b) + " in the right place."
                   : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
@@ -146,12 +135,12 @@
                   width={rectWidth}
                   height={rectHeight}
                   x={i * (rectWidth + padding) +
-                    ((i == settings.codeLength && wScores[ii] <= 2) ||
-                    (i == settings.codeLength + 1 && bScores[ii] <= 2)
+                    ((i == settings.codeLength && scores[ii].w <= 2) ||
+                    (i == settings.codeLength + 1 && scores[ii].b <= 2)
                       ? 5
                       : 0)}
                   y={ii * (rectHeight + padding) - padding}
-                  bodyText={i == settings.codeLength ? pieces[wScores[ii]] : pieces[bScores[ii]]}
+                  bodyText={i == settings.codeLength ? pieces[scores[ii].w] : pieces[scores[ii].b]}
                 />
               {/if}
             {/each}
@@ -190,8 +179,7 @@
                     colorClicks = [...colorClicks, codeColor]
 
                     if (colorClicks.length % settings.codeLength == 0) {
-                      wScores = [...wScores, getWScore(colorClicks.slice(-settings.codeLength))]
-                      bScores = [...bScores, getBScore(colorClicks.slice(-settings.codeLength))]
+                      scores = [...scores, getScore(colorClicks.slice(-settings.codeLength))]
                     }
                     if (String(colorClicks.slice(-settings.codeLength)) == String(colorCode)) {
                       win = true

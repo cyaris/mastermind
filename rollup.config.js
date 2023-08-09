@@ -44,8 +44,8 @@ const plugins = [
 ]
 
 const routes = [
-  {input: "src/lib/components/App.svelte", output: 'dist/ssr.js'},
-  {input: "src/main.js", output: 'dist/bundle.js'},
+  { input: "src/lib/components/App.svelte", output: "dist/ssr.js" },
+  { input: "src/main.js", output: "dist/bundle.js" },
   // "./src/lib/components/App.svelte",
   // "./src/routes/+page.svelte",
   // "./src/routes/development/+page.svelte",
