@@ -35,9 +35,8 @@ const plugins = [
   }),
   commonjs(),
   url({
-    // Use the url plugin to handle .gif files
     include: ["**/*.gif"],
-    limit: 0, // Set to 0 to embed all .gif files as base64 data URLs
+    limit: 0, // set to 0 to embed all .gif files as base64 data URLs
     emitFiles: false,
   }),
   svg(),
@@ -73,11 +72,11 @@ const routes = [
 //   target: div,
 // })`
 
-const config = routes.map((v, i) => {
+const config = routes.map(v => {
   return {
     input: v.input,
     output: {
-      format: "iife", // Output format for using the component in non-Svelte environments
+      format: "iife",
       file: v.output,
     },
     plugins: plugins,
