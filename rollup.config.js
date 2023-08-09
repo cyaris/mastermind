@@ -3,6 +3,7 @@ import image from "@rollup/plugin-image"
 import resolve from "@rollup/plugin-node-resolve"
 import url from "@rollup/plugin-url"
 import postcss from "rollup-plugin-postcss"
+import progress from 'rollup-plugin-progress'
 import svelte from "rollup-plugin-svelte"
 import svg from "rollup-plugin-svg"
 import tailwindcss from "tailwindcss"
@@ -41,6 +42,9 @@ const plugins = [
   }),
   svg(),
   image(),
+  progress({
+    clearLine: false,
+  }),
 ]
 
 const routes = [
