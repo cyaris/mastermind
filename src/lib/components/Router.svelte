@@ -13,9 +13,6 @@
 
   // import "svelte-lib/styles/root.css"
   // import "svelte-lib/styles/app.css"
-
-  // Get the current URL and calculate the base dynamically.
-  const subpage = window.location.pathname.split("/")[1] || ""
 </script>
 
 <main>
