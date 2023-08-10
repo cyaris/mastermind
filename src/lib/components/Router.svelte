@@ -2,6 +2,7 @@
   import { Router, Route } from "svelte-routing"
 
   import App from "./App.svelte"
+  import Button from "./Button.svelte"
   import Home from "../../routes/+page.svelte"
   import Development from "../../routes/development/+page.svelte"
   import Instructions from "../../routes/instructions/+page.svelte"
