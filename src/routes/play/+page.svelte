@@ -1,10 +1,10 @@
 <div>
-  <a href="./level_1">Level 1</a>
-  <a href="./level_2">Level 2</a>
+  <a href="../play/level_1">Level 1</a>
+  <a href="../play/level_2">Level 2</a>
 </div>
 <div>
-  <a href="./level_3">Level 3</a>
-  <a href="./level_4">Level 4</a>
+  <a href="../play/level_3">Level 3</a>
+  <a href="../play/level_4">Level 4</a>
 </div>
 <div>
   <div>Levels Overview</div>
