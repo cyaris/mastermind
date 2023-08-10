@@ -48,9 +48,8 @@ const config = {
     }),
     svg(),
     image(),
-    progress({
-      clearLine: false,
-    }),
+    progress(
+    ),
   ],
 }
 
