@@ -2,7 +2,7 @@
   import { Button } from "../lib/components"
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center mb-20">
   <Button href="play" label="Play Game" />
   <div class="flex-row mt-2">
     <Button href="development" label="Development" />
