@@ -50,6 +50,7 @@
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-svelte": "^7.1.6",
     "rollup-plugin-svg": "^2.0.0",
-    "rollup-plugin-url": "^3.0.1"
+    "rollup-plugin-url": "^3.0.1",
+    "svelte-routing": "^2.0.0"
   }
 }
