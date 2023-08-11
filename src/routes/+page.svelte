@@ -1,5 +1,5 @@
 <script>
-  import { Button } from "../lib/components"
+  import { Button } from "svelte-lib/components"
 </script>
 
 <div class="flex flex-col items-center my-8">

@@ -1,3 +1,40 @@
+<script>
+  import { marked } from "marked"
+
+  let content = `
+      ### Level 1
+
+      - 4 color code
+      - 6 possible colors
+      - 8 guesses
+
+      ### Level 2
+
+      - 4 color code
+      - 8 possible colors
+      - 8 guesses
+
+      ### Level 3
+
+      - 5 color code
+      - 6 possible colors
+      - 9 guesses
+
+      ### Level 3
+
+      - 5 color code
+      - 6 possible colors
+      - 9 guesses
+
+      ### Level 4
+
+      - 5 color code
+      - 8 possible colors
+      - 10 guesses`
+
+  let markdown = marked(content)
+</script>
+
 <div>
   <a href="../play/level_1">Level 1</a>
   <a href="../play/level_2">Level 2</a>
@@ -6,32 +43,7 @@
   <a href="../play/level_3">Level 3</a>
   <a href="../play/level_4">Level 4</a>
 </div>
-<div>
-  <div>Levels Overview</div>
-  <div>
-    <h4>Level 1</h4>
-    <ul>
-      <li>4 color code</li>
-      <li>6 possible colors</li>
-      <li>8 guesses</li>
-    </ul>
-    <h4>Level 2</h4>
-    <ul>
-      <li>4 color code</li>
-      <li>8 possible colors</li>
-      <li>8 guesses</li>
-    </ul>
-    <h4>Level 3</h4>
-    <ul>
-      <li>5 color code</li>
-      <li>6 possible colors</li>
-      <li>9 guesses</li>
-    </ul>
-    <h4>Level 4</h4>
-    <ul>
-      <li>5 color code</li>
-      <li>8 possible colors</li>
-      <li>10 guesses</li>
-    </ul>
-  </div>
+<div class="flex flex-col items-center pt-5">
+  <h2>Levels Overview</h2>
+  {@html markdown}
 </div>
