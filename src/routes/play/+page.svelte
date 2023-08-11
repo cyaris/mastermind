@@ -3,39 +3,39 @@
 
   let content = `
 
-### Level 1
+  ### Level 1
 
-- 4 color code
-- 6 possible colors
-- 8 guesses
+  - 4 color code
+  - 6 possible colors
+  - 8 guesses
 
-### Level 2
+  ### Level 2
 
-- 4 color code
-- 8 possible colors
-- 8 guesses
+  - 4 color code
+  - 8 possible colors
+  - 8 guesses
 
-### Level 3
+  ### Level 3
 
-- 5 color code
-- 6 possible colors
-- 9 guesses
+  - 5 color code
+  - 6 possible colors
+  - 9 guesses
 
-### Level 3
+  ### Level 3
 
-- 5 color code
-- 6 possible colors
-- 9 guesses
+  - 5 color code
+  - 6 possible colors
+  - 9 guesses
 
-### Level 4
+  ### Level 4
 
-- 5 color code
-- 8 possible colors
-- 10 guesses`
+  - 5 color code
+  - 8 possible colors
+  - 10 guesses`
 
   let markdown = marked(content)
 
-  let showLevelsOverview = true
+  let showLevelsOverview = false
 </script>
 
 <div class="flex flex-col items-center pt-5">
