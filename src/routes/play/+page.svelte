@@ -48,11 +48,11 @@
     <a href="../play/level_4">Level 4</a>
   </div>
   <div class="flex-col pt-5">
-    <a href="#"
-      ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Levels Overview</h2></a
-    >
-    {#if showLevelsOverview}
-      {@html markdown}
-    {/if}
+  <a href="#"
+    ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Levels Overview</h2></a
+  >
+  {#if showLevelsOverview}
+    {@html markdown}
+  {/if}
   </div>
 </div>
