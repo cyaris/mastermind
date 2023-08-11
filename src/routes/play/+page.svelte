@@ -47,7 +47,7 @@
     <a href="../play/level_3">Level 3</a>
     <a href="../play/level_4">Level 4</a>
   </div>
-  <div class="flex-col pt-5">
+  <div class="flex-col pt-5 mb-8">
   <a href="#"
     ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Levels Overview</h2></a
   >
