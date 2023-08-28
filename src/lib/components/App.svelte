@@ -2,6 +2,7 @@
   import * as d3 from "d3"
   import Pluralize from "pluralize"
 
+  // import { mounted } from "svelte-lib/stores/utils"
   import { tooltip } from "svelte-lib/functions"
   import { Button, Text } from "svelte-lib/components"
 
@@ -222,7 +223,7 @@
           </svg>
         </div>
         <div class="mb-8">
-          <Button href={window.location.href} label="Play Again" />
+          <Button href={window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1)} label="Play Again" />
         </div>
       {/if}
     </div>
