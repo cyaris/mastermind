@@ -223,7 +223,10 @@
           </svg>
         </div>
         <div class="mb-8">
-          <Button href={window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1)} label="Play Again" />
+          <Button
+            href={window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1)}
+            label="Play Again"
+          />
         </div>
       {/if}
     </div>
