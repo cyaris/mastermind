@@ -137,7 +137,7 @@
                     (i == settings.codeLength + 1 && scores[ii].b <= 2)
                       ? 5
                       : 0)}
-                  y={ii * (rectHeight + padding) - padding}
+                  y={ii * (rectHeight + padding) - padding - 1}
                   bodyText={i == settings.codeLength ? pieces[scores[ii].w] : pieces[scores[ii].b]}
                 />
               {/if}
