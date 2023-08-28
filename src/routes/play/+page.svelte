@@ -35,7 +35,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-  <div class="flex flex-col items-center mt-2 mb-8">
+  <div class="flex flex-col items-center mt-2 mb-4">
     <div class="flex-row">
       <Button href="../play/level_1" label="Level 1" />
       <Button href="../play/level_2" label="Level 2" />
