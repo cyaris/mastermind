@@ -23,12 +23,6 @@
   - 6 possible colors
   - 9 guesses
 
-  ### Level 3
-
-  - 5 color code
-  - 6 possible colors
-  - 9 guesses
-
   ### Level 4
 
   - 5 color code
