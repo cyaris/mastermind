@@ -1,6 +1,8 @@
 <script>
   import { marked } from "marked"
 
+  import { Button } from "svelte-lib/components"
+
   let content = `
 
   ### Level 1
@@ -39,20 +41,22 @@
 </script>
 
 <div class="flex flex-col items-center pt-5">
-  <div>
-    <a href="../play/level_1">Level 1</a>
-    <a href="../play/level_2">Level 2</a>
-  </div>
-  <div>
-    <a href="../play/level_3">Level 3</a>
-    <a href="../play/level_4">Level 4</a>
+  <div class="flex flex-col items-center mt-2 mb-8">
+    <div class="flex-row">
+      <Button href="../play/level_1" label="Level 1" />
+      <Button href="../play/level_2" label="Level 2" />
+    </div>
+    <div class="flex-row mt-2">
+      <Button href="../play/level_3" label="Level 3" />
+      <Button href="../play/level_4" label="Level 4" />
+    </div>
   </div>
   <div class="flex-col pt-5 mb-8">
-  <a href="#"
-    ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Levels Overview</h2></a
-  >
-  {#if showLevelsOverview}
-    {@html markdown}
-  {/if}
+    <a href="#"
+      ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Levels Overview</h2></a
+    >
+    {#if showLevelsOverview}
+      {@html markdown}
+    {/if}
   </div>
 </div>

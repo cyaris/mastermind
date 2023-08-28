@@ -13,9 +13,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {},
-      fontFamily: {
-        sans: ["Avenir", "Helvetica", "Arial", "sans-serif"],
-      },
       spacing: {
         "5px": "5px",
         "15px": "15px",
