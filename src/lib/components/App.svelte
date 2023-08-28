@@ -3,7 +3,7 @@
   import Pluralize from "pluralize"
 
   import { tooltip } from "svelte-lib/functions"
-  import { Text } from "svelte-lib/components"
+  import { Button, Text } from "svelte-lib/components"
 
   export let level = 1
 
@@ -220,6 +220,9 @@
               {/each}
             </g>
           </svg>
+        </div>
+        <div class="mb-8">
+          <Button href="/play/level_{level}" label="Play Again" />
         </div>
       {/if}
     </div>
