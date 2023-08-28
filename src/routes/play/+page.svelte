@@ -29,13 +29,6 @@
   - 8 possible colors
   - 10 guesses`
 
-  // ### Level 5
-  //
-  // - 6 color code
-  // - 8 possible colors
-  // - 10 guesses
-  // - Two consecutive colors must appear in the code.`
-
   let markdown = marked(content)
 
   let showLevelsOverview = false

@@ -14,7 +14,6 @@
     { codeLength: 4, colorsLength: 8, maxTurns: 8, buttonSpacer: 2 },
     { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
     { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 },
-    { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2, twoConsecutiveColors: true },
   ]
 
   let rectWidth = 45
@@ -45,13 +44,6 @@
       colorCode = Array.from({ length: settings.codeLength }).map(
         () => codeColors[Math.floor(Math.random() * codeColors.length)]
       )
-      // if (settings.twoConsecutiveColors) {
-      //   let randomIndex = Math.floor(Math.random() * settings.codeLength)
-      //   let consecutiveIndexes = [randomIndex - 1, randomIndex + 1].filter(v => v >= 0 && v < settings.codeLength)
-      //   colorCode[consecutiveIndexes[Math.floor(Math.random() * consecutiveIndexes.length)]] = colorCode[randomIndex]
-      //   console.log(randomIndex)
-      //   console.log(consecutiveIndexes)
-      // }
       console.log(colorCode)
     }
   }
@@ -93,7 +85,6 @@
   <div class="flex justify-center w-full h-full">
     <div class="flex flex-col items-center">
       <div class="flex flex-col items-center mb-10">
-        <span>Level {level}</span>
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
@@ -123,18 +114,17 @@
                   : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
-              {#if i == 0}
+              {#if !i}
                 <Text
                   classes="non-reactive text-end text-sm font-medium"
                   wrapBody={false}
                   width={rectWidth + padding}
                   height={rectHeight}
                   x={-(rectWidth + padding) - 2.5}
-                  y={(ii + 0.25) * (rectHeight + padding)}
+                  y={(ii + 0.25) * (rectHeight + padding) - 2}
                   bodyText={String(ii + 1)}
                 />
-              {/if}
-              {#if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
+              {:else if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
                 <Text
                   classes="non-reactive text-center"
                   bodyClasses="flex flex-col text-3xl justify-center"
@@ -158,7 +148,7 @@
               width={rectWidth + padding}
               height={rectHeight}
               x={i * (rectWidth + padding)}
-              y={-20}
+              y={-22.5}
               bodyText={i < settings.codeLength ? String(i + 1) : i == settings.codeLength ? "W" : "B"}
             />
           {/each}
@@ -212,7 +202,7 @@
         >
       {:else}
         <div class="flex flex-col items-start mt-8">
-          <span class="font-black animate-bounce">YOU {win ? "WIN" : "LOSE"}!</span>
+          <span class="font-black text-2xl animate-bounce">YOU {win ? "WIN" : "LOSE"}!</span>
           <span>Here's the code:</span>
           <svg class="flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
