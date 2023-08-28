@@ -222,7 +222,7 @@
           </svg>
         </div>
         <div class="mb-8">
-          <Button href="/play/level_{level}" label="Play Again" />
+          <Button href={window.location.href} label="Play Again" />
         </div>
       {/if}
     </div>
