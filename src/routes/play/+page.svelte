@@ -53,7 +53,7 @@
   </div>
   <div class="flex-col mb-8">
     <a href="#"
-      ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Levels Overview</h2></a
+      ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Level Breakdown</h2></a
     >
     {#if showLevelsOverview}
       {@html markdown}
