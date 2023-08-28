@@ -201,7 +201,7 @@
           </g></svg
         >
       {:else}
-        <div class="flex flex-col items-start mt-8">
+        <div class="flex flex-col items-start my-8">
           <span class="font-black text-2xl animate-bounce">YOU {win ? "WIN" : "LOSE"}!</span>
           <span>Here's the code:</span>
           <svg class="flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
