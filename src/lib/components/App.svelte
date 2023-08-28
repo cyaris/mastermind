@@ -14,6 +14,7 @@
     { codeLength: 4, colorsLength: 8, maxTurns: 8, buttonSpacer: 2 },
     { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
     { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 },
+    { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2, twoConsecutiveColors: true },
   ]
 
   let rectWidth = 45
@@ -44,6 +45,13 @@
       colorCode = Array.from({ length: settings.codeLength }).map(
         () => codeColors[Math.floor(Math.random() * codeColors.length)]
       )
+      // if (settings.twoConsecutiveColors) {
+      //   let randomIndex = Math.floor(Math.random() * settings.codeLength)
+      //   let consecutiveIndexes = [randomIndex - 1, randomIndex + 1].filter(v => v >= 0 && v < settings.codeLength)
+      //   colorCode[consecutiveIndexes[Math.floor(Math.random() * consecutiveIndexes.length)]] = colorCode[randomIndex]
+      //   console.log(randomIndex)
+      //   console.log(consecutiveIndexes)
+      // }
       console.log(colorCode)
     }
   }
