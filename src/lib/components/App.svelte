@@ -202,7 +202,7 @@
         >
       {:else}
         <div class="flex flex-col items-start my-8">
-          <span class="font-black text-2xl animate-bounce">YOU {win ? "WIN" : "LOSE"}!</span>
+          <span class="font-black text-2xl animation-bounce">YOU {win ? "WIN" : "LOSE"}!</span>
           <span>Here's the code:</span>
           <svg class="flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
@@ -226,3 +226,25 @@
     </div>
   </div>
 {/if}
+<svelte:head>
+  <style>
+    @keyframes bounce {
+      0% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      }
+      50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      }
+      100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      }
+    }
+
+    .animation-bounce {
+      animation: bounce 1s infinite;
+    }
+  </style>
+</svelte:head>
