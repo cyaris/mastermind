@@ -202,7 +202,7 @@
         >
       {:else}
         <div class="non-reactive flex flex-col items-start my-8">
-          <span class="font-black text-2xl animation-bounce">You {win ? "win" : "lose"}!</span>
+          <span class="font-extrabold text-2xl animation-bounce">You {win ? "win" : "lose"}!</span>
           <span>Here's the code:</span>
           <svg class="flex mt-2" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
