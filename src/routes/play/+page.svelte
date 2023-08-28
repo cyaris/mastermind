@@ -40,7 +40,7 @@
   let showLevelsOverview = false
 </script>
 
-<div class="flex flex-col items-center pt-5">
+<div class="flex flex-col items-center">
   <div class="flex flex-col items-center mt-2 mb-8">
     <div class="flex-row">
       <Button href="../play/level_1" label="Level 1" />
