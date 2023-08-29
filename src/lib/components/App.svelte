@@ -17,22 +17,26 @@
     { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 },
   ]
 
-  let rectWidth = 45
-  let rectHeight = 35
-  let padding = 2
-
+  let turn = 1
   let settings
+  let rectWidth
+  let rectHeight
+  let padding = 2.5
   let svgWidth
   let svgHeight
 
   let outerRadius = 100
   let svgWidth2 = outerRadius * 3
   let svgHeight2 = svgWidth2
+
   let circleSepDegrees
   let codeColors
   let colorCode
   $: {
     settings = levels[level - 1]
+
+    rectWidth = 280 / (settings.codeLength + 2)
+    rectHeight = 270 / settings.maxTurns
 
     svgWidth = (rectWidth + padding) * (settings.codeLength + 2) + 1
     svgHeight = (rectHeight + padding) * settings.maxTurns + 1
@@ -74,7 +78,7 @@
       }
     })
 
-    return { w: wScore, b: bScore }
+    return [wScore, bScore]
   }
 
   let scores = []
@@ -108,10 +112,11 @@
                   : "transparent"}
                 title={i < settings.codeLength
                   ? ""
-                  : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength
-                  ? String(scores[ii].w) + " " + Pluralize("color", scores[ii].w) + " in the wrong place."
-                  : ii < Math.floor(colorClicks.length / settings.codeLength) && i == settings.codeLength + 1
-                  ? String(scores[ii].b) + " " + Pluralize("color", scores[ii].b) + " in the right place."
+                  : ii < Math.floor(colorClicks.length / settings.codeLength) && i >= settings.codeLength
+                  ? String(scores[ii][i - settings.codeLength]) +
+                    " " +
+                    Pluralize("color", scores[ii][i - settings.codeLength]) +
+                    " in the wrong place."
                   : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
@@ -128,18 +133,18 @@
               {:else if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
                 <Text
                   classes="non-reactive text-center"
-                  bodyClasses="flex flex-col text-3xl justify-center"
+                  bodyClasses="flex flex-col {scores[ii][i - settings.codeLength] == settings.codeLength
+                    ? 'text-xl'
+                    : 'text-3xl'} justify-center"
                   overflowBody={false}
                   wrapBody={false}
                   width={rectWidth}
                   height={rectHeight}
-                  x={i * (rectWidth + padding) +
-                    ((i == settings.codeLength && scores[ii].w <= 2) ||
-                    (i == settings.codeLength + 1 && scores[ii].b <= 2)
-                      ? 5
-                      : 0)}
-                  y={ii * (rectHeight + padding) - padding - 1}
-                  bodyText={i == settings.codeLength ? pieces[scores[ii].w] : pieces[scores[ii].b]}
+                  x={i * (rectWidth + padding) + (scores[ii][i - settings.codeLength] <= 2 ? 5 : 0)}
+                  y={ii * (rectHeight + padding) -
+                    padding +
+                    (scores[ii][i - settings.codeLength] == settings.codeLength ? 3 : -1)}
+                  bodyText={pieces[scores[ii][i - settings.codeLength]]}
                 />
               {/if}
             {/each}
@@ -179,8 +184,10 @@
 
                     if (colorClicks.length % settings.codeLength == 0) {
                       scores = [...scores, getScore(colorClicks.slice(-settings.codeLength))]
+                      turn += 1
                     }
-                    if (String(colorClicks.slice(-settings.codeLength)) == String(colorCode)) {
+
+                    if (turn > 1 && scores[turn - 2][1] == settings.codeLength) {
                       win = true
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
                       gameOver = true
