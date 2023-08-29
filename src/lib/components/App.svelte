@@ -165,7 +165,8 @@
           class="flex overflow-visible"
           width={svgWidth2}
           height={svgHeight2}
-          viewBox="{-svgWidth2 * (5 / 32)} {0} {svgWidth2} {svgHeight2}"
+          viewBox="{-svgWidth2 * (5 / 32)} {svgHeight2 / 16} {svgWidth2 -
+            padding * (settings.codeLength - 3)} {svgHeight2}"
         >
           <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
             {#each codeColors.sort() as codeColor, i}
