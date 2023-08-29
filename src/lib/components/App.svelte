@@ -112,7 +112,7 @@
                   : "transparent"}
                 title={i < settings.codeLength
                   ? ""
-                  : ii < Math.floor(colorClicks.length / settings.codeLength) && i >= settings.codeLength
+                  : ii < turn - 1 && i >= settings.codeLength
                   ? String(scores[ii][i - settings.codeLength]) +
                     " " +
                     Pluralize("color", scores[ii][i - settings.codeLength]) +
@@ -132,7 +132,7 @@
                   y={(ii + 0.25) * (rectHeight + padding) - 3}
                   bodyText={String(ii + 1)}
                 />
-              {:else if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
+              {:else if i >= settings.codeLength && ii < turn - 1}
                 <Text
                   classes="non-reactive text-center"
                   bodyClasses="flex flex-col {scores[ii][i - settings.codeLength] == 5
