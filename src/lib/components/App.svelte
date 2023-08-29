@@ -129,7 +129,7 @@
                   width={rectWidth + padding}
                   height={rectHeight}
                   x={-(rectWidth + padding) - 2.5}
-                  y={(ii + 0.25) * (rectHeight + padding) - 2}
+                  y={(ii + 0.25) * (rectHeight + padding) - 3}
                   bodyText={String(ii + 1)}
                 />
               {:else if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
