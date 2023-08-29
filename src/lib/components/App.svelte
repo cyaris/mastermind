@@ -35,7 +35,7 @@
   $: {
     settings = levels[level - 1]
 
-    rectWidth = 280 / (settings.codeLength + 2)
+    rectWidth = 275 / (settings.codeLength + 2)
     rectHeight = 270 / settings.maxTurns
 
     svgWidth = (rectWidth + padding) * (settings.codeLength + 2) + 1
