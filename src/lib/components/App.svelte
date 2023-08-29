@@ -27,7 +27,7 @@
 
   let outerRadius = 100
   let svgWidth2 = outerRadius * 3
-  let svgHeight2 = svgWidth2
+  let svgHeight2 = svgWidth2 * (2 / 3)
 
   let circleSepDegrees
   let codeColors
@@ -116,7 +116,9 @@
                   ? String(scores[ii][i - settings.codeLength]) +
                     " " +
                     Pluralize("color", scores[ii][i - settings.codeLength]) +
-                    " in the wrong place."
+                    " in the " +
+                    (i == settings.codeLength ? "wrong" : "right") +
+                    " place."
                   : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
@@ -133,7 +135,7 @@
               {:else if i >= settings.codeLength && ii < Math.floor(colorClicks.length / settings.codeLength)}
                 <Text
                   classes="non-reactive text-center"
-                  bodyClasses="flex flex-col {scores[ii][i - settings.codeLength] == settings.codeLength
+                  bodyClasses="flex flex-col {scores[ii][i - settings.codeLength] == 5
                     ? 'text-xl'
                     : 'text-3xl'} justify-center"
                   overflowBody={false}
@@ -141,9 +143,7 @@
                   width={rectWidth}
                   height={rectHeight}
                   x={i * (rectWidth + padding) + (scores[ii][i - settings.codeLength] <= 2 ? 5 : 0)}
-                  y={ii * (rectHeight + padding) -
-                    padding +
-                    (scores[ii][i - settings.codeLength] == settings.codeLength ? 3 : -1)}
+                  y={ii * (rectHeight + padding) - padding + (scores[ii][i - settings.codeLength] == 5 ? 3 : -1)}
                   bodyText={pieces[scores[ii][i - settings.codeLength]]}
                 />
               {/if}
