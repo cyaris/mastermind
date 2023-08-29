@@ -201,7 +201,7 @@
               bodyClasses="cursive"
               overflowBody={false}
               x={-22}
-              y={-22.5}
+              y={-23.5}
               width={50}
               height={50}
               bodyText="Choose a Color"
