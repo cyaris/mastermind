@@ -5,26 +5,22 @@
 
   let content = `
 
-  ### Level 1
-
+  #### Level 1
   - 4 color code
   - 6 possible colors
   - 8 guesses
 
-  ### Level 2
-
+  #### Level 2
   - 4 color code
   - 8 possible colors
   - 8 guesses
 
-  ### Level 3
-
+  #### Level 3
   - 5 color code
   - 6 possible colors
   - 9 guesses
 
-  ### Level 4
-
+  #### Level 4
   - 5 color code
   - 8 possible colors
   - 10 guesses`
@@ -45,9 +41,9 @@
       <Button href="../play/level_4" label="Level 4" />
     </div>
   </div>
-  <div class="flex-col mb-8">
+  <div class="flex-col mt-4 mb-8">
     <a href="#"
-      ><h2 class="cursor-pointer" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Breakdown by Level</h2></a
+      ><span class="cursor-pointer font-bold text-2xl" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Breakdown by Level</span></a
     >
     {#if showLevelsOverview}
       {@html markdown}
