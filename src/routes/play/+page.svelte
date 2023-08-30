@@ -33,17 +33,19 @@
 <div class="flex flex-col items-center">
   <div class="flex flex-col items-center my-2">
     <div class="flex-row">
-      <Button href="../play/level_1" label="Level 1" />
-      <Button href="../play/level_2" label="Level 2" />
+      <Button classes="w-40" href="../play/level_1" label="Level 1" />
+      <Button classes="w-40" href="../play/level_2" label="Level 2" />
     </div>
     <div class="flex-row mt-2">
-      <Button href="../play/level_3" label="Level 3" />
-      <Button href="../play/level_4" label="Level 4" />
+      <Button classes="w-40" href="../play/level_3" label="Level 3" />
+      <Button classes="w-40" href="../play/level_4" label="Level 4" />
     </div>
   </div>
-  <div class="flex-col mt-4 mb-8">
+  <div class="flex-col mt-2 mb-8">
     <a href="#"
-      ><span class="cursor-pointer font-bold text-2xl" on:click={() => (showLevelsOverview = !showLevelsOverview)}>Breakdown by Level</span></a
+      ><span class="cursor-pointer font-bold text-2xl" on:click={() => (showLevelsOverview = !showLevelsOverview)}
+        >Breakdown by Level</span
+      ></a
     >
     {#if showLevelsOverview}
       {@html markdown}
