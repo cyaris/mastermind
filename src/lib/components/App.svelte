@@ -232,6 +232,7 @@
         </div>
         <div class="mb-8">
           <Button
+            classes="w-44"
             href={window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1)}
             label="Play Again"
           />
