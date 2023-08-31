@@ -20,6 +20,7 @@ module.exports = {
         144: "36rem",
       },
       strokeWidth: {
+        2.5: "2.5px",
         3: "3px",
         4: "4px",
       },
