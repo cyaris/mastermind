@@ -112,6 +112,8 @@
                   : "transparent"}
                 title={i < settings.codeLength
                   ? ""
+                  : ii == turn - 1 && colorClicks.length % settings.codeLength != 0
+                  ? "This round is in progress."
                   : ii < turn - 1 && i >= settings.codeLength
                   ? String(scores[ii][i - settings.codeLength]) +
                     " " +
