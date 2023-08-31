@@ -23,7 +23,7 @@
   #### Level 4
   - 5 color code
   - 8 possible colors
-  - 10 guesses`
+  - 9 guesses`
 
   let markdown = marked(content)
 
