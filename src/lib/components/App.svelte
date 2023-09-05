@@ -101,7 +101,7 @@
                 class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
-                  ? 'cursor-help hover:stroke-3'
+                  ? 'cursor-help hover:stroke-2.5'
                   : ''}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
