@@ -1,0 +1,9 @@
+.DS_Store
+.svelte-kit
+
+build
+dist
+node_modules
+package
+
+**/Test.svelte
