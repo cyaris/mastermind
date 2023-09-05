@@ -98,7 +98,11 @@
           {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
             {#each Array.from({ length: settings.maxTurns }) as dd, ii}
               <rect
-                class="non-reactive stroke-black"
+                class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
+                  ? 'stroke-2.5'
+                  : i >= settings.codeLength
+                  ? 'cursor-help hover:stroke-3'
+                  : ''}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
                 rx={3}
@@ -110,19 +114,6 @@
                   : colorClicks[ii * settings.codeLength + i]
                   ? colorClicks[ii * settings.codeLength + i]
                   : "transparent"}
-              />
-              <foreignObject
-                class="border border-solid [border-width:2.5px] rounded-sm {i &&
-                ii == turn - 1 &&
-                colorClicks.length % settings.codeLength == i
-                  ? ''
-                  : i >= settings.codeLength
-                  ? 'cursor-help hidden sm:inline border-transparent hover:border-black'
-                  : 'border-transparent'}"
-                x={i * (rectWidth + padding)}
-                y={ii * (rectHeight + padding)}
-                width={rectWidth}
-                height={rectHeight}
                 title={i < settings.codeLength
                   ? ""
                   : ii == turn - 1 && colorClicks.length % settings.codeLength != 0
