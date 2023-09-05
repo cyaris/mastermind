@@ -112,13 +112,13 @@
                   : "transparent"}
               />
               <foreignObject
-                class="border border-solid border-0 rounded-sm {i &&
+                class="border border-solid [border-width:2.5px] rounded-sm {i &&
                 ii == turn - 1 &&
                 colorClicks.length % settings.codeLength == i
-                  ? '[border-width:2.5px]'
+                  ? ''
                   : i >= settings.codeLength
-                  ? 'cursor-help hidden sm:inline hover:[border-width:2.5px]'
-                  : ''}"
+                  ? 'cursor-help hidden sm:inline border-transparent hover:border-black'
+                  : 'border-transparent'}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
                 width={rectWidth}
