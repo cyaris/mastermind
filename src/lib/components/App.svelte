@@ -3,8 +3,11 @@
   import Pluralize from "pluralize"
 
   // import { mounted } from "svelte-lib/stores/utils"
+  import { createEventDispatcher } from "svelte"
   import { tooltip } from "svelte-lib/functions"
   import { Button, Text } from "svelte-lib/components"
+
+  const dispatch = createEventDispatcher()
 
   export let level = 1
 
@@ -196,6 +199,9 @@
 
                     if (turn > 1 && scores[turn - 2][1] == settings.codeLength) {
                       win = true
+                      dispatch("win", {
+                        value: true,
+                      })
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
                       gameOver = true
                     }

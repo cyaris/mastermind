@@ -25,6 +25,7 @@
     "node_modules"
   ],
   "dependencies": {
-    "svelte-lib": "file:../svelte-lib"
+    "svelte-lib": "file:../svelte-lib",
+    "fireworks": "file:../fireworks"
   }
 }
