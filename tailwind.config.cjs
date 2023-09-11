@@ -6,6 +6,7 @@ const plugin = require("tailwindcss/plugin")
 module.exports = {
   content: [
     "./node_modules/svelte-lib/**/*.{html,js,svelte,ts}",
+    "./node_modules/fireworks/**/*.{html,js,svelte,ts}",
     "./package/**/*.{html,js,svelte,ts}",
     "./public/**/*.{html,js,svelte,ts}",
     "./src/**/*.{html,js,svelte,ts}",
