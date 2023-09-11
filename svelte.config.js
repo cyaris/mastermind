@@ -1,3 +1,1 @@
-import config from "svelte-lib/svelte.config.js"
-
-export default config
+export { default } from "svelte-lib/svelte.config.js"

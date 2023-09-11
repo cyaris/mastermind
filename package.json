@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "dev:open": "vite --host --open",
-    "build": "svelte-kit sync && svelte-package",
+    "build": "vite build",
     "build:watch": "svelte-kit sync && svelte-package -w",
     "package": "vite package",
     "preview": "vite preview",
@@ -25,11 +25,6 @@
     "dist",
     "node_modules"
   ],
-  "exports": {
-    ".": {
-      "svelte": "./dist/index.js"
-    }
-  },
   "dependencies": {
     "svelte-lib": "file:../svelte-lib",
     "fireworks": "file:../fireworks"
