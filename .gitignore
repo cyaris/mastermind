@@ -7,3 +7,5 @@ node_modules
 package
 
 **/Test.svelte
+
+**/test.css

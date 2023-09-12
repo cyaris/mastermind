@@ -3,8 +3,11 @@
   import Pluralize from "pluralize"
 
   // import { mounted } from "svelte-lib/stores/utils"
+  import { createEventDispatcher } from "svelte"
   import { tooltip } from "svelte-lib/functions"
   import { Button, Text } from "svelte-lib/components"
+
+  const dispatch = createEventDispatcher()
 
   export let level = 1
 
@@ -101,7 +104,7 @@
                 class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
-                  ? 'cursor-help hover:stroke-3'
+                  ? 'cursor-help hover:stroke-2.5'
                   : ''}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
@@ -196,6 +199,9 @@
 
                     if (turn > 1 && scores[turn - 2][1] == settings.codeLength) {
                       win = true
+                      dispatch("win", {
+                        value: true,
+                      })
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
                       gameOver = true
                     }
