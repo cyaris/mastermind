@@ -11,9 +11,6 @@
   import Level2 from "../../routes/play/level_2/+page.svelte"
   import Level3 from "../../routes/play/level_3/+page.svelte"
   import Level4 from "../../routes/play/level_4/+page.svelte"
-
-  // import "svelte-lib/styles/root.css"
-  // import "svelte-lib/styles/app.css"
 </script>
 
 <main>
