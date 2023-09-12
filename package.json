@@ -7,7 +7,6 @@
     "dev": "vite --host",
     "dev:open": "vite --host --open",
     "build": "vite build",
-    "build:watch": "svelte-kit sync && svelte-package -w",
     "package": "vite package",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
