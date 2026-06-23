@@ -7,7 +7,7 @@
 
 <App level={4} on:win={() => (win = true)} />
 {#if win}
-  <div class="non-reactive fixed top-0 left-0">
+  <div class="non-reactive fixed left-0 top-0">
     <FireworkShow />
   </div>
 {/if}

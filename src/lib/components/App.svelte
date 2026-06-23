@@ -90,9 +90,9 @@
 </script>
 
 {#if settings}
-  <div class="flex justify-center w-full h-full">
+  <div class="flex h-full w-full justify-center">
     <div class="flex flex-col items-center">
-      <div class="flex flex-col items-center mb-12">
+      <div class="mb-12 flex flex-col items-center">
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
@@ -222,10 +222,10 @@
           </g></svg
         >
       {:else}
-        <div class="non-reactive flex flex-col items-start my-8">
-          <span class="font-extrabold text-2xl animation-bounce">You {win ? "win" : "lose"}!</span>
+        <div class="non-reactive my-8 flex flex-col items-start">
+          <span class="animation-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
           <span>Here's the code:</span>
-          <svg class="flex mt-2" width={svgWidth} height={svgHeight / settings.maxTurns}>
+          <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
               {#each colorCode as color, i}
                 <rect

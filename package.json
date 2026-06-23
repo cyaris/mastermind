@@ -11,20 +11,15 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
-    "format": "prettier --ignore-path .gitignore --write '**/*.{css,cjs,html,js,json,svelte,svg}'",
-    "format:check": "prettier --ignore-path ../.gitignore --check '**/*.{css,cjs,html,js,json,svelte,svg}'",
+    "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write '**/*.{css,cjs,html,js,json,svelte,svg}'",
+    "format:check": "prettier --ignore-path ../.gitignore --ignore-path .prettierignore --check '**/*.{css,cjs,html,js,json,svelte,svg}'",
     "lint": "eslint '**/*.{cjs,html,js,svelte}'",
     "lint:fix": "eslint --fix '**/*.{cjs,html,js,svelte}'",
     "rollup": "rollup -c rollup.config.js",
     "rollup:watch": "rollup -c rollup.config.js -w"
   },
-  "eslintIgnore": [
-    ".svelte-kit",
-    "build",
-    "dist",
-    "node_modules"
-  ],
   "dependencies": {
+    "linklocal": "^2.8.2",
     "svelte-lib": "file:../svelte-lib",
     "fireworks": "file:../fireworks"
   }

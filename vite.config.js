@@ -7,6 +7,11 @@ export const config = {
   build: {
     sourcemap: true,
   },
+  // svelte-lib is a Svelte component library compiled on the fly by vite-plugin-svelte.
+  // excluding it from pre-bundling avoids stale optimized-dep caches when the library changes.
+  optimizeDeps: {
+    exclude: ["svelte-lib"],
+  },
   server: {
     port: 3000,
   },
