@@ -9,6 +9,4 @@ div.classList.add("mastermind")
 let script = document.currentScript
 script.parentNode.insertBefore(div, script)
 
-new Router({
-  target: div,
-})
+new Router({target: div})
