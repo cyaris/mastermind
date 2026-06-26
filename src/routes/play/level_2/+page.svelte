@@ -1,5 +1,6 @@
 <script>
   import { FireworkShow } from "fireworks/components"
+
   import { App } from "../../../lib/components"
 
   let win = false

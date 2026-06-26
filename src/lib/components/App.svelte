@@ -1,11 +1,10 @@
 <script>
   import * as d3 from "d3"
   import Pluralize from "pluralize"
-
   // import { mounted } from "svelte-lib/stores/utils"
   import { createEventDispatcher } from "svelte"
-  import { tooltip } from "svelte-lib/functions"
   import { Button, Text } from "svelte-lib/components"
+  import { tooltip } from "svelte-lib/functions"
 
   const dispatch = createEventDispatcher()
 
@@ -87,6 +86,9 @@
   let scores = []
 
   let pieces = { 0: "", 1: ".", 2: ":", 3: ":.", 4: "::", 5: "★" }
+
+  $: columns = settings ? Array.from({ length: settings.codeLength + 2 }, (_, i) => i) : []
+  $: rows = settings ? Array.from({ length: settings.maxTurns }, (_, i) => i) : []
 </script>
 
 {#if settings}
@@ -98,8 +100,8 @@
       </div>
       <svg class="overflow-visible" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
-          {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
-            {#each Array.from({ length: settings.maxTurns }) as dd, ii}
+          {#each columns as i (i)}
+            {#each rows as ii (ii)}
               <rect
                 class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
                   ? 'stroke-2.5'
@@ -178,7 +180,7 @@
             padding * (settings.codeLength - 3)} {svgHeight2}"
         >
           <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
-            {#each codeColors.sort() as codeColor, i}
+            {#each codeColors.sort() as codeColor, i (codeColor)}
               <g
                 transform="translate({(svgWidth2 / 2 - outerRadius) *
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
@@ -227,7 +229,7 @@
           <span>Here's the code:</span>
           <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
-              {#each colorCode as color, i}
+              {#each colorCode as color, i (i)}
                 <rect
                   x={i * (rectWidth + padding)}
                   y={0}
