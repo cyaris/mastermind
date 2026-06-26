@@ -200,9 +200,7 @@
 
                     if (turn > 1 && scores[turn - 2][1] == settings.codeLength) {
                       win = true
-                      dispatch("win", {
-                        value: true,
-                      })
+                      dispatch("win", { value: true })
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
                       gameOver = true
                     }
