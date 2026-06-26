@@ -1,7 +1,6 @@
 <script>
   import * as d3 from "d3"
   import Pluralize from "pluralize"
-  // import { mounted } from "svelte-lib/stores/utils"
   import { createEventDispatcher } from "svelte"
   import { Button, Text } from "svelte-lib/components"
   import { tooltip } from "svelte-lib/functions"
