@@ -19,8 +19,8 @@
     "rollup:watch": "rollup -c rollup.config.js -w"
   },
   "dependencies": {
+    "fireworks": "file:../fireworks",
     "linklocal": "^2.8.2",
-    "svelte-lib": "file:../svelte-lib",
-    "fireworks": "file:../fireworks"
+    "svelte-lib": "file:../svelte-lib"
   }
 }
