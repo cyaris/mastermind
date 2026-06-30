@@ -22,6 +22,10 @@
     "d3-scale-chromatic": "3",
     "fireworks": "file:../fireworks",
     "linklocal": "^2.8.2",
-    "svelte-lib": "file:../svelte-lib"
+    "pluralize": "^8.0.0",
+    "svelte": "4.2.20",
+    "svelte-lib": "file:../svelte-lib",
+    "svelte-routing": "^2.3.0",
+    "vite": "^4.4.2"
   }
 }
