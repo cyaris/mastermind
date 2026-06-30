@@ -19,6 +19,7 @@
     "rollup:watch": "rollup -c rollup.config.js -w"
   },
   "dependencies": {
+    "d3-scale-chromatic": "3",
     "fireworks": "file:../fireworks",
     "linklocal": "^2.8.2",
     "svelte-lib": "file:../svelte-lib"

@@ -1,5 +1,5 @@
 <script>
-  import * as d3 from "d3"
+  import { schemeSet1 } from "d3-scale-chromatic"
   import Pluralize from "pluralize"
   import { createEventDispatcher } from "svelte"
   import { Button, Text } from "svelte-lib/components"
@@ -9,7 +9,7 @@
 
   export let level = 1
 
-  let colors = d3.schemeSet1
+  let colors = schemeSet1
 
   let levels = [
     { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
