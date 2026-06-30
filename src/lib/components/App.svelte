@@ -1,17 +1,15 @@
 <script>
-  import * as d3 from "d3"
+  import { schemeSet1 } from "d3-scale-chromatic"
   import Pluralize from "pluralize"
-
-  // import { mounted } from "svelte-lib/stores/utils"
   import { createEventDispatcher } from "svelte"
-  import { tooltip } from "svelte-lib/functions"
   import { Button, Text } from "svelte-lib/components"
+  import { tooltip } from "svelte-lib/functions"
 
   const dispatch = createEventDispatcher()
 
   export let level = 1
 
-  let colors = d3.schemeSet1
+  let colors = schemeSet1
 
   let levels = [
     { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
@@ -87,19 +85,22 @@
   let scores = []
 
   let pieces = { 0: "", 1: ".", 2: ":", 3: ":.", 4: "::", 5: "★" }
+
+  $: columns = settings ? Array.from({ length: settings.codeLength + 2 }, (_, i) => i) : []
+  $: rows = settings ? Array.from({ length: settings.maxTurns }, (_, i) => i) : []
 </script>
 
 {#if settings}
-  <div class="flex justify-center w-full h-full">
+  <div class="flex h-full w-full justify-center">
     <div class="flex flex-col items-center">
-      <div class="flex flex-col items-center mb-12">
+      <div class="mb-12 flex flex-col items-center">
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
       <svg class="overflow-visible" width={svgWidth} height={svgHeight}>
         <g transform="translate({1}, {1})">
-          {#each Array.from({ length: settings.codeLength + 2 }) as d, i}
-            {#each Array.from({ length: settings.maxTurns }) as dd, ii}
+          {#each columns as i (i)}
+            {#each rows as ii (ii)}
               <rect
                 class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
                   ? 'stroke-2.5'
@@ -178,7 +179,7 @@
             padding * (settings.codeLength - 3)} {svgHeight2}"
         >
           <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
-            {#each codeColors.sort() as codeColor, i}
+            {#each codeColors.sort() as codeColor, i (codeColor)}
               <g
                 transform="translate({(svgWidth2 / 2 - outerRadius) *
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
@@ -199,9 +200,7 @@
 
                     if (turn > 1 && scores[turn - 2][1] == settings.codeLength) {
                       win = true
-                      dispatch("win", {
-                        value: true,
-                      })
+                      dispatch("win", { value: true })
                     } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
                       gameOver = true
                     }
@@ -222,12 +221,12 @@
           </g></svg
         >
       {:else}
-        <div class="non-reactive flex flex-col items-start my-8">
-          <span class="font-extrabold text-2xl animation-bounce">You {win ? "win" : "lose"}!</span>
+        <div class="non-reactive my-8 flex flex-col items-start">
+          <span class="animation-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
           <span>Here's the code:</span>
-          <svg class="flex mt-2" width={svgWidth} height={svgHeight / settings.maxTurns}>
+          <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate({1}, {1})">
-              {#each colorCode as color, i}
+              {#each colorCode as color, i (i)}
                 <rect
                   x={i * (rectWidth + padding)}
                   y={0}

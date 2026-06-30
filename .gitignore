@@ -1,11 +1,4 @@
 .DS_Store
-.svelte-kit
-
-build
-dist
-node_modules
-package
-
-**/Test.svelte
-
-**/test.css
+.svelte-kit/
+dist/
+node_modules/
