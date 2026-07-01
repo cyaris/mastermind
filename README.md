@@ -2,6 +2,8 @@
 
 Svelte implementation of the classic Mastermind code-breaking game. The app includes instructions, four playable levels, score feedback for each guess, a replay flow, and a fireworks celebration after a win.
 
+View the live tool at [charlieyaris.com/mastermind](https://charlieyaris.com/mastermind/).
+
 I first learned how to code while reading the book Learn Python the Hard Way. For the section on object oriented programming, I took on the challenge of translating Mastermind into a command line game. I originally hoped to integrate this original Python version into my site with Flask. Since GitHub doesn't support Flask, I decided to learn JavaScript and create a web version of Mastermind using D3.js. The code for both versions of the game are included in this repository.
 
 ## How the game works
