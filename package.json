@@ -9,6 +9,7 @@
     "build": "vite build",
     "package": "vite package",
     "preview": "vite preview",
+    "preview:open": "vite preview --open",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
     "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write '**/*.{css,cjs,html,js,json,svelte,svg}'",
@@ -22,6 +23,10 @@
     "d3-scale-chromatic": "3",
     "fireworks": "file:../fireworks",
     "linklocal": "^2.8.2",
-    "svelte-lib": "file:../svelte-lib"
+    "pluralize": "^8.0.0",
+    "svelte": "4.2.20",
+    "svelte-lib": "file:../svelte-lib",
+    "svelte-routing": "^2.3.0",
+    "vite": "^4.4.2"
   }
 }
