@@ -2,7 +2,7 @@
 
 Svelte implementation of the classic Mastermind code-breaking game. The app includes instructions, four playable levels, score feedback for each guess, a replay flow, and a fireworks celebration after a win.
 
-View the live tool at [charlieyaris.com/mastermind](https://charlieyaris.com/mastermind/).
+View the live tool at <a href="https://charlieyaris.com/mastermind/" target="_blank" rel="noopener noreferrer">charlieyaris.com/mastermind</a>.
 
 I first learned how to code while reading the book Learn Python the Hard Way. For the section on object oriented programming, I took on the challenge of translating Mastermind into a command line game. I later re-coded it in D3.js, and then as a Svelte app. The final version is what you see here today.
 
@@ -79,5 +79,5 @@ Rebuild those packages after changing them so Mastermind can consume the latest 
 
 Two existing D3.js projects really helped me in seeing this project through.
 
-- <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank">Customizing Heatmap in D3.js</a>
-- <a href="http://jsfiddle.net/ksWDN//" target="_blank">Drawing Circles on the Circumference of Another Circle</a>
+- <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank" rel="noopener noreferrer">Customizing Heatmap in D3.js</a>
+- <a href="http://jsfiddle.net/ksWDN//" target="_blank" rel="noopener noreferrer">Drawing Circles on the Circumference of Another Circle</a>
