@@ -11,5 +11,4 @@
 
 ## Routed Pages
 
-- Use `svelte-routing` in `src/lib/components/Router.svelte` to simulate the GitHub Pages paths under `/mastermind` for local/app rendering.
-- Keep `src/routes/+page.svelte` as the app navigation hub. Page-specific content belongs in the matching route component under `src/routes`.
+- Use `/mastermind` as the simulated GitHub Pages route base for local/app rendering.
