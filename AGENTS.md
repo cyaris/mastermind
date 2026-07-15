@@ -6,12 +6,12 @@
 
 ## Documentation
 
-- For README links that intentionally open a new tab, use an HTML anchor with `target="_blank"` and `rel="noopener noreferrer"`.
+- Keep README link behavior intentional and consistent. Use standard Markdown links by default, and use HTML anchors with `target="_blank"` and `rel="noopener noreferrer"` only when links should explicitly open in a new tab.
 
 ## Local Dependencies
 
 - Keep `linklocal` and local `file:` dependencies in `package.json`; sibling workspace packages such as `svelte-lib` and `fireworks` should use `file:../...` paths.
 
-## Routed Pages
+## Routing And Hosting
 
 - Use `/mastermind` as the simulated GitHub Pages route base for local/app rendering.
