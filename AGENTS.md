@@ -8,6 +8,10 @@
 
 - For README links that intentionally open a new tab, use an HTML anchor with `target="_blank"` and `rel="noopener noreferrer"`.
 
+## Local Dependencies
+
+- Keep `linklocal` and local `file:` dependencies in `package.json`; sibling workspace packages such as `svelte-lib` and `fireworks` should use `file:../...` paths.
+
 ## Routed Pages
 
 - Use `/mastermind` as the simulated GitHub Pages route base for local/app rendering.
