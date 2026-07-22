@@ -9,10 +9,7 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"]
-    }
+    "paths": { "$lib": ["src/lib"], "$lib/*": ["src/lib/*"] }
   },
   "include": ["src/**/*.css", "src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"],
   "extends": "./.svelte-kit/tsconfig.json"
