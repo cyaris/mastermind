@@ -31,7 +31,7 @@
 </script>
 
 <main>
-  <Router base="/">
+  <Router>
     {#each routes as { paths, component }}
       {#each paths as path}
         <Route {path} {component} />
