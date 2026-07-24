@@ -85,14 +85,12 @@ Manual dispatch uploads staged `test_bundle.*` files by default. Set `production
 upload names and `dry-run` disabled.
 
 Set the repository variable `SVELTE_LIB_REF` to control which `svelte-lib` branch, tag, or SHA the automatic production
-workflow checks out. Set `FIREWORKS_REF` to control the same behavior for the local `fireworks` dependency. Manual
-dispatch exposes both values as inputs.
+workflow checks out for both the local file dependency and the shared rollup upload action. Set `FIREWORKS_REF` to
+control the same behavior for the local `fireworks` dependency. Manual dispatch exposes both values as inputs.
 
-The workflow calls the reusable workflow in the private `svelte-lib` repository, which means the caller repository must
-also be private. Enable access from `svelte-lib`
-Settings, Actions, General, Access, and provide `CHECKOUT_TOKEN` with read access to `svelte-lib` and any private local
-dependency repositories. AWS authentication uses `AWS_ROLLUP_UPLOAD_ROLE_ARN` when present, otherwise it expects AWS
-access-key secrets.
+The workflow checks out the private `svelte-lib` repository and runs `.github/actions/rollup-upload` from that checkout.
+Provide `CHECKOUT_TOKEN` with read access to `svelte-lib` and any private local dependency repositories. AWS
+authentication uses `AWS_ROLLUP_UPLOAD_ROLE_ARN` when present, otherwise it expects AWS access-key secrets.
 
 ## Credits
 
