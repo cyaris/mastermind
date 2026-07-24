@@ -75,6 +75,25 @@ This app uses local workspace packages:
 
 Rebuild those packages after changing them so Mastermind can consume the latest generated output.
 
+## Embedded Bundle Deployment
+
+The `Rollup upload` GitHub Actions workflow builds the rollup bundle and uploads it to
+`s3://cyaris.github.io/mastermind/`.
+
+Manual dispatch uploads staged `test_bundle.*` files by default. Set `production` during manual dispatch to upload live
+`bundle.*` files instead. Pushes to `main` or `master`, including merges into those branches, always run with production
+upload names and `dry-run` disabled.
+
+Set the repository variable `SVELTE_LIB_REF` to control which `svelte-lib` branch, tag, or SHA the automatic production
+workflow checks out. Set `FIREWORKS_REF` to control the same behavior for the local `fireworks` dependency. Manual
+dispatch exposes both values as inputs.
+
+The workflow calls the reusable workflow in the private `svelte-lib` repository, which means the caller repository must
+also be private. Enable access from `svelte-lib`
+Settings, Actions, General, Access, and provide `CHECKOUT_TOKEN` with read access to `svelte-lib` and any private local
+dependency repositories. AWS authentication uses `AWS_ROLLUP_UPLOAD_ROLE_ARN` when present, otherwise it expects AWS
+access-key secrets.
+
 ## Credits
 
 Two existing D3.js projects really helped me in seeing this project through.
