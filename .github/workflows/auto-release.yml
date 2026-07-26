@@ -1,0 +1,47 @@
+name: Auto release
+
+on:
+  pull_request:
+    types:
+      - closed
+  workflow_dispatch:
+    inputs:
+      release-sha:
+        description: Commit SHA to evaluate and release.
+        required: false
+        type: string
+        default: ""
+      pr-number:
+        description: Pull request number to comment on.
+        required: false
+        type: string
+        default: ""
+      svelte-lib-ref:
+        description: svelte-lib ref used to run the shared release workflow.
+        required: false
+        type: string
+        default: cy_dev3
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: read
+
+jobs:
+  auto-release-after-pr:
+    if: github.event.pull_request.merged == true
+    uses: cyaris/svelte-lib/.github/workflows/auto-release.yml@cy_dev3
+    with:
+      pr-number: ${{ github.event.pull_request.number }}
+      release-sha: ${{ github.event.pull_request.merge_commit_sha }}
+      svelte-lib-ref: ${{ vars.SVELTE_LIB_REF || 'cy_dev3' }}
+    secrets: inherit
+
+  auto-release-manual:
+    if: github.event_name == 'workflow_dispatch'
+    uses: cyaris/svelte-lib/.github/workflows/auto-release.yml@cy_dev3
+    with:
+      pr-number: ${{ inputs.pr-number }}
+      release-sha: ${{ inputs.release-sha || github.sha }}
+      svelte-lib-ref: ${{ inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || 'cy_dev3' }}
+    secrets: inherit
