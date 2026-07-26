@@ -70,40 +70,21 @@ jobs:
 
   rollup-upload:
     needs: resolve-inputs
-    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
-    steps:
-      - name: Checkout caller repository
-        uses: actions/checkout@v6
-        with:
-          path: ${{ github.event.repository.name }}
-
-      - name: Checkout svelte-lib
-        uses: actions/checkout@v6
-        with:
-          repository: cyaris/svelte-lib
-          ref: ${{ needs.resolve-inputs.outputs.svelte_lib_ref }}
-          path: svelte-lib
-          token: ${{ secrets.CHECKOUT_TOKEN || github.token }}
-
-      - name: Rollup and upload embedded bundle
-        uses: ./svelte-lib/.github/actions/rollup-upload
-        with:
-          caller-repository-name: ${{ github.event.repository.name }}
-          bundle-files: |
-            bundle.css:text/css
-            bundle.js:application/javascript
-          s3-bucket: cyaris.github.io
-          s3-prefix: mastermind
-          aws-region: us-east-2
-          aws-role-to-assume: ${{ needs.resolve-inputs.outputs.aws_role_to_assume }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          production: ${{ needs.resolve-inputs.outputs.production }}
-          dry-run: ${{ needs.resolve-inputs.outputs.dry_run }}
-          checkout-token: ${{ secrets.CHECKOUT_TOKEN || github.token }}
-          local-dependency-repositories: |
-            cyaris/fireworks:fireworks:${{ needs.resolve-inputs.outputs.fireworks_ref }}
+    uses: cyaris/svelte-lib/.github/workflows/rollup-upload.yml@cy_dev3
+    with:
+      bundle-files: |
+        bundle.css:text/css
+        bundle.js:application/javascript
+      s3-bucket: cyaris.github.io
+      s3-prefix: mastermind
+      aws-region: us-east-2
+      aws-role-to-assume: ${{ needs.resolve-inputs.outputs.aws_role_to_assume }}
+      production: ${{ needs.resolve-inputs.outputs.production == 'true' }}
+      dry-run: ${{ needs.resolve-inputs.outputs.dry_run == 'true' }}
+      svelte-lib-ref: ${{ needs.resolve-inputs.outputs.svelte_lib_ref }}
+      local-dependency-repositories: |
+        cyaris/fireworks:fireworks:${{ needs.resolve-inputs.outputs.fireworks_ref }}
+    secrets: inherit
