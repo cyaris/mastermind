@@ -10,8 +10,8 @@ I first learned how to code while reading the book Learn Python the Hard Way. Fo
 
 The computer chooses a secret color code. Each turn, the player builds a guess from the color wheel. After each complete guess, the board shows:
 
-- `W`: correct color in the wrong position.
-- `B`: correct color in the right position.
+- `W`: correct color in the wrong position
+- `B`: correct color in the right position
 
 Win by matching the full code before the turn limit is reached.
 

@@ -7,6 +7,35 @@
 ## Documentation
 
 - Keep README link behavior intentional and consistent. Use standard Markdown links by default, and use HTML anchors with `target="_blank"` and `rel="noopener noreferrer"` only when links should explicitly open in a new tab.
+- Prefer bullets and subbullets over inline listed-out prose in README and Markdown documentation when they make
+  concrete technical lists easier to scan, especially files, paths, options, flags, configuration values, table names,
+  column names, commands, and metrics. Keep short phrase lists in prose when bullets would make the text feel
+  fragmented, and keep tables when they make dense reference data easier to compare.
+- Do not use bullets solely to separate README command examples or other code-block sections. Introduce each code block
+  with a short prose sentence instead.
+- Do not place separate bullet groups directly next to each other when they document different concepts, because
+  Markdown can render them as one list. Use prose, a table, or an explicit subsection label to separate the concepts.
+- Keep each README bullet list focused on one kind of item. If a bullet stands out as metadata, a context note, an
+  example, an identifier, or a behavior note rather than a peer of the surrounding bullets, move it into
+  prose, a table, a new subsection, or a clearly labeled subbullet group.
+- When README bullet items are sentence fragments, omit trailing periods. Keep periods for bullets that are complete
+  sentences or contain multiple sentences.
+- Avoid starting README bullets with ambiguous pronouns such as `it`, `this`, or `these` unless the noun is explicit in
+  the same bullet. Repeat the noun when that makes the bullet clearer.
+- Avoid vague README verbs such as `use`, `provide`, `support`, or `available` when the relationship can be named more
+  directly. Prefer concrete wording that identifies the field, flag, table, file path, setting, destination, or UI
+  behavior.
+- When documenting multiple README tables, files, or generated outputs, describe each item separately when a shared
+  description would become vague or hide meaningful differences.
+- Use prose instead of a bullet list when a section would contain only one bullet. Prefer prose over subbullets when a
+  nested list would have only two items, unless the pair needs extra visual separation to avoid ambiguity.
+- When an example supports an existing README bullet, make the example a subbullet under that point even when there is
+  only one example. Use `Example:` for one example and `Examples:` for multiple examples.
+- Let table-of-contents nesting reflect the document structure even when a section has only two children.
+- Keep documentation style guidance in AGENTS.md instead of the README.
+- Keep future maintainer instructions in AGENTS.md instead of the README. The README should describe project behavior,
+  commands, outputs, and user-facing effects rather than telling future editors what they should do.
+- In Markdown files, always format the literal as `null`.
 
 ## GitHub Actions
 
