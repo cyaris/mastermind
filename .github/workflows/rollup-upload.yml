@@ -87,4 +87,8 @@ jobs:
       svelte-lib-ref: ${{ needs.resolve-inputs.outputs.svelte_lib_ref }}
       local-dependency-repositories: |
         cyaris/fireworks:fireworks:${{ needs.resolve-inputs.outputs.fireworks_ref }}
-    secrets: inherit
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}

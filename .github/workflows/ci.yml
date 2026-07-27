@@ -23,4 +23,5 @@ jobs:
       svelte-lib-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || 'cy_dev3' }}
       local-dependency-repositories: |
         cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'cy_dev' }}
-    secrets: inherit
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
