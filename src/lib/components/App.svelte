@@ -105,8 +105,8 @@
                 class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
-                  ? 'cursor-help hover:stroke-2.5'
-                  : ''}"
+                    ? 'cursor-help hover:stroke-2.5'
+                    : ''}"
                 x={i * (rectWidth + padding)}
                 y={ii * (rectHeight + padding)}
                 rx={3}
@@ -116,20 +116,20 @@
                 fill={i >= settings.codeLength
                   ? "rgb(211,211,211)"
                   : colorClicks[ii * settings.codeLength + i]
-                  ? colorClicks[ii * settings.codeLength + i]
-                  : "transparent"}
+                    ? colorClicks[ii * settings.codeLength + i]
+                    : "transparent"}
                 title={i < settings.codeLength
                   ? ""
                   : ii == turn - 1 && colorClicks.length % settings.codeLength != 0
-                  ? "This round is in progress."
-                  : ii < turn - 1 && i >= settings.codeLength
-                  ? String(scores[ii][i - settings.codeLength]) +
-                    " " +
-                    Pluralize("color", scores[ii][i - settings.codeLength]) +
-                    " in the " +
-                    (i == settings.codeLength ? "wrong" : "right") +
-                    " place."
-                  : "This round hasn't<br />been played yet."}
+                    ? "This round is in progress."
+                    : ii < turn - 1 && i >= settings.codeLength
+                      ? String(scores[ii][i - settings.codeLength]) +
+                        " " +
+                        Pluralize("color", scores[ii][i - settings.codeLength]) +
+                        " in the " +
+                        (i == settings.codeLength ? "wrong" : "right") +
+                        " place."
+                      : "This round hasn't<br />been played yet."}
                 use:tooltip
               />
               {#if !i}

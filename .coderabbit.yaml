@@ -1,0 +1,113 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+inheritance: true
+language: "en-US"
+
+reviews:
+  profile: "chill"
+
+  request_changes_workflow: false
+  high_level_summary: true
+  review_status: true
+  review_details: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+    ignore_title_keywords:
+      - "WIP"
+      - "[skip review]"
+
+  path_filters:
+    - "!**/.DS_Store"
+    - "!**/.svelte-kit/**"
+    - "!**/dist/**"
+    - "!**/node_modules/**"
+
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        Focus on changes introduced by the pull request.
+
+        Prioritize:
+        - Incorrect behavior and likely runtime bugs
+        - Security vulnerabilities
+        - Broken links, navigation, or user interactions
+        - Backward compatibility
+        - Meaningful performance problems
+        - Unnecessary complexity
+        - Missing error handling
+        - Missing tests for important behavior
+
+        For each issue:
+        - Describe a concrete failure scenario.
+        - Explain why the issue matters.
+        - Recommend a specific correction.
+        - Distinguish blocking problems from optional improvements.
+
+        Avoid:
+        - Minor formatting comments
+        - Subjective naming preferences
+        - Suggestions already handled by formatters or linters
+        - Large refactors unrelated to the pull request
+        - Repeating the same concern in multiple comments
+
+    - path: "**/*.{cjs,js,svelte}"
+      instructions: |
+        Check for:
+        - Svelte reactivity, lifecycle, binding, and store regressions
+        - Missing cleanup for timers, observers, subscriptions, animations, and event listeners
+        - Runtime errors from optional DOM nodes, missing browser APIs, or server-side rendering assumptions
+        - Accessibility regressions in keyboard, focus, label, role, and touch behavior
+        - Responsive-layout problems, clipping, overflow, and unexpected horizontal scrolling
+        - Route-base or embedded GitHub Pages path mistakes
+        - Imports that bypass package exports or depend on unpublished source paths
+        - D3 state, scale, transition, and data-join mistakes that make charts stale or nondeterministic
+        - Changes that break shared component APIs used by downstream apps
+
+    - path: "**/*.{css,scss,svelte}"
+      instructions: |
+        Check for:
+        - Scoped embedded-app styles leaking into host pages or depending on host-page globals
+        - CSS custom properties without useful fallbacks where shared components are embedded
+        - Mobile viewport-height issues, fixed dimensions, and text or control overflow
+        - Missing focus-visible states and hover-only interactions
+        - Animations or transitions that should respect prefers-reduced-motion
+        - Tailwind class changes that unintentionally alter responsive behavior or selector specificity
+
+    - path: "**/{package.json,vite.config.js,rollup.config.js,svelte.config.js,eslint.config.js,postcss.config.cjs,tailwind.config.cjs,.prettierrc.cjs}"
+      instructions: |
+        Check for:
+        - Shared config wrappers drifting from the exports owned by svelte-lib
+        - Local file dependencies using the wrong sibling path
+        - Svelte, Vite, Rollup, ESLint, Prettier, Tailwind, or PostCSS version mismatches
+        - Build config changes that break linked local development or packaged output
+
+    - path: "src/lib/**"
+      instructions: |
+        Check for:
+        - Game-state transitions that allow impossible guesses, stale results, or incorrect win/loss states
+        - Route-base mistakes for the /mastermind GitHub Pages path
+        - Fireworks integration changes that break package exports, local file dependencies, or animation cleanup
+        - Accessibility regressions in controls needed for keyboard and touch play
+
+    - path: "**/.github/workflows/*.{yml,yaml}"
+      instructions: |
+        Check for:
+        - Invalid GitHub Actions syntax
+        - Excessive permissions
+        - Unsafe use of pull_request_target
+        - Incorrect branch or path filters
+        - Deployment steps that could expose secrets
+        - Rollup upload workflows drifting from the shared svelte-lib composite action contract
+
+    - path: "**/*.{md,markdown}"
+      instructions: |
+        Check for:
+        - Build, lint, format, and deployment commands that no longer match package scripts
+        - Links that should use standard Markdown by default or rel="noopener noreferrer" when intentionally opened in a new tab
+        - Documentation that conflicts with AGENTS.md, shared config behavior, or package exports
+        - Stale GitHub Actions, S3 bundle, route-base, or local file dependency guidance
+
+chat:
+  auto_reply: true

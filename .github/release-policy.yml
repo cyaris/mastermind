@@ -1,0 +1,17 @@
+extends: cyaris/svelte-lib/.github/release-policy.yml@cy_dev3
+
+project:
+  type: embedded-svelte-app
+
+versioning:
+  scheme: app-milestone
+  tag_format: vMAJOR.MINOR
+  release_title_format: "vX.Y - Plain-English Milestone"
+
+milestone_threshold:
+  create_release_for:
+    - meaningful gameplay, interface, embedding, or hosting milestones
+    - changes that materially improve the public embedded app experience
+  skip_release_for:
+    - staged bundle uploads without source behavior changes
+    - local dependency refreshes without user-facing impact

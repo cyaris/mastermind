@@ -9,17 +9,35 @@
   import Level2 from "../../routes/play/level_2/+page.svelte"
   import Level3 from "../../routes/play/level_3/+page.svelte"
   import Level4 from "../../routes/play/level_4/+page.svelte"
+
+  let projectRouteBase = "/mastermind"
+
+  function shellPaths(path = "") {
+    let routePath = `${projectRouteBase}${path}`
+
+    return path
+      ? [routePath, `${routePath}/`, `${routePath}/index.html`, `${routePath}.html`]
+      : [routePath, `${routePath}/`, `${routePath}/index.html`]
+  }
+
+  let routes = [
+    { paths: shellPaths(), component: Home },
+    { paths: shellPaths("/development"), component: Development },
+    { paths: shellPaths("/instructions"), component: Instructions },
+    { paths: shellPaths("/play"), component: Play },
+    { paths: shellPaths("/play/level_1"), component: Level1 },
+    { paths: shellPaths("/play/level_2"), component: Level2 },
+    { paths: shellPaths("/play/level_3"), component: Level3 },
+    { paths: shellPaths("/play/level_4"), component: Level4 },
+  ]
 </script>
 
 <main>
-  <Router base="/">
-    <Route path="/mastermind" component={Home} />
-    <Route path="/mastermind/development" component={Development} />
-    <Route path="/mastermind/instructions" component={Instructions} />
-    <Route path="/mastermind/play" component={Play} />
-    <Route path="/mastermind/play/level_1" component={Level1} />
-    <Route path="/mastermind/play/level_2" component={Level2} />
-    <Route path="/mastermind/play/level_3" component={Level3} />
-    <Route path="/mastermind/play/level_4" component={Level4} />
+  <Router>
+    {#each routes as { paths, component } (component)}
+      {#each paths as path (path)}
+        <Route {path} {component} />
+      {/each}
+    {/each}
   </Router>
 </main>
