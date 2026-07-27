@@ -15,7 +15,7 @@
     { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
     { codeLength: 4, colorsLength: 8, maxTurns: 8, buttonSpacer: 2 },
     { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
-    { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 }
+    { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 },
   ]
 
   let turn = 1
