@@ -20,8 +20,8 @@ jobs:
   node-package-ci:
     uses: cyaris/shared-automation/.github/workflows/ci.yml@main
     with:
-      svelte-lib-ref: ${{ inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || github.head_ref == 'dev' && 'dev' || github.ref_name == 'dev' && 'dev' || 'main' }}
       local-dependency-repositories: |
+        cyaris/svelte-lib:svelte-lib:${{ inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || github.head_ref == 'dev' && 'dev' || github.ref_name == 'dev' && 'dev' || 'main' }}
         cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
