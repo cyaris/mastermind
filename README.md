@@ -86,7 +86,7 @@ format, lint, Svelte check, and build commands.
 The workflow can be dispatched from the GitHub Actions UI with **Actions > CI > Run workflow**. Manual dispatch exposes
 `svelte-lib-ref` and `fireworks-ref` inputs for choosing the sibling `svelte-lib` and `fireworks` refs checked out for
 local `file:` dependencies. Automatic push and pull-request runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` repository
-variables when present, falling back to `cy_dev3` and `cy_dev`.
+variables when present, falling back to `main` and `dev`.
 
 ### `.github/workflows/rollup-upload.yml`
 

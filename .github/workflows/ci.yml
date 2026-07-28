@@ -9,19 +9,19 @@ on:
         description: svelte-lib ref used for the local file dependency.
         required: false
         type: string
-        default: cy_dev3
+        default: main
       fireworks-ref:
         description: fireworks ref used for the local file dependency.
         required: false
         type: string
-        default: cy_dev
+        default: dev
 
 jobs:
   node-package-ci:
-    uses: cyaris/svelte-lib/.github/workflows/node-package-ci.yml@cy_dev3
+    uses: cyaris/svelte-lib/.github/workflows/node-package-ci.yml@main
     with:
-      svelte-lib-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || 'cy_dev3' }}
+      svelte-lib-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || 'main' }}
       local-dependency-repositories: |
-        cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'cy_dev' }}
+        cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
