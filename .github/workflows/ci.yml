@@ -9,7 +9,7 @@ on:
         description: svelte-lib ref used for the local file dependency.
         required: false
         type: string
-        default: main
+        default: ""
       fireworks-ref:
         description: fireworks ref used for the local file dependency.
         required: false
@@ -20,7 +20,7 @@ jobs:
   node-package-ci:
     uses: cyaris/shared-automation/.github/workflows/ci.yml@main
     with:
-      svelte-lib-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || 'main' }}
+      svelte-lib-ref: ${{ inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || github.head_ref == 'dev' && 'dev' || github.ref_name == 'dev' && 'dev' || 'main' }}
       local-dependency-repositories: |
         cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
     secrets:
