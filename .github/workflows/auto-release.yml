@@ -35,7 +35,10 @@ jobs:
       pr-number: ${{ github.event.pull_request.number }}
       release-sha: ${{ github.event.pull_request.merge_commit_sha }}
       shared-automation-ref: ${{ vars.SHARED_AUTOMATION_REF || 'main' }}
-    secrets: inherit
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
 
   auto-release-manual:
     if: github.event_name == 'workflow_dispatch'
@@ -44,4 +47,7 @@ jobs:
       pr-number: ${{ inputs.pr-number }}
       release-sha: ${{ inputs.release-sha || github.sha }}
       shared-automation-ref: ${{ inputs.shared-automation-ref || vars.SHARED_AUTOMATION_REF || 'main' }}
-    secrets: inherit
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
