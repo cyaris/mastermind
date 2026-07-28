@@ -1,5 +1,3 @@
-extends: cyaris/svelte-lib/.github/release-policy.yml@cy_dev3
-
 project:
   type: embedded-svelte-app
 
