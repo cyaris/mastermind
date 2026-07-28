@@ -21,7 +21,7 @@ on:
         description: svelte-lib ref used for the local file dependency.
         required: true
         type: string
-        default: cy_dev3
+        default: dev
       fireworks-ref:
         description: fireworks ref used for the local file dependency.
         required: true
@@ -52,7 +52,7 @@ jobs:
 
           production="$INPUT_PRODUCTION"
           dry_run="$INPUT_DRY_RUN"
-          svelte_lib_ref="${INPUT_SVELTE_LIB_REF:-${VAR_SVELTE_LIB_REF:-cy_dev3}}"
+          svelte_lib_ref="${INPUT_SVELTE_LIB_REF:-${VAR_SVELTE_LIB_REF:-dev}}"
           fireworks_ref="${INPUT_FIREWORKS_REF:-${VAR_FIREWORKS_REF:-cy_dev}}"
 
           if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
@@ -73,7 +73,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: cyaris/svelte-lib/.github/workflows/rollup-upload.yml@cy_dev3
+    uses: cyaris/svelte-lib/.github/workflows/rollup-upload.yml@dev
     with:
       bundle-files: |
         bundle.css:text/css
