@@ -11,44 +11,6 @@ permissions:
 
 jobs:
   auto-create-dev-pr:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Create pull request if needed
-        env:
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-
-          if [[ "$DEFAULT_BRANCH" == "dev" ]]; then
-            printf "The default branch is dev, so there is no separate base branch for a pull request.\n"
-            exit 0
-          fi
-
-          git fetch --no-tags origin \
-            "+refs/heads/${DEFAULT_BRANCH}:refs/remotes/origin/${DEFAULT_BRANCH}" \
-            "+refs/heads/dev:refs/remotes/origin/dev"
-
-          if [[ "$(git rev-list --count "origin/${DEFAULT_BRANCH}..origin/dev")" == "0" ]]; then
-            printf "dev has no commits ahead of %s.\n" "$DEFAULT_BRANCH"
-            exit 0
-          fi
-
-          if [[ "$(gh pr list --repo "$REPOSITORY" --state open --base "$DEFAULT_BRANCH" --head dev --json number --jq 'length')" != "0" ]]; then
-            printf "An open pull request from dev to %s already exists.\n" "$DEFAULT_BRANCH"
-            exit 0
-          fi
-
-          gh pr create \
-            --repo "$REPOSITORY" \
-            --base "$DEFAULT_BRANCH" \
-            --head dev \
-            --title "Merge dev into ${DEFAULT_BRANCH}" \
-            --body "This pull request was automatically created after changes were pushed to dev."
+    uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@main
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}

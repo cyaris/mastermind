@@ -18,7 +18,7 @@ on:
 
 jobs:
   node-package-ci:
-    uses: cyaris/svelte-lib/.github/workflows/node-package-ci.yml@main
+    uses: cyaris/shared-automation/.github/workflows/ci.yml@main
     with:
       svelte-lib-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || 'main' }}
       local-dependency-repositories: |
