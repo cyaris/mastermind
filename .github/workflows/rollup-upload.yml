@@ -31,6 +31,7 @@ on:
 jobs:
   resolve-inputs:
     runs-on: ubuntu-latest
+    permissions: {}
     outputs:
       aws_role_to_assume: ${{ steps.values.outputs.aws_role_to_assume }}
       dry_run: ${{ steps.values.outputs.dry_run }}
