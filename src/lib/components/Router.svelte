@@ -28,7 +28,7 @@
     { paths: shellPaths("/play/level_1"), component: Level1 },
     { paths: shellPaths("/play/level_2"), component: Level2 },
     { paths: shellPaths("/play/level_3"), component: Level3 },
-    { paths: shellPaths("/play/level_4"), component: Level4 },
+    { paths: shellPaths("/play/level_4"), component: Level4 }
   ]
 </script>
 
