@@ -22,7 +22,7 @@ on:
         description: Publish a selected release instead of reporting only.
         required: false
         type: boolean
-        default: true
+        default: false
       update-existing:
         description: Update existing release titles and notes.
         required: false
