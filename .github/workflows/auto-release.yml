@@ -24,6 +24,11 @@ on:
         required: false
         type: string
         default: main
+      publish:
+        description: Publish a selected release instead of reporting only.
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -41,6 +46,7 @@ jobs:
       pr-number: ${{ github.event.pull_request.number }}
       release-sha: ${{ github.event.pull_request.merge_commit_sha }}
       shared-automation-ref: ${{ vars.SHARED_AUTOMATION_REF || 'main' }}
+      publish: true
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
@@ -57,6 +63,7 @@ jobs:
       pr-number: ${{ inputs.pr-number }}
       release-sha: ${{ inputs.release-sha || github.sha }}
       shared-automation-ref: ${{ inputs.shared-automation-ref || vars.SHARED_AUTOMATION_REF || 'main' }}
+      publish: ${{ inputs.publish }}
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
