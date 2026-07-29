@@ -66,6 +66,16 @@ jobs:
             dry_run="false"
           fi
 
+          if [[ "$production" == "true" && ! "$svelte_lib_ref" =~ ^[0-9a-f]{40}$ ]]; then
+            printf "Production uploads require SVELTE_LIB_REF or svelte-lib-ref to be a pinned 40-character commit SHA.\n" >&2
+            exit 1
+          fi
+
+          if [[ "$production" == "true" && ! "$fireworks_ref" =~ ^[0-9a-f]{40}$ ]]; then
+            printf "Production uploads require FIREWORKS_REF or fireworks-ref to be a pinned 40-character commit SHA.\n" >&2
+            exit 1
+          fi
+
           {
             printf "aws_role_to_assume=%s\n" "$VAR_AWS_ROLLUP_UPLOAD_ROLE_ARN"
             printf "dry_run=%s\n" "$dry_run"

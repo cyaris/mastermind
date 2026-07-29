@@ -22,7 +22,7 @@ on:
         description: Publish a selected release instead of reporting only.
         required: false
         type: boolean
-        default: true
+        default: false
       update-existing:
         description: Update existing release titles and notes.
         required: false
@@ -30,8 +30,9 @@ on:
         default: true
 
 permissions:
-  contents: read
-  pull-requests: read
+  contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   auto-release:
@@ -41,11 +42,11 @@ jobs:
       issues: write
       pull-requests: write
     with:
-      pr-number: ${{ inputs.pr-number }}
-      release-sha: ${{ inputs.release-sha }}
-      shared-automation-ref: ${{ inputs.shared-automation-ref || vars.SHARED_AUTOMATION_REF || 'main' }}
-      publish: ${{ inputs.publish }}
-      update-existing: ${{ inputs.update-existing }}
+      pr-number: ${{ github.event.inputs['pr-number'] }}
+      release-sha: ${{ github.event.inputs['release-sha'] }}
+      shared-automation-ref: ${{ github.event.inputs['shared-automation-ref'] }}
+      publish: ${{ github.event.inputs.publish == 'true' }}
+      update-existing: ${{ github.event.inputs['update-existing'] != 'false' }}
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}

@@ -12,5 +12,3 @@ permissions:
 jobs:
   auto-create-dev-pr:
     uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@main
-    secrets:
-      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
