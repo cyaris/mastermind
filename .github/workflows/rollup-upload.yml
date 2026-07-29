@@ -45,6 +45,7 @@ jobs:
           INPUT_FIREWORKS_REF: ${{ inputs.fireworks-ref }}
           INPUT_PRODUCTION: ${{ inputs.production }}
           INPUT_SVELTE_LIB_REF: ${{ inputs.svelte-lib-ref }}
+          HAS_AWS_ACCESS_KEYS: ${{ secrets.AWS_ACCESS_KEY_ID != '' && secrets.AWS_SECRET_ACCESS_KEY != '' }}
           VAR_AWS_ROLLUP_UPLOAD_ROLE_ARN: ${{ vars.AWS_ROLLUP_UPLOAD_ROLE_ARN }}
           VAR_FIREWORKS_REF: ${{ vars.FIREWORKS_REF }}
           VAR_SVELTE_LIB_REF: ${{ vars.SVELTE_LIB_REF }}
@@ -60,10 +61,29 @@ jobs:
 
           svelte_lib_ref="${INPUT_SVELTE_LIB_REF:-${VAR_SVELTE_LIB_REF:-$default_svelte_lib_ref}}"
           fireworks_ref="${INPUT_FIREWORKS_REF:-${VAR_FIREWORKS_REF:-dev}}"
+          has_aws_upload_config="false"
+          if [[ -n "$VAR_AWS_ROLLUP_UPLOAD_ROLE_ARN" || "$HAS_AWS_ACCESS_KEYS" == "true" ]]; then
+            has_aws_upload_config="true"
+          fi
 
           if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-            production="true"
-            dry_run="false"
+            if [[ "$has_aws_upload_config" == "true" ]]; then
+              production="true"
+              dry_run="false"
+            else
+              production="false"
+              dry_run="true"
+            fi
+          fi
+
+          if [[ "$production" == "true" && ! "$svelte_lib_ref" =~ ^[0-9a-f]{40}$ ]]; then
+            printf "Production uploads require SVELTE_LIB_REF or svelte-lib-ref to be a pinned 40-character commit SHA.\n" >&2
+            exit 1
+          fi
+
+          if [[ "$production" == "true" && ! "$fireworks_ref" =~ ^[0-9a-f]{40}$ ]]; then
+            printf "Production uploads require FIREWORKS_REF or fireworks-ref to be a pinned 40-character commit SHA.\n" >&2
+            exit 1
           fi
 
           {
