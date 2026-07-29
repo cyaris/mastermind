@@ -39,7 +39,7 @@ jobs:
     permissions:
       contents: write
       issues: write
-      pull-requests: read
+      pull-requests: write
     with:
       pr-number: ${{ inputs.pr-number }}
       release-sha: ${{ inputs.release-sha }}
