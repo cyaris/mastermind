@@ -11,10 +11,6 @@ permissions:
 
 jobs:
   auto-create-dev-pr:
-    concurrency:
-      group: auto-create-dev-pr-${{ github.repository }}-${{ github.ref_name }}
-      cancel-in-progress: false
-
     uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@main
     secrets:
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
