@@ -1,16 +1,10 @@
 name: Auto release
 
 on:
-  pull_request:
-    branches:
-      - main
-      - master
-    types:
-      - closed
   workflow_dispatch:
     inputs:
       release-sha:
-        description: Commit SHA to evaluate and release.
+        description: Commit SHA to reconcile releases through. Blank uses the default branch tip.
         required: false
         type: string
         default: ""
@@ -29,31 +23,18 @@ on:
         required: false
         type: boolean
         default: true
+      update-existing:
+        description: Update existing release titles and notes.
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
   pull-requests: read
 
 jobs:
-  auto-release-after-pr:
-    if: github.event.pull_request.merged == true
-    uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: read
-    with:
-      pr-number: ${{ github.event.pull_request.number }}
-      release-sha: ${{ github.event.pull_request.merge_commit_sha }}
-      shared-automation-ref: ${{ vars.SHARED_AUTOMATION_REF || 'main' }}
-      publish: true
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
-
-  auto-release-manual:
-    if: github.event_name == 'workflow_dispatch'
+  auto-release:
     uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
     permissions:
       contents: write
@@ -61,9 +42,10 @@ jobs:
       pull-requests: read
     with:
       pr-number: ${{ inputs.pr-number }}
-      release-sha: ${{ inputs.release-sha || github.sha }}
+      release-sha: ${{ inputs.release-sha }}
       shared-automation-ref: ${{ inputs.shared-automation-ref || vars.SHARED_AUTOMATION_REF || 'main' }}
       publish: ${{ inputs.publish }}
+      update-existing: ${{ inputs.update-existing }}
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
