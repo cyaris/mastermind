@@ -5,10 +5,6 @@ on:
     branches:
       - dev
 
-concurrency:
-  group: auto-create-dev-pr-${{ github.repository }}-dev
-  cancel-in-progress: false
-
 permissions:
   contents: read
   pull-requests: write
@@ -16,5 +12,3 @@ permissions:
 jobs:
   auto-create-dev-pr:
     uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@main
-    secrets:
-      RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
