@@ -79,6 +79,16 @@ Rebuild those packages after changing them so Mastermind can consume the latest 
 
 These local wrappers inherit their reusable implementations from `cyaris/shared-automation`. Manual `workflow_dispatch` paths delegated to the shared workflows are restricted to the `cyaris` GitHub actor by default.
 
+### `.github/workflows/auto-create-dev-pr.yml`
+
+The `Auto-create dev pull request` workflow runs on pushes to `dev` and delegates to the shared
+`cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml` workflow. It opens a `dev` to repository-default
+branch pull request when one does not already exist.
+
+This workflow has no GitHub Actions UI dispatch path. To run the same behavior manually, dispatch the reusable workflow
+from `cyaris/shared-automation` or create the pull request with `gh pr create`. The workflow passes `RELEASE_TOKEN` so
+the shared workflow can create pull requests when the default token is restricted.
+
 ### `.github/workflows/ci.yml`
 
 The `CI` workflow runs on pushes, pull requests, and manual dispatch. It calls the shared
@@ -87,8 +97,9 @@ format, lint, Svelte check, and build commands.
 
 The workflow can be dispatched from the GitHub Actions UI with **Actions > CI > Run workflow**. Manual dispatch exposes
 `svelte-lib-ref` and `fireworks-ref` inputs for choosing the sibling `svelte-lib` and `fireworks` refs checked out for
-local `file:` dependencies. Automatic push and pull-request runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` repository
-variables when present, falling back to `main` and `dev`.
+local `file:` dependencies. Push and pull-request runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` repository variables
+when present; otherwise `svelte-lib` selects `dev` for matching `dev` base, head, or ref names and `main` for all other
+refs, while `fireworks` falls back to `dev`.
 
 ### `.github/workflows/rollup-upload.yml`
 
@@ -111,15 +122,16 @@ authentication uses `AWS_ROLLUP_UPLOAD_ROLE_ARN` when present, otherwise it expe
 
 ### `.github/workflows/auto-release.yml`
 
-The `Auto release` workflow runs after a pull request is closed and delegates to the shared
+The `Auto release` workflow runs after a pull request targeting `main` or `master` is closed and delegates to the shared
 `cyaris/shared-automation/.github/workflows/auto-release.yml` workflow only when that pull request was merged. It evaluates the
 merge commit against the repository release policy, asks the configured OpenAI model whether the merge warrants a
 release, publishes a GitHub release when warranted, and comments the outcome on the pull request.
 
 The workflow can also be dispatched from the GitHub Actions UI with **Actions > Auto release > Run workflow**. Manual
 dispatch accepts optional `release-sha`, `pr-number`, and `shared-automation-ref` inputs; when `release-sha` is blank, it
-evaluates the workflow SHA. Release runs require `OPENAI_API_KEY`; `RELEASE_TOKEN` and `CHECKOUT_TOKEN` can be provided
-when the default token cannot create releases or read private repositories.
+evaluates the workflow SHA. Release decisions use `OPENAI_API_KEY`; when it is not configured, the shared workflow skips
+release decision work without failing. `RELEASE_TOKEN` and `CHECKOUT_TOKEN` can be provided when the default token cannot
+create releases or read private repositories.
 
 ## Credits
 

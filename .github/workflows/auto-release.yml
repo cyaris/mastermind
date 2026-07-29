@@ -2,6 +2,9 @@ name: Auto release
 
 on:
   pull_request:
+    branches:
+      - main
+      - master
     types:
       - closed
   workflow_dispatch:
@@ -23,14 +26,17 @@ on:
         default: main
 
 permissions:
-  contents: write
-  issues: write
+  contents: read
   pull-requests: read
 
 jobs:
   auto-release-after-pr:
     if: github.event.pull_request.merged == true
     uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: read
     with:
       pr-number: ${{ github.event.pull_request.number }}
       release-sha: ${{ github.event.pull_request.merge_commit_sha }}
@@ -43,6 +49,10 @@ jobs:
   auto-release-manual:
     if: github.event_name == 'workflow_dispatch'
     uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: read
     with:
       pr-number: ${{ inputs.pr-number }}
       release-sha: ${{ inputs.release-sha || github.sha }}
