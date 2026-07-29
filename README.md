@@ -98,9 +98,8 @@ present.
 The `Rollup upload` workflow calls the
 [shared rollup-upload workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollup-uploadyml) to build
 the rollup bundle and upload it to `s3://cyaris.github.io/mastermind/`. Manual dispatch exposes `svelte-lib-ref` and
-`fireworks-ref`; automatic runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` when set and fall back to a dry-run build when
-the repository has no AWS upload credentials configured. Production uploads require pinned 40-character dependency
-commit SHAs.
+`fireworks-ref`; automatic runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` when set. Production uploads require pinned
+40-character dependency commit SHAs.
 
 ### `.github/workflows/auto-release.yml`
 
