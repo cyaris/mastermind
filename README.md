@@ -107,6 +107,13 @@ The `Auto release` workflow runs from manual dispatch only and calls the
 [shared auto-release workflow](https://github.com/cyaris/shared-automation#githubworkflowsauto-releaseyml). This
 repository contributes `.github/release-policy.yml` overrides.
 
+### `.github/workflows/release-please.yml`
+
+The `Release Please` workflow runs on pushes to `master` and manual dispatches by `cyaris`, using
+`release-please-config.json` and `.release-please-manifest.json` for future releases. Historical reconciliation is
+complete through `2504eb35e885174bb12fde5ac3cf3ceb82ea595d`; `auto-release.yml` remains available for manual historical
+repair, while Release Please manages later commits.
+
 ## Credits
 
 Two existing D3.js projects really helped me in seeing this project through.
