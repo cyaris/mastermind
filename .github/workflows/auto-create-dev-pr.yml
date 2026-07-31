@@ -11,4 +11,4 @@ permissions:
 
 jobs:
   auto-create-dev-pr:
-    uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@main
+    uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@d8b402e487b26a803abadc3afdf0d6c3cac77820

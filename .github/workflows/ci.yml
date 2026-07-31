@@ -16,9 +16,12 @@ on:
         type: string
         default: dev
 
+permissions:
+  contents: read
+
 jobs:
   node-package-ci:
-    uses: cyaris/shared-automation/.github/workflows/ci.yml@main
+    uses: cyaris/shared-automation/.github/workflows/ci.yml@d8b402e487b26a803abadc3afdf0d6c3cac77820
     with:
       local-dependency-repositories: |
         cyaris/svelte-lib:svelte-lib:${{ inputs.svelte-lib-ref || vars.SVELTE_LIB_REF || github.base_ref == 'dev' && 'dev' || github.head_ref == 'dev' && 'dev' || github.ref_name == 'dev' && 'dev' || 'main' }}
