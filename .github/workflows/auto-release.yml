@@ -29,11 +29,6 @@ on:
         type: boolean
         default: true
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-
 jobs:
   auto-release:
     uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
