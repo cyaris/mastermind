@@ -1,4 +1,1 @@
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>cyaris/shared-automation"]
-}
+{ "$schema": "https://docs.renovatebot.com/renovate-schema.json", "extends": ["github>cyaris/shared-automation"] }
