@@ -114,6 +114,12 @@ The `Release Please` workflow runs on pushes to `master` and manual dispatches b
 complete through `2504eb35e885174bb12fde5ac3cf3ceb82ea595d`; `auto-release.yml` remains available for manual historical
 repair, while Release Please manages later commits.
 
+### `.github/workflows/workflow-validation.yml`
+
+The `Workflow validation` workflow runs on local workflow and automation configuration changes, then calls the
+[shared workflow-validation workflow](https://github.com/cyaris/shared-automation#githubworkflowsworkflow-validationyml)
+to validate rollup upload wrapper logic, release configuration, and Renovate configuration.
+
 ## Credits
 
 Two existing D3.js projects really helped me in seeing this project through.

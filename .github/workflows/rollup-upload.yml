@@ -89,7 +89,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: cyaris/shared-automation/.github/workflows/rollup-upload.yml@main
+    uses: cyaris/shared-automation/.github/workflows/rollup-upload.yml@d8b402e487b26a803abadc3afdf0d6c3cac77820
     with:
       bundle-files: |
         bundle.css:text/css

@@ -1,0 +1,33 @@
+name: Workflow validation
+
+on:
+  push:
+    branches:
+      - dev
+      - master
+    paths:
+      - ".github/release-policy.yml"
+      - ".github/workflows/**"
+      - ".release-please-manifest.json"
+      - "release-please-config.json"
+      - "renovate.json"
+  pull_request:
+    paths:
+      - ".github/release-policy.yml"
+      - ".github/workflows/**"
+      - ".release-please-manifest.json"
+      - "release-please-config.json"
+      - "renovate.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workflow-validation:
+    uses: cyaris/shared-automation/.github/workflows/workflow-validation.yml@d8b402e487b26a803abadc3afdf0d6c3cac77820
+    with:
+      json-files: |
+        .release-please-manifest.json
+        release-please-config.json
+        renovate.json
