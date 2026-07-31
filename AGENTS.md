@@ -45,6 +45,8 @@
 
 - Use `../shared-automation/AGENTS.md` as the source of truth for shared GitHub Actions, reusable workflow wrapper,
   release-policy, dispatch, and automation documentation conventions.
+- Before merging any pull request, explicitly inspect CodeRabbit comments and reviews and assess every still-applicable
+  finding; do not merge solely because checks are green.
 - Workflows must fail clearly when a requested feature requires credentials, secrets, repository variables, external
   permissions, or paid services that are not configured. Apply this to dry-run modes too unless the feature is
   explicitly documented as credential-optional.
