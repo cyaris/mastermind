@@ -75,6 +75,13 @@ This app uses local workspace packages:
 
 Rebuild those packages after changing them so Mastermind can consume the latest generated output.
 
+## Credits
+
+Two existing D3.js projects really helped me in seeing this project through.
+
+- <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank" rel="noopener noreferrer">Customizing Heatmap in D3.js</a>
+- <a href="http://jsfiddle.net/ksWDN//" target="_blank" rel="noopener noreferrer">Drawing Circles on the Circumference of Another Circle</a>
+
 ## GitHub Actions Workflows
 
 These local wrappers inherit their reusable implementations from `cyaris/shared-automation`. Shared workflow behavior,
@@ -86,20 +93,14 @@ inputs, and secrets are documented in the
 The `Auto-create dev pull request` workflow runs on pushes to `dev` and calls the
 [shared auto-create-dev-pr workflow](https://github.com/cyaris/shared-automation#githubworkflowsauto-create-dev-pryml).
 
-### `.github/workflows/ci.yml`
+### `.github/workflows/rollup.yml`
 
-The `CI` workflow runs on pushes, pull requests, and manual dispatch. It calls the
-[shared CI workflow](https://github.com/cyaris/shared-automation#githubworkflowsciyml). Manual dispatch exposes
-`svelte-lib-ref` and `fireworks-ref`; automatic runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` repository variables when
-present.
-
-### `.github/workflows/rollup-upload.yml`
-
-The `Rollup upload` workflow calls the
-[shared rollup-upload workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollup-uploadyml) to build
-the rollup bundle and upload it to `s3://cyaris.github.io/mastermind/`. Manual dispatch exposes `svelte-lib-ref` and
-`fireworks-ref`; automatic runs use `SVELTE_LIB_REF` and `FIREWORKS_REF` when set. Production uploads require pinned
-40-character dependency commit SHAs.
+The `Rollup` workflow runs on pushes, pull requests, and manual dispatch, then calls the
+[shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml). Shared CI runs for every
+trigger; uploads run on `main` and `master` pushes or manual dispatches to build the rollup bundle and upload it to
+`s3://cyaris.github.io/mastermind/`. Manual dispatch exposes `svelte-lib-ref` and `fireworks-ref`; automatic runs use
+`SVELTE_LIB_REF` and `FIREWORKS_REF` repository variables when present. Production uploads require pinned 40-character
+dependency commit SHAs.
 
 ### `.github/workflows/auto-release.yml`
 
@@ -119,10 +120,3 @@ historical repair, while Release Please manages later commits.
 The `Workflow validation` workflow runs on local workflow and automation configuration changes, then calls the
 [shared workflow-validation workflow](https://github.com/cyaris/shared-automation#githubworkflowsworkflow-validationyml)
 to validate rollup upload wrapper logic, release configuration, and Renovate configuration.
-
-## Credits
-
-Two existing D3.js projects really helped me in seeing this project through.
-
-- <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank" rel="noopener noreferrer">Customizing Heatmap in D3.js</a>
-- <a href="http://jsfiddle.net/ksWDN//" target="_blank" rel="noopener noreferrer">Drawing Circles on the Circumference of Another Circle</a>

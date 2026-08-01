@@ -1,0 +1,61 @@
+name: Rollup
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      production:
+        description: Upload bundle.* files instead of staged test_bundle.* files.
+        required: true
+        type: boolean
+        default: false
+      dry-run:
+        description: Print the S3 operations without writing objects.
+        required: true
+        type: boolean
+        default: false
+      svelte-lib-ref:
+        description: svelte-lib ref used for the local file dependency.
+        required: false
+        type: string
+        default: ""
+      fireworks-ref:
+        description: fireworks ref used for the local file dependency.
+        required: true
+        type: string
+        default: dev
+
+permissions:
+  contents: read
+
+jobs:
+  rollup:
+    permissions:
+      contents: read
+      id-token: write
+    uses: cyaris/shared-automation/.github/workflows/rollup.yml@main
+    with:
+      additional-ci-local-dependency-repositories: |
+        cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
+      bundle-files: |
+        bundle.css:text/css
+        bundle.js:application/javascript
+      s3-bucket: cyaris.github.io
+      s3-prefix: mastermind
+      aws-region: us-east-2
+      aws-role-to-assume: ${{ vars.AWS_ROLLUP_UPLOAD_ROLE_ARN }}
+      manual-production: ${{ inputs.production || false }}
+      manual-dry-run: ${{ inputs.dry-run || false }}
+      manual-svelte-lib-ref: ${{ inputs.svelte-lib-ref || '' }}
+      svelte-lib-variable-ref: ${{ vars.SVELTE_LIB_REF }}
+      rollup-local-dependency-repositories: |
+        cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
+      production-ref-requirements: |
+        FIREWORKS_REF=${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
