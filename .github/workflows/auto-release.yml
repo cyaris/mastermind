@@ -31,7 +31,7 @@ on:
 
 jobs:
   auto-release:
-    uses: cyaris/shared-automation/.github/workflows/auto-release.yml@d8b402e487b26a803abadc3afdf0d6c3cac77820
+    uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
     permissions:
       contents: write
       issues: write

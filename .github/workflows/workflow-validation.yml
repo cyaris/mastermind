@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   workflow-validation:
-    uses: cyaris/shared-automation/.github/workflows/workflow-validation.yml@d8b402e487b26a803abadc3afdf0d6c3cac77820
+    uses: cyaris/shared-automation/.github/workflows/workflow-validation.yml@main
     with:
       json-files: |
         .release-please-manifest.json

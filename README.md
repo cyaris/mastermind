@@ -20,11 +20,11 @@ Win by matching the full code before the turn limit is reached.
 The four levels vary code length, number of available colors, and maximum turns:
 
 | Level | Code length | Colors | Turns |
-| --- | ---: | ---: | ---: |
-| 1 | 4 | 6 | 8 |
-| 2 | 4 | 8 | 8 |
-| 3 | 5 | 6 | 9 |
-| 4 | 5 | 8 | 9 |
+| ----- | ----------: | -----: | ----: |
+| 1     |           4 |      6 |     8 |
+| 2     |           4 |      8 |     8 |
+| 3     |           5 |      6 |     9 |
+| 4     |           5 |      8 |     9 |
 
 ## Project layout
 
@@ -111,8 +111,8 @@ repository contributes `.github/release-policy.yml` overrides.
 
 The `Release Please` workflow runs on pushes to `master` and manual dispatches by `cyaris`, using
 `release-please-config.json` and `.release-please-manifest.json` for future releases. Historical reconciliation is
-complete through `2504eb35e885174bb12fde5ac3cf3ceb82ea595d`; `auto-release.yml` remains available for manual historical
-repair, while Release Please manages later commits.
+complete through the handoff recorded in `release-please-config.json`; `auto-release.yml` remains available for manual
+historical repair, while Release Please manages later commits.
 
 ### `.github/workflows/workflow-validation.yml`
 
