@@ -75,6 +75,13 @@ This app uses local workspace packages:
 
 Rebuild those packages after changing them so Mastermind can consume the latest generated output.
 
+## Credits
+
+Two existing D3.js projects really helped me in seeing this project through.
+
+- <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank" rel="noopener noreferrer">Customizing Heatmap in D3.js</a>
+- <a href="http://jsfiddle.net/ksWDN//" target="_blank" rel="noopener noreferrer">Drawing Circles on the Circumference of Another Circle</a>
+
 ## GitHub Actions Workflows
 
 These local wrappers inherit their reusable implementations from `cyaris/shared-automation`. Shared workflow behavior,
@@ -113,10 +120,3 @@ historical repair, while Release Please manages later commits.
 The `Workflow validation` workflow runs on local workflow and automation configuration changes, then calls the
 [shared workflow-validation workflow](https://github.com/cyaris/shared-automation#githubworkflowsworkflow-validationyml)
 to validate rollup upload wrapper logic, release configuration, and Renovate configuration.
-
-## Credits
-
-Two existing D3.js projects really helped me in seeing this project through.
-
-- <a href="https://www.d3-graph-gallery.com/graph/heatmap_style.html" target="_blank" rel="noopener noreferrer">Customizing Heatmap in D3.js</a>
-- <a href="http://jsfiddle.net/ksWDN//" target="_blank" rel="noopener noreferrer">Drawing Circles on the Circumference of Another Circle</a>
