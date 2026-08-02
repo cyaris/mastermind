@@ -9,9 +9,7 @@
 
   export let level = 1
 
-  let colors = schemeSet1
-
-  let levels = [
+  const levels = [
     { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
     { codeLength: 4, colorsLength: 8, maxTurns: 8, buttonSpacer: 2 },
     { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
@@ -22,16 +20,16 @@
   let settings
   let rectWidth
   let rectHeight
-  let padding = 2.5
+  const padding = 2.5
   let svgWidth
   let svgHeight
 
-  let outerRadius = 100
-  let svgWidth2 = outerRadius * 3
-  let svgHeight2 = svgWidth2 * (2 / 3)
+  const outerRadius = 100
+  const svgWidth2 = outerRadius * 3
+  const svgHeight2 = svgWidth2 * (2 / 3)
 
   let circleSepDegrees
-  let codeColors
+  let sortedCodeColors
   let colorCode
   $: {
     settings = levels[level - 1]
@@ -42,15 +40,16 @@
     svgWidth = (rectWidth + padding) * (settings.codeLength + 2) + 1
     svgHeight = (rectHeight + padding) * settings.maxTurns + 1
 
-    codeColors = colors.slice(0, settings.colorsLength)
+    const codeColors = schemeSet1.slice(0, settings.colorsLength)
+    sortedCodeColors = [...codeColors].sort()
 
     circleSepDegrees = 360 / settings.colorsLength
 
     if (!colorCode) {
-      colorCode = Array.from({ length: settings.codeLength }).map(
+      colorCode = Array.from(
+        { length: settings.codeLength },
         () => codeColors[Math.floor(Math.random() * codeColors.length)]
       )
-      console.log(colorCode)
     }
   }
 
@@ -58,14 +57,15 @@
 
   let gameOver = false
   let win = false
+  let scores = []
 
   function getScore(colorGuess) {
     let wScore = 0
     let bScore = 0
-    let colorGuessCopy = [...colorGuess]
-    let colorCodeCopy = [...colorCode]
+    const colorGuessCopy = [...colorGuess]
+    const colorCodeCopy = [...colorCode]
     colorCode.forEach((d, i) => {
-      if (d == colorGuess[i]) {
+      if (d === colorGuess[i]) {
         colorGuessCopy.splice(i - bScore, 1)
         colorCodeCopy.splice(i - bScore, 1)
         bScore += 1
@@ -82,9 +82,55 @@
     return [wScore, bScore]
   }
 
-  let scores = []
+  function getScoreTitle(column, row) {
+    if (column < settings.codeLength) {
+      return ""
+    }
 
-  let pieces = { 0: "", 1: ".", 2: ":", 3: ":.", 4: "::", 5: "★" }
+    if (row === turn - 1 && colorClicks.length % settings.codeLength !== 0) {
+      return "This round is in progress."
+    }
+
+    if (row < turn - 1) {
+      const score = scores[row][column - settings.codeLength]
+
+      return `${score} ${Pluralize("color", score)} in the ${column === settings.codeLength ? "wrong" : "right"} place.`
+    }
+
+    return "This round hasn't<br />been played yet."
+  }
+
+  function chooseColor(codeColor) {
+    colorClicks = [...colorClicks, codeColor]
+
+    if (colorClicks.length % settings.codeLength === 0) {
+      scores = [...scores, getScore(colorClicks.slice(-settings.codeLength))]
+      turn += 1
+    }
+
+    if (turn > 1 && scores[turn - 2][1] === settings.codeLength) {
+      win = true
+      dispatch("win", { value: true })
+    } else if (settings.codeLength * settings.maxTurns === colorClicks.length) {
+      gameOver = true
+    }
+  }
+
+  function getCellFill(column, row) {
+    if (column >= settings.codeLength) {
+      return "rgb(211,211,211)"
+    }
+
+    return colorClicks[row * settings.codeLength + column] || "transparent"
+  }
+
+  function getPlayAgainHref() {
+    const currentHref = window.location.href.replace(/\/+$/, "")
+
+    return currentHref.substring(0, currentHref.lastIndexOf("/") + 1)
+  }
+
+  const pieces = { 0: "", 1: ".", 2: ":", 3: ":.", 4: "::", 5: "★" }
 
   $: columns = settings ? Array.from({ length: settings.codeLength + 2 }, (_, i) => i) : []
   $: rows = settings ? Array.from({ length: settings.maxTurns }, (_, i) => i) : []
@@ -102,7 +148,7 @@
           {#each columns as i (i)}
             {#each rows as ii (ii)}
               <rect
-                class="stroke-black {i && ii == turn - 1 && colorClicks.length % settings.codeLength == i
+                class="stroke-black {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
                     ? 'cursor-help hover:stroke-2.5'
@@ -113,26 +159,11 @@
                 ry={3}
                 width={rectWidth}
                 height={rectHeight}
-                fill={i >= settings.codeLength
-                  ? "rgb(211,211,211)"
-                  : colorClicks[ii * settings.codeLength + i]
-                    ? colorClicks[ii * settings.codeLength + i]
-                    : "transparent"}
-                title={i < settings.codeLength
-                  ? ""
-                  : ii == turn - 1 && colorClicks.length % settings.codeLength != 0
-                    ? "This round is in progress."
-                    : ii < turn - 1 && i >= settings.codeLength
-                      ? String(scores[ii][i - settings.codeLength]) +
-                        " " +
-                        Pluralize("color", scores[ii][i - settings.codeLength]) +
-                        " in the " +
-                        (i == settings.codeLength ? "wrong" : "right") +
-                        " place."
-                      : "This round hasn't<br />been played yet."}
+                fill={getCellFill(i, ii)}
+                title={getScoreTitle(i, ii)}
                 use:tooltip
               />
-              {#if !i}
+              {#if i === 0}
                 <Text
                   classes="non-reactive text-end text-sm font-medium"
                   wrapBody={false}
@@ -143,18 +174,17 @@
                   bodyText={String(ii + 1)}
                 />
               {:else if i >= settings.codeLength && ii < turn - 1}
+                {@const scorePiece = scores[ii][i - settings.codeLength]}
                 <Text
                   classes="non-reactive text-center"
-                  bodyClasses="flex flex-col {scores[ii][i - settings.codeLength] == 5
-                    ? 'text-xl'
-                    : 'text-3xl'} justify-center"
+                  bodyClasses="flex flex-col {scorePiece === 5 ? 'text-xl' : 'text-3xl'} justify-center"
                   overflowBody={false}
                   wrapBody={false}
                   width={rectWidth}
                   height={rectHeight}
-                  x={i * (rectWidth + padding) + (scores[ii][i - settings.codeLength] <= 2 ? 5 : 0)}
-                  y={ii * (rectHeight + padding) - padding + (scores[ii][i - settings.codeLength] == 5 ? 3 : -1)}
-                  bodyText={pieces[scores[ii][i - settings.codeLength]]}
+                  x={i * (rectWidth + padding) + (scorePiece <= 2 ? 5 : 0)}
+                  y={ii * (rectHeight + padding) - padding + (scorePiece === 5 ? 3 : -1)}
+                  bodyText={pieces[scorePiece]}
                 />
               {/if}
             {/each}
@@ -165,7 +195,7 @@
               height={rectHeight}
               x={i * (rectWidth + padding)}
               y={-22.5}
-              bodyText={i < settings.codeLength ? String(i + 1) : i == settings.codeLength ? "W" : "B"}
+              bodyText={i < settings.codeLength ? String(i + 1) : i === settings.codeLength ? "W" : "B"}
             />
           {/each}
         </g>
@@ -179,7 +209,7 @@
             padding * (settings.codeLength - 3)} {svgHeight2}"
         >
           <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
-            {#each codeColors.sort() as codeColor, i (codeColor)}
+            {#each sortedCodeColors as codeColor, i (codeColor)}
               <g
                 transform="translate({(svgWidth2 / 2 - outerRadius) *
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
@@ -190,21 +220,7 @@
                   r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
                   fill={codeColor}
                   stroke="black"
-                  on:click={() => {
-                    colorClicks = [...colorClicks, codeColor]
-
-                    if (colorClicks.length % settings.codeLength == 0) {
-                      scores = [...scores, getScore(colorClicks.slice(-settings.codeLength))]
-                      turn += 1
-                    }
-
-                    if (turn > 1 && scores[turn - 2][1] == settings.codeLength) {
-                      win = true
-                      dispatch("win", { value: true })
-                    } else if (settings.codeLength * settings.maxTurns == colorClicks.length) {
-                      gameOver = true
-                    }
-                  }}
+                  on:click={() => chooseColor(codeColor)}
                 />
               </g>
             {/each}
@@ -242,13 +258,7 @@
           </svg>
         </div>
         <div class="mb-8">
-          <Button
-            classes="w-44"
-            href={window.location.href
-              .replace(/\/+$/, "")
-              .substring(0, window.location.href.replace(/\/+$/, "").lastIndexOf("/") + 1)}
-            label="Play Again"
-          />
+          <Button classes="w-44" href={getPlayAgainHref()} label="Play Again" />
         </div>
       {/if}
     </div>

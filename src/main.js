@@ -3,10 +3,10 @@ import "svelte-lib/styles/root.css"
 
 import Router from "./lib/components/Router.svelte"
 
-let div = document.createElement("div")
+const div = document.createElement("div")
 div.classList.add("mastermind")
 
-let script = document.currentScript
+const script = document.currentScript
 script.parentNode.insertBefore(div, script)
 
 new Router({ target: div })
