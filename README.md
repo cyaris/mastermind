@@ -95,12 +95,11 @@ The `Auto-create dev pull request` workflow runs on pushes to `dev` and calls th
 
 ### `.github/workflows/rollup.yml`
 
-The `Rollup` workflow runs on pushes, pull requests, and manual dispatch, then calls the
+The `Rollup` workflow runs on pushes to `master`, pull requests, and manual dispatch, then calls the
 [shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml). Shared CI runs for every
-trigger; uploads run on `main` and `master` pushes or manual dispatches to build the rollup bundle and upload it to
-`s3://cyaris.github.io/mastermind/`. Manual dispatch exposes `svelte-lib-ref` and `fireworks-ref`; automatic runs use
-`SVELTE_LIB_REF` and `FIREWORKS_REF` repository variables when present. Production uploads require pinned 40-character
-dependency commit SHAs.
+trigger; uploads run on `master` pushes or manual dispatches to build the rollup bundle and upload it to
+`s3://cyaris.github.io/mastermind/`. The workflow checks out `svelte-lib` and `fireworks` at their latest `main` commits
+as local dependencies. The shared workflow resolves those branches to exact commit SHAs before checkout.
 
 ### `.github/workflows/auto-release.yml`
 
