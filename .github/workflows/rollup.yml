@@ -2,6 +2,8 @@ name: Rollup
 
 on:
   push:
+    branches:
+      - master
   pull_request:
   workflow_dispatch:
     inputs:
@@ -15,16 +17,6 @@ on:
         required: true
         type: boolean
         default: false
-      svelte-lib-ref:
-        description: svelte-lib ref used for the local file dependency.
-        required: false
-        type: string
-        default: ""
-      fireworks-ref:
-        description: fireworks ref used for the local file dependency.
-        required: true
-        type: string
-        default: dev
 
 permissions:
   contents: read
@@ -37,7 +29,7 @@ jobs:
     uses: cyaris/shared-automation/.github/workflows/rollup.yml@main
     with:
       additional-ci-local-dependency-repositories: |
-        cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
+        cyaris/fireworks:fireworks:main
       bundle-files: |
         bundle.css:text/css
         bundle.js:application/javascript
@@ -47,12 +39,8 @@ jobs:
       aws-role-to-assume: ${{ vars.AWS_ROLLUP_UPLOAD_ROLE_ARN }}
       manual-production: ${{ inputs.production || false }}
       manual-dry-run: ${{ inputs.dry-run || false }}
-      manual-svelte-lib-ref: ${{ inputs.svelte-lib-ref || '' }}
-      svelte-lib-variable-ref: ${{ vars.SVELTE_LIB_REF }}
       rollup-local-dependency-repositories: |
-        cyaris/fireworks:fireworks:${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
-      production-ref-requirements: |
-        FIREWORKS_REF=${{ github.event_name == 'workflow_dispatch' && inputs.fireworks-ref || vars.FIREWORKS_REF || 'dev' }}
+        cyaris/fireworks:fireworks:main
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}

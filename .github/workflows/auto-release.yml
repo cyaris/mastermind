@@ -13,11 +13,6 @@ on:
         required: false
         type: string
         default: ""
-      shared-automation-ref:
-        description: shared-automation ref used to run the shared release workflow.
-        required: false
-        type: string
-        default: ""
       publish:
         description: Publish a selected release instead of reporting only.
         required: false
@@ -39,7 +34,6 @@ jobs:
     with:
       pr-number: ${{ github.event.inputs['pr-number'] }}
       release-sha: ${{ github.event.inputs['release-sha'] }}
-      shared-automation-ref: ${{ github.event.inputs['shared-automation-ref'] }}
       publish: ${{ github.event.inputs.publish == 'true' }}
       update-existing: ${{ github.event.inputs['update-existing'] != 'false' }}
     secrets:
