@@ -7,15 +7,11 @@ on:
     paths:
       - ".github/release-policy.yml"
       - ".github/workflows/**"
-      - ".release-please-manifest.json"
-      - "release-please-config.json"
       - "renovate.json"
   pull_request:
     paths:
       - ".github/release-policy.yml"
       - ".github/workflows/**"
-      - ".release-please-manifest.json"
-      - "release-please-config.json"
       - "renovate.json"
   workflow_dispatch:
 
@@ -25,8 +21,3 @@ permissions:
 jobs:
   workflow-validation:
     uses: cyaris/shared-automation/.github/workflows/workflow-validation.yml@main
-    with:
-      json-files: |
-        .release-please-manifest.json
-        release-please-config.json
-        renovate.json
