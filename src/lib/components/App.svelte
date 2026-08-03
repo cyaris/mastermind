@@ -2,7 +2,7 @@
   import { schemeSet1 } from "d3-scale-chromatic"
   import Pluralize from "pluralize"
   import { createEventDispatcher } from "svelte"
-  import { Button, Text } from "svelte-lib/components"
+  import { LinkButton, Text } from "svelte-lib/components"
   import { tooltip } from "svelte-lib/functions"
 
   const dispatch = createEventDispatcher()
@@ -258,7 +258,7 @@
           </svg>
         </div>
         <div class="mb-8">
-          <Button classes="w-44" href={getPlayAgainHref()} label="Play Again" />
+          <LinkButton classes="w-44" href={getPlayAgainHref()} label="Play Again" />
         </div>
       {/if}
     </div>

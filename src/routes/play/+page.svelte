@@ -1,5 +1,5 @@
 <script>
-  import { Button } from "svelte-lib/components"
+  import { LinkButton } from "svelte-lib/components"
 
   let showLevelsOverview = false
 </script>
@@ -7,12 +7,12 @@
 <div class="flex flex-col items-center">
   <div class="my-2 flex flex-col items-center">
     <div class="flex-row">
-      <Button classes="w-40" href="../play/level_1" label="Level 1" />
-      <Button classes="w-40" href="../play/level_2" label="Level 2" />
+      <LinkButton classes="w-40" href="../play/level_1" label="Level 1" />
+      <LinkButton classes="w-40" href="../play/level_2" label="Level 2" />
     </div>
     <div class="mt-2 flex-row">
-      <Button classes="w-40" href="../play/level_3" label="Level 3" />
-      <Button classes="w-40" href="../play/level_4" label="Level 4" />
+      <LinkButton classes="w-40" href="../play/level_3" label="Level 3" />
+      <LinkButton classes="w-40" href="../play/level_4" label="Level 4" />
     </div>
   </div>
   <div class="mb-8 mt-2 flex-col">
