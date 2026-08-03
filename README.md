@@ -100,7 +100,8 @@ The `Rollup` workflow runs on pushes to `dev` and `master`, pull requests, and m
 trigger; uploads run on `dev` and `master` pushes or manual dispatches to build the rollup bundle and upload it to
 `s3://cyaris.github.io/mastermind/`. `master` runs upload unprefixed production bundles, and `dev` runs upload staged
 `test_bundle.*` names. The workflow checks out `svelte-lib` and `fireworks` at their latest `main` commits as local
-dependencies. The shared workflow resolves those branches to exact commit SHAs before checkout.
+dependencies. The shared workflow resolves those branches to exact commit SHAs before checkout and passes the same
+resolved `fireworks` SHA to CI and upload.
 
 ### `.github/workflows/auto-release.yml`
 
