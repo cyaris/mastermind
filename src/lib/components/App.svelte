@@ -82,7 +82,7 @@
     return [wScore, bScore]
   }
 
-  function getScoreTitle(column, row) {
+  function getScoreTitle(column, row, colorClicks, scores, turn) {
     if (column < settings.codeLength) {
       return ""
     }
@@ -116,7 +116,7 @@
     }
   }
 
-  function getCellFill(column, row) {
+  function getCellFill(column, row, colorClicks) {
     if (column >= settings.codeLength) {
       return "rgb(211,211,211)"
     }
@@ -159,8 +159,8 @@
                 ry={3}
                 width={rectWidth}
                 height={rectHeight}
-                fill={getCellFill(i, ii)}
-                title={getScoreTitle(i, ii)}
+                fill={getCellFill(i, ii, colorClicks)}
+                title={getScoreTitle(i, ii, colorClicks, scores, turn)}
                 use:tooltip
               />
               {#if i === 0}
