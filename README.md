@@ -20,11 +20,11 @@ Win by matching the full code before the turn limit is reached.
 The four levels vary code length, number of available colors, and maximum turns:
 
 | Level | Code length | Colors | Turns |
-| ----- | ----------: | -----: | ----: |
-| 1     |           4 |      6 |     8 |
-| 2     |           4 |      8 |     8 |
-| 3     |           5 |      6 |     9 |
-| 4     |           5 |      8 |     9 |
+| --- | ---: | ---: | ---: |
+| 1 | 4 | 6 | 8 |
+| 2 | 4 | 8 | 8 |
+| 3 | 5 | 6 | 9 |
+| 4 | 5 | 8 | 9 |
 
 ## Project layout
 
