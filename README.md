@@ -20,11 +20,11 @@ Win by matching the full code before the turn limit is reached.
 The four levels vary code length, number of available colors, and maximum turns:
 
 | Level | Code length | Colors | Turns |
-| ----- | ----------: | -----: | ----: |
-| 1     |           4 |      6 |     8 |
-| 2     |           4 |      8 |     8 |
-| 3     |           5 |      6 |     9 |
-| 4     |           5 |      8 |     9 |
+| --- | ---: | ---: | ---: |
+| 1 | 4 | 6 | 8 |
+| 2 | 4 | 8 | 8 |
+| 3 | 5 | 6 | 9 |
+| 4 | 5 | 8 | 9 |
 
 ## Project layout
 
@@ -95,11 +95,13 @@ The `Auto-create dev pull request` workflow runs on pushes to `dev` and calls th
 
 ### `.github/workflows/rollup.yml`
 
-The `Rollup` workflow runs on pushes to `master`, pull requests, and manual dispatch, then calls the
+The `Rollup` workflow runs on pushes to `dev` and `master`, pull requests, and manual dispatch, then calls the
 [shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml). Shared CI runs for every
-trigger; uploads run on `master` pushes or manual dispatches to build the rollup bundle and upload it to
-`s3://cyaris.github.io/mastermind/`. The workflow checks out `svelte-lib` and `fireworks` at their latest `main` commits
-as local dependencies. The shared workflow resolves those branches to exact commit SHAs before checkout.
+trigger; uploads run on `dev` and `master` pushes or manual dispatches to build the rollup bundle and upload it to
+`s3://cyaris.github.io/mastermind/`. `master` runs upload unprefixed production bundles, and `dev` runs upload staged
+`test_bundle.*` names. The workflow checks out `svelte-lib` and `fireworks` at their latest `main` commits as local
+dependencies. The shared workflow resolves those branches to exact commit SHAs before checkout and passes the same
+resolved `fireworks` SHA to CI and upload.
 
 ### `.github/workflows/auto-release.yml`
 

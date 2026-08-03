@@ -50,7 +50,7 @@
 - Workflows must fail clearly when a requested feature requires credentials, secrets, repository variables, external
   permissions, or paid services that are not configured. Apply this to dry-run modes too unless the feature is
   explicitly documented as credential-optional.
-- Project-specific rollup upload inputs include the S3 prefix, bundle file list, and the `fireworks` local dependency
+- Project-specific Rollup inputs include the S3 prefix, bundle file list, and the `fireworks` local dependency
   spec. The shared Rollup workflow uses the latest `svelte-lib` and `fireworks` `main` commits by default and resolves
   those branches to exact commit SHAs during each run.
 - Project release naming and milestone overrides belong in `.github/release-policy.yml`.
