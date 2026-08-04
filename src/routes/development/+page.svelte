@@ -5,6 +5,6 @@
     originally hoped to integrate this original Python version into my site with Flask. Since Github doesn't support
     Flask, I decided to learn Javascript and create a web version of Mastermind using the D3.js library. The code for
     both versions of the game are included
-    <a href="https://github.com/cyaris/mastermind" target="_blank">here</a>.
+    <a href="https://github.com/cyaris/mastermind" target="_blank" rel="noopener noreferrer">here</a>.
   </p>
 </div>
