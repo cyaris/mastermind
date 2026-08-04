@@ -29,7 +29,6 @@ jobs:
     uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
     permissions:
       contents: write
-      issues: write
       pull-requests: write
     with:
       pr-number: ${{ github.event.inputs['pr-number'] }}
