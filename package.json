@@ -4,6 +4,9 @@
   "license": "MIT",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vite --host",
     "dev:open": "vite --host --open",
