@@ -4,11 +4,13 @@
   "license": "MIT",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "vite --host",
     "dev:open": "vite --host --open",
     "build": "vite build",
-    "package": "vite package",
     "preview": "vite preview",
     "preview:open": "vite preview --open",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
@@ -20,6 +22,10 @@
     "rollup": "rollup -c rollup.config.js",
     "rollup:watch": "rollup -c rollup.config.js -w"
   },
+  "overrides": {
+    "cookie": "^0.7.2",
+    "esbuild": "^0.25.2"
+  },
   "dependencies": {
     "d3-scale-chromatic": "3",
     "fireworks": "file:../fireworks",
@@ -28,6 +34,6 @@
     "svelte": "4.2.20",
     "svelte-lib": "file:../svelte-lib",
     "svelte-routing": "^2.3.0",
-    "vite": "^4.4.2"
+    "vite": "^5.4.21"
   }
 }

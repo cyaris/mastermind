@@ -8,13 +8,8 @@ on:
         required: false
         type: string
         default: ""
-      pr-number:
-        description: Pull request number to comment on.
-        required: false
-        type: string
-        default: ""
       publish:
-        description: Publish a selected release instead of reporting only.
+        description: Create and update releases instead of only reporting the plan.
         required: false
         type: boolean
         default: false
@@ -29,10 +24,7 @@ jobs:
     uses: cyaris/shared-automation/.github/workflows/auto-release.yml@main
     permissions:
       contents: write
-      issues: write
-      pull-requests: write
     with:
-      pr-number: ${{ github.event.inputs['pr-number'] }}
       release-sha: ${{ github.event.inputs['release-sha'] }}
       publish: ${{ github.event.inputs.publish == 'true' }}
       update-existing: ${{ github.event.inputs['update-existing'] != 'false' }}
