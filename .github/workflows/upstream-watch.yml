@@ -1,0 +1,23 @@
+name: Upstream Watch
+
+on:
+  schedule:
+    - cron: "18 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upstream-watch:
+    permissions:
+      contents: read
+      actions: write
+    uses: cyaris/shared-automation/.github/workflows/upstream-watch.yml@main
+    with:
+      local-dependency-repositories: |
+        cyaris/fireworks:fireworks:main
+      dispatch-ref: master
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
