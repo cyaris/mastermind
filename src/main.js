@@ -1,12 +1,10 @@
 import "svelte-lib/styles/app.css"
 import "svelte-lib/styles/root.css"
 
+import { mountEmbeddedRoot } from "svelte-lib/functions"
+
 import Router from "./lib/components/Router.svelte"
 
-const div = document.createElement("div")
-div.classList.add("mastermind")
-
-const script = document.currentScript
-script.parentNode.insertBefore(div, script)
+const div = mountEmbeddedRoot({ classes: ["mastermind"] })
 
 new Router({ target: div })

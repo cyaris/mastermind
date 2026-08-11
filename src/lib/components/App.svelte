@@ -97,7 +97,7 @@
       return `${score} ${Pluralize("color", score)} in the ${column === settings.codeLength ? "wrong" : "right"} place.`
     }
 
-    return "This round hasn't<br />been played yet."
+    return "This round hasn't\nbeen played yet."
   }
 
   function chooseColor(codeColor) {
