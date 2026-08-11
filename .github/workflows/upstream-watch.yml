@@ -2,7 +2,7 @@ name: Upstream Watch
 
 on:
   schedule:
-    - cron: "30 13 * * *"
+    - cron: "30 12 * * *"
   workflow_dispatch:
 
 permissions:
