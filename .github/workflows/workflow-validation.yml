@@ -3,12 +3,8 @@ name: Workflow validation
 on:
   push:
     branches:
+      - dev
       - master
-    paths:
-      - ".github/release-policy.yml"
-      - ".github/workflows/**"
-      - "renovate.json"
-  pull_request:
     paths:
       - ".github/release-policy.yml"
       - ".github/workflows/**"
