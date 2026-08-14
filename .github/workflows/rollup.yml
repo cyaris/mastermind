@@ -12,6 +12,11 @@ on:
         required: true
         type: boolean
         default: false
+      source-run-id:
+        description: Run ID of the upstream-watch run that dispatched this workflow, used to verify automated github-actions[bot] dispatches.
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -21,6 +26,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      actions: read
     uses: cyaris/shared-automation/.github/workflows/rollup.yml@main
     with:
       local-dependency-repositories: |
@@ -33,6 +39,7 @@ jobs:
       aws-region: us-east-2
       aws-role-to-assume: ${{ vars.AWS_ROLLUP_UPLOAD_ROLE_ARN }}
       manual-dry-run: ${{ inputs.dry-run || false }}
+      source-run-id: ${{ inputs.source-run-id }}
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
