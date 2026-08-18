@@ -8,6 +8,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "postinstall": "linklocal",
     "dev": "vite --host",
     "dev:open": "vite --host --open",
     "build": "vite build",
