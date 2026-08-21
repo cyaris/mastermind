@@ -1,6 +1,12 @@
 # mastermind
 
-Svelte implementation of the classic Mastermind code-breaking game. The app includes instructions, four playable levels, score feedback for each guess, a replay flow, and a fireworks celebration after a win.
+Svelte implementation of the classic Mastermind code-breaking game. The app includes:
+
+- instructions
+- four playable levels
+- score feedback for each guess
+- a replay flow
+- a fireworks celebration after a win
 
 View the live tool at <a href="https://charlieyaris.com/mastermind/" target="_blank" rel="noopener noreferrer">charlieyaris.com/mastermind</a>.
 
@@ -19,12 +25,12 @@ Win by matching the full code before the turn limit is reached.
 
 The four levels vary code length, number of available colors, and maximum turns:
 
-| Level | Code length | Colors | Turns |
-| --- | ---: | ---: | ---: |
-| 1 | 4 | 6 | 8 |
-| 2 | 4 | 8 | 8 |
-| 3 | 5 | 6 | 9 |
-| 4 | 5 | 8 | 9 |
+|Level|Code length|Colors|Turns|
+|---|---:|---:|---:|
+|1|4|6|8|
+|2|4|8|8|
+|3|5|6|9|
+|4|5|8|9|
 
 ## Project layout
 
@@ -84,9 +90,9 @@ Two existing D3.js projects really helped me in seeing this project through.
 
 ## GitHub Actions Workflows
 
-These local wrappers inherit their reusable implementations from `cyaris/shared-automation`. Shared workflow behavior,
-inputs, and secrets are documented in the
-[shared-automation workflow reference](https://github.com/cyaris/shared-automation#workflows).
+These local wrappers inherit their reusable implementations from `cyaris/shared-automation`. The
+[shared-automation workflow reference](https://github.com/cyaris/shared-automation#workflows) documents shared
+behavior, inputs, and secrets.
 
 ### `.github/workflows/auto-create-dev-pr.yml`
 
@@ -95,13 +101,14 @@ The `Auto-create dev pull request` workflow runs on pushes to `dev` and calls th
 
 ### `.github/workflows/rollup.yml`
 
-The `Rollup` workflow runs on pushes to `dev` and `master` and on manual dispatch, then calls the
-[shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml). Shared CI runs for every
-trigger; uploads run on `dev` and `master` pushes or manual dispatches to build the rollup bundle and upload it to
-`s3://cyaris.github.io/mastermind/`. `master` runs upload unprefixed production bundles, and `dev` runs upload staged
-`test_bundle.*` names. The workflow checks out `svelte-lib` and `fireworks` at their latest `main` commits as local
-dependencies. The shared workflow resolves those branches to exact commit SHAs before checkout and passes the same
-resolved `fireworks` SHA to CI and upload.
+The `Rollup` workflow calls the
+[shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml) with these local details:
+
+- triggers: pushes to `dev` and `master`, plus manual dispatch
+- destination: `s3://cyaris.github.io/mastermind/`
+- production naming: unprefixed bundles from `master`
+- staged naming: `test_bundle.*` from `dev`
+- local dependencies: latest `main` refs for `svelte-lib` and `fireworks`, resolved to exact SHAs
 
 ### `.github/workflows/upstream-watch.yml`
 
