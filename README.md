@@ -107,7 +107,7 @@ The `Rollup` workflow calls the
 - triggers: pushes to `dev` and `master`, plus manual dispatch
 - destination: `s3://cyaris.github.io/mastermind/`
 - production naming: unprefixed bundles from `master`
-- staged naming: `test_bundle.*` from `dev`
+- staged naming: `dev_bundle.*` from `dev`
 - local dependencies: `dev` refs for staged runs and `main` refs for production runs for both `svelte-lib` and
   `fireworks`, resolved to exact SHAs
 
