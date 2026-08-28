@@ -202,7 +202,7 @@
       </svg>
       {#if !(win || gameOver)}
         <svg
-          class="flex overflow-visible"
+          class="flex touch-manipulation overflow-visible"
           width={svgWidth2}
           height={svgHeight2}
           viewBox="{-svgWidth2 * (5 / 32)} {svgHeight2 / 16} {svgWidth2 -
