@@ -8,9 +8,9 @@
 
 - Inherit README and Markdown style, GitHub Actions, reusable workflow, pull-request review, workflow failure, commit,
   and release-management rules from `../shared-automation/AGENTS.md`.
-- Project-specific Rollup inputs include the S3 prefix, bundle file list, and the `fireworks` local dependency
-  spec. The shared Rollup workflow uses the latest `svelte-lib` and `fireworks` `main` commits by default and resolves
-  those branches to exact commit SHAs during each run.
+- Project-specific Rollup inputs include the S3 prefix, bundle file list, and the `fireworks` local dependency spec. The
+  shared Rollup workflow resolves `svelte-lib` and `fireworks` from `dev` for dev runs and from `main` for production
+  runs, pinning the selected branches to exact commit SHAs during each run.
 
 ## Routing And Hosting
 

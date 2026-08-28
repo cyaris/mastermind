@@ -108,16 +108,17 @@ The `Rollup` workflow calls the
 - destination: `s3://cyaris.github.io/mastermind/`
 - production naming: unprefixed bundles from `master`
 - staged naming: `test_bundle.*` from `dev`
-- local dependencies: latest `main` refs for `svelte-lib` and `fireworks`, resolved to exact SHAs
+- local dependencies: `dev` refs for staged runs and `main` refs for production runs for both `svelte-lib` and
+  `fireworks`, resolved to exact SHAs
 
 ### `.github/workflows/upstream-watch.yml`
 
 The `Upstream Watch` workflow runs daily at 12:53 UTC, 30 minutes after `fireworks`'s own upstream watch and 30
 minutes before the `cyaris.github.io` Pages build, and on manual dispatch, then calls the
 [shared upstream-watch workflow](https://github.com/cyaris/shared-automation#githubworkflowsupstream-watchyml). It
-watches `svelte-lib`'s and `fireworks`'s `main` branches and, when either has moved since the last check, dispatches
-this repository's own `Rollup` workflow on `master` so the build picks up the new upstream commit without waiting for
-a push here.
+watches `svelte-lib`'s and `fireworks`'s `dev` and `main` branch commits independently. When a watched branch moves, it
+dispatches this repository's `Rollup` workflow on the matching `dev` or `master` branch so staged and production
+bundles pick up the corresponding upstream code without waiting for a push here.
 
 ### `.github/workflows/auto-release.yml`
 
