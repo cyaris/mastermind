@@ -2,14 +2,14 @@ name: Upstream Watch
 
 on:
   schedule:
-    - cron: "18 13 * * *"
+    - cron: "53 12 * * *"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  upstream-watch:
+  upstream-watch-production:
     permissions:
       contents: read
       actions: write
@@ -18,6 +18,21 @@ jobs:
       local-dependency-repositories: |
         cyaris/fireworks:fireworks:main
       dispatch-ref: master
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+  upstream-watch-dev:
+    permissions:
+      contents: read
+      actions: write
+    uses: cyaris/shared-automation/.github/workflows/upstream-watch.yml@main
+    with:
+      svelte-lib-ref: dev
+      local-dependency-repositories: |
+        cyaris/fireworks:fireworks:dev
+      allow-nonproduction-refs: true
+      dispatch-ref: dev
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
