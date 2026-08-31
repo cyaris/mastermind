@@ -1,5 +1,4 @@
 <script>
-  import { schemeSet1 } from "d3-scale-chromatic"
   import Pluralize from "pluralize"
   import { createEventDispatcher } from "svelte"
   import { LinkButton, Text } from "svelte-lib/components"
@@ -15,6 +14,7 @@
     { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
     { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 }
   ]
+  const colorOrder = [1, 5, 3, 7, 2, 6, 4, 8]
 
   let turn = 1
   let settings
@@ -29,7 +29,7 @@
   const svgHeight2 = svgWidth2 * (2 / 3)
 
   let circleSepDegrees
-  let sortedCodeColors
+  let codeColors
   let colorCode
   $: {
     settings = levels[level - 1]
@@ -40,8 +40,7 @@
     svgWidth = (rectWidth + padding) * (settings.codeLength + 2) + 1
     svgHeight = (rectHeight + padding) * settings.maxTurns + 1
 
-    const codeColors = schemeSet1.slice(0, settings.colorsLength)
-    sortedCodeColors = [...codeColors].sort()
+    codeColors = colorOrder.slice(0, settings.colorsLength)
 
     circleSepDegrees = 360 / settings.colorsLength
 
@@ -118,10 +117,12 @@
 
   function getCellFill(column, row, colorClicks) {
     if (column >= settings.codeLength) {
-      return "rgb(211,211,211)"
+      return "var(--data-neutral)"
     }
 
-    return colorClicks[row * settings.codeLength + column] || "transparent"
+    let color = colorClicks[row * settings.codeLength + column]
+
+    return color ? `var(--data-category-${color})` : "transparent"
   }
 
   function getPlayAgainHref() {
@@ -148,7 +149,7 @@
           {#each columns as i (i)}
             {#each rows as ii (ii)}
               <rect
-                class="stroke-black {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
+                class="stroke-ui-text {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
                     ? 'cursor-help hover:stroke-2.5'
@@ -209,7 +210,7 @@
             padding * (settings.codeLength - 3)} {svgHeight2}"
         >
           <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
-            {#each sortedCodeColors as codeColor, i (codeColor)}
+            {#each codeColors as codeColor, i (codeColor)}
               <g
                 transform="translate({(svgWidth2 / 2 - outerRadius) *
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
@@ -218,8 +219,8 @@
                 <circle
                   class="cursor-pointer hover:stroke-3"
                   r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
-                  fill={codeColor}
-                  stroke="black"
+                  fill="var(--data-category-{codeColor})"
+                  stroke="var(--ui-text)"
                   on:click={() => chooseColor(codeColor)}
                 />
               </g>
@@ -250,8 +251,8 @@
                   ry={3}
                   width={rectWidth}
                   height={rectHeight}
-                  fill={color}
-                  stroke="black"
+                  fill="var(--data-category-{color})"
+                  stroke="var(--ui-text)"
                 />
               {/each}
             </g>
