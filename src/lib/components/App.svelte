@@ -117,7 +117,7 @@
 
   function getCellFill(column, row, colorClicks) {
     if (column >= settings.codeLength) {
-      return "var(--data-neutral)"
+      return "var(--ui-border-subtle)"
     }
 
     let color = colorClicks[row * settings.codeLength + column]
@@ -149,7 +149,9 @@
           {#each columns as i (i)}
             {#each rows as ii (ii)}
               <rect
-                class="stroke-ui-text {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
+                class="{i >= settings.codeLength ? 'stroke-ui-border' : 'stroke-ui-text'} {i > 0 &&
+                ii === turn - 1 &&
+                colorClicks.length % settings.codeLength === i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
                     ? 'cursor-help hover:stroke-2.5'
