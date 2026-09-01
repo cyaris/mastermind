@@ -122,7 +122,7 @@
 
     let color = colorClicks[row * settings.codeLength + column]
 
-    return color ? `var(--data-category-${color})` : "transparent"
+    return color ? `var(--mastermind-color-${color})` : "transparent"
   }
 
   function getPlayAgainHref() {
@@ -138,7 +138,7 @@
 </script>
 
 {#if settings}
-  <div class="flex h-full w-full justify-center">
+  <div class="mastermind-game flex h-full w-full justify-center">
     <div class="flex flex-col items-center">
       <div class="mb-12 flex flex-col items-center">
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
@@ -149,9 +149,7 @@
           {#each columns as i (i)}
             {#each rows as ii (ii)}
               <rect
-                class="{i >= settings.codeLength ? 'stroke-ui-border' : 'stroke-ui-text'} {i > 0 &&
-                ii === turn - 1 &&
-                colorClicks.length % settings.codeLength === i
+                class="stroke-ui-text {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
                     ? 'cursor-help hover:stroke-2.5'
@@ -221,7 +219,7 @@
                 <circle
                   class="cursor-pointer hover:stroke-3"
                   r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
-                  fill="var(--data-category-{codeColor})"
+                  fill="var(--mastermind-color-{codeColor})"
                   stroke="var(--ui-text)"
                   on:click={() => chooseColor(codeColor)}
                 />
@@ -253,7 +251,7 @@
                   ry={3}
                   width={rectWidth}
                   height={rectHeight}
-                  fill="var(--data-category-{color})"
+                  fill="var(--mastermind-color-{color})"
                   stroke="var(--ui-text)"
                 />
               {/each}
@@ -286,6 +284,17 @@
 
     .animation-bounce {
       animation: bounce 1s infinite;
+    }
+
+    .mastermind-game {
+      --mastermind-color-1: oklch(from var(--data-palette-reference) 65% 0.14 h);
+      --mastermind-color-2: oklch(from var(--mastermind-color-1) l c calc(h + 45));
+      --mastermind-color-3: oklch(from var(--mastermind-color-1) l c calc(h + 90));
+      --mastermind-color-4: oklch(from var(--mastermind-color-1) l c calc(h + 135));
+      --mastermind-color-5: oklch(from var(--mastermind-color-1) l c calc(h + 180));
+      --mastermind-color-6: oklch(from var(--mastermind-color-1) l c calc(h + 225));
+      --mastermind-color-7: oklch(from var(--mastermind-color-1) l c calc(h + 270));
+      --mastermind-color-8: oklch(from var(--mastermind-color-1) l c calc(h + 315));
     }
   </style>
 </svelte:head>
