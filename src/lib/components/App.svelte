@@ -1,13 +1,12 @@
 <script>
-  import { schemeSet1 } from "d3-scale-chromatic"
   import Pluralize from "pluralize"
   import { createEventDispatcher } from "svelte"
   import { LinkButton, Text } from "svelte-lib/components"
   import { tooltip } from "svelte-lib/functions"
 
-  const dispatch = createEventDispatcher()
-
   export let level = 1
+
+  const dispatch = createEventDispatcher()
 
   const levels = [
     { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
@@ -15,6 +14,7 @@
     { codeLength: 5, colorsLength: 6, maxTurns: 9, buttonSpacer: 3 },
     { codeLength: 5, colorsLength: 8, maxTurns: 9, buttonSpacer: 2 }
   ]
+  const colorOrder = [1, 5, 3, 7, 2, 6, 4, 8]
 
   let turn = 1
   let settings
@@ -29,7 +29,7 @@
   const svgHeight2 = svgWidth2 * (2 / 3)
 
   let circleSepDegrees
-  let sortedCodeColors
+  let codeColors
   let colorCode
   $: {
     settings = levels[level - 1]
@@ -40,8 +40,7 @@
     svgWidth = (rectWidth + padding) * (settings.codeLength + 2) + 1
     svgHeight = (rectHeight + padding) * settings.maxTurns + 1
 
-    const codeColors = schemeSet1.slice(0, settings.colorsLength)
-    sortedCodeColors = [...codeColors].sort()
+    codeColors = colorOrder.slice(0, settings.colorsLength)
 
     circleSepDegrees = 360 / settings.colorsLength
 
@@ -118,10 +117,12 @@
 
   function getCellFill(column, row, colorClicks) {
     if (column >= settings.codeLength) {
-      return "rgb(211,211,211)"
+      return "var(--ui-border-subtle)"
     }
 
-    return colorClicks[row * settings.codeLength + column] || "transparent"
+    let color = colorClicks[row * settings.codeLength + column]
+
+    return color ? `var(--mastermind-color-${color})` : "transparent"
   }
 
   function getPlayAgainHref() {
@@ -137,18 +138,18 @@
 </script>
 
 {#if settings}
-  <div class="flex h-full w-full justify-center">
+  <div class="mastermind-game flex h-full w-full justify-center">
     <div class="flex flex-col items-center">
       <div class="mb-12 flex flex-col items-center">
         <span>{settings.maxTurns} tries to crack the {settings.codeLength} color code.</span>
         <span>{settings.colorsLength} possible colors.</span>
       </div>
       <svg class="overflow-visible" width={svgWidth} height={svgHeight}>
-        <g transform="translate({1}, {1})">
-          {#each columns as i (i)}
-            {#each rows as ii (ii)}
+        <g transform="translate(1, 1)">
+          {#each columns as i}
+            {#each rows as ii}
               <rect
-                class="stroke-black {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
+                class="stroke-ui-text {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
                   ? 'stroke-2.5'
                   : i >= settings.codeLength
                     ? 'cursor-help hover:stroke-2.5'
@@ -209,7 +210,7 @@
             padding * (settings.codeLength - 3)} {svgHeight2}"
         >
           <g transform="translate({outerRadius + 1}, {outerRadius + 1})">
-            {#each sortedCodeColors as codeColor, i (codeColor)}
+            {#each codeColors as codeColor, i (codeColor)}
               <g
                 transform="translate({(svgWidth2 / 2 - outerRadius) *
                   Math.cos((circleSepDegrees * i * Math.PI) / 180)}, {(svgWidth2 / 2 - outerRadius) *
@@ -218,8 +219,8 @@
                 <circle
                   class="cursor-pointer hover:stroke-3"
                   r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
-                  fill={codeColor}
-                  stroke="black"
+                  fill="var(--mastermind-color-{codeColor})"
+                  stroke="var(--ui-text)"
                   on:click={() => chooseColor(codeColor)}
                 />
               </g>
@@ -238,11 +239,11 @@
         >
       {:else}
         <div class="non-reactive my-8 flex flex-col items-start">
-          <span class="animation-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
+          <span class="animate-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
           <span>Here's the code:</span>
           <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
-            <g transform="translate({1}, {1})">
-              {#each colorCode as color, i (i)}
+            <g transform="translate(1, 1)">
+              {#each colorCode as color, i}
                 <rect
                   x={i * (rectWidth + padding)}
                   y={0}
@@ -250,8 +251,8 @@
                   ry={3}
                   width={rectWidth}
                   height={rectHeight}
-                  fill={color}
-                  stroke="black"
+                  fill="var(--mastermind-color-{color})"
+                  stroke="var(--ui-text)"
                 />
               {/each}
             </g>
@@ -266,23 +267,15 @@
 {/if}
 <svelte:head>
   <style>
-    @keyframes bounce {
-      0% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-      }
-      50% {
-        transform: translateY(0);
-        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-      }
-      100% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-      }
-    }
-
-    .animation-bounce {
-      animation: bounce 1s infinite;
+    .mastermind-game {
+      --mastermind-color-1: oklch(from var(--data-palette-reference) 65% 0.14 h);
+      --mastermind-color-2: oklch(from var(--mastermind-color-1) l c calc(h + 45));
+      --mastermind-color-3: oklch(from var(--mastermind-color-1) l c calc(h + 90));
+      --mastermind-color-4: oklch(from var(--mastermind-color-1) l c calc(h + 135));
+      --mastermind-color-5: oklch(from var(--mastermind-color-1) l c calc(h + 180));
+      --mastermind-color-6: oklch(from var(--mastermind-color-1) l c calc(h + 225));
+      --mastermind-color-7: oklch(from var(--mastermind-color-1) l c calc(h + 270));
+      --mastermind-color-8: oklch(from var(--mastermind-color-1) l c calc(h + 315));
     }
   </style>
 </svelte:head>

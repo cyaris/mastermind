@@ -28,7 +28,6 @@
     "esbuild": "^0.25.2"
   },
   "dependencies": {
-    "d3-scale-chromatic": "3",
     "fireworks": "file:../fireworks",
     "linklocal": "^2.8.2",
     "pluralize": "^8.0.0",
