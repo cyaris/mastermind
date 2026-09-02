@@ -96,13 +96,13 @@ behavior, inputs, and secrets.
 
 ### `.github/workflows/auto-create-dev-pr.yml`
 
-The `Auto-create dev pull request` workflow runs on pushes to `dev` and calls the
+Runs on pushes to `dev` and calls the
 [shared auto-create-dev-pr workflow](https://github.com/cyaris/shared-automation#githubworkflowsauto-create-dev-pryml).
 
 ### `.github/workflows/rollup.yml`
 
-The `Rollup` workflow calls the
-[shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml) with these local details:
+Calls the [shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml) with these
+local details:
 
 - triggers: pushes to `dev` and `master`, plus manual dispatch
 - destination: `s3://cyaris.github.io/mastermind/`
@@ -113,20 +113,20 @@ The `Rollup` workflow calls the
 
 ### `.github/workflows/upstream-watch.yml`
 
-The `Upstream Watch` workflow runs daily at 12:53 UTC, 30 minutes after `fireworks`'s own upstream watch and 30
-minutes before the `cyaris.github.io` Pages build, and on manual dispatch, then calls the
+Runs daily at 12:53 UTC, 30 minutes after `fireworks`'s own upstream watch and 30 minutes before the `cyaris.github.io`
+Pages build, and on manual dispatch, then calls the
 [shared upstream-watch workflow](https://github.com/cyaris/shared-automation#githubworkflowsupstream-watchyml). It
 watches `svelte-lib`'s and `fireworks`'s `dev` and `main` branch commits independently.
 
 ### `.github/workflows/auto-release.yml`
 
-The `Auto release` workflow runs from manual dispatch only and calls the
+Runs from manual dispatch only and calls the
 [shared auto-release workflow](https://github.com/cyaris/shared-automation#githubworkflowsauto-releaseyml). This
 repository contributes `.github/release-policy.yml` overrides. Release creation or existing-release updates require
 reviewing the generated plan and explicitly enabling publication for an approved run.
 
 ### `.github/workflows/workflow-validation.yml`
 
-The `Workflow validation` workflow runs on local workflow and automation configuration changes, then calls the
+Runs on local workflow and automation configuration changes, then calls the
 [shared workflow-validation workflow](https://github.com/cyaris/shared-automation#githubworkflowsworkflow-validationyml)
 to validate rollup upload wrapper logic, release-policy configuration, and Renovate configuration.

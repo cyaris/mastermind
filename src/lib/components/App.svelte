@@ -4,9 +4,9 @@
   import { LinkButton, Text } from "svelte-lib/components"
   import { tooltip } from "svelte-lib/functions"
 
-  const dispatch = createEventDispatcher()
-
   export let level = 1
+
+  const dispatch = createEventDispatcher()
 
   const levels = [
     { codeLength: 4, colorsLength: 6, maxTurns: 8, buttonSpacer: 3 },
@@ -239,7 +239,7 @@
         >
       {:else}
         <div class="non-reactive my-8 flex flex-col items-start">
-          <span class="animation-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
+          <span class="animate-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
           <span>Here's the code:</span>
           <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate(1, 1)">
@@ -267,25 +267,6 @@
 {/if}
 <svelte:head>
   <style>
-    @keyframes bounce {
-      0% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-      }
-      50% {
-        transform: translateY(0);
-        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-      }
-      100% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-      }
-    }
-
-    .animation-bounce {
-      animation: bounce 1s infinite;
-    }
-
     .mastermind-game {
       --mastermind-color-1: oklch(from var(--data-palette-reference) 65% 0.14 h);
       --mastermind-color-2: oklch(from var(--mastermind-color-1) l c calc(h + 45));
