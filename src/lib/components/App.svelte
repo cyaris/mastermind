@@ -146,8 +146,8 @@
       </div>
       <svg class="overflow-visible" width={svgWidth} height={svgHeight}>
         <g transform="translate(1, 1)">
-          {#each columns as i (i)}
-            {#each rows as ii (ii)}
+          {#each columns as i}
+            {#each rows as ii}
               <rect
                 class="stroke-ui-text {i > 0 && ii === turn - 1 && colorClicks.length % settings.codeLength === i
                   ? 'stroke-2.5'
@@ -243,7 +243,7 @@
           <span>Here's the code:</span>
           <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
             <g transform="translate(1, 1)">
-              {#each colorCode as color, i (i)}
+              {#each colorCode as color, i}
                 <rect
                   x={i * (rectWidth + padding)}
                   y={0}
