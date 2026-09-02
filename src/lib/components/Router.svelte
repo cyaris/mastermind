@@ -1,4 +1,5 @@
 <script>
+  import { createShellPaths } from "svelte-lib/functions"
   import { Route, Router } from "svelte-routing"
 
   import Home from "../../routes/+page.svelte"
@@ -12,13 +13,7 @@
 
   let projectRouteBase = "/mastermind"
 
-  function shellPaths(path = "") {
-    let routePath = `${projectRouteBase}${path}`
-
-    return path
-      ? [routePath, `${routePath}/`, `${routePath}/index.html`, `${routePath}.html`]
-      : [routePath, `${routePath}/`, `${routePath}/index.html`]
-  }
+  let shellPaths = createShellPaths(projectRouteBase)
 
   let routes = [
     { paths: shellPaths(), component: Home },
@@ -34,8 +29,8 @@
 
 <main>
   <Router>
-    {#each routes as { paths, component } (component)}
-      {#each paths as path (path)}
+    {#each routes as { paths, component }}
+      {#each paths as path}
         <Route {path} {component} />
       {/each}
     {/each}

@@ -145,7 +145,7 @@
         <span>{settings.colorsLength} possible colors.</span>
       </div>
       <svg class="overflow-visible" width={svgWidth} height={svgHeight}>
-        <g transform="translate({1}, {1})">
+        <g transform="translate(1, 1)">
           {#each columns as i (i)}
             {#each rows as ii (ii)}
               <rect
@@ -242,7 +242,7 @@
           <span class="animation-bounce text-2xl font-extrabold">You {win ? "win" : "lose"}!</span>
           <span>Here's the code:</span>
           <svg class="mt-2 flex" width={svgWidth} height={svgHeight / settings.maxTurns}>
-            <g transform="translate({1}, {1})">
+            <g transform="translate(1, 1)">
               {#each colorCode as color, i (i)}
                 <rect
                   x={i * (rectWidth + padding)}

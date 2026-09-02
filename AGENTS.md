@@ -6,12 +6,13 @@
 
 ## Shared Conventions
 
-- Inherit README and Markdown style, GitHub Actions, reusable workflow, pull-request review, workflow failure, commit,
-  and release-management rules from `../shared-automation/AGENTS.md`.
-- Project-specific Rollup inputs include the S3 prefix, bundle file list, and the `fireworks` local dependency spec. The
-  shared Rollup workflow resolves `svelte-lib` and `fireworks` from `dev` for dev runs and from `main` for production
-  runs, pinning the selected branches to exact commit SHAs during each run.
+- Inherit README and Markdown style, GitHub Actions, reusable workflow wrapper, release policy, dispatch, pull-request
+  review, workflow failure, commit, and release-management rules from `../shared-automation/AGENTS.md`.
 
 ## Routing And Hosting
 
 - Use `/mastermind` as the simulated GitHub Pages route base for local/app rendering.
+
+## Rollup Delivery
+
+- Project-specific Rollup inputs include the S3 prefix, bundle file list, and a local dependency ref for `fireworks`.
