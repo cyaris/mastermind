@@ -18,12 +18,13 @@
 
   let turn = 1
   let settings
+
   let rectWidth
   let rectHeight
-  const padding = 2.5
   let svgWidth
   let svgHeight
 
+  const padding = 2.5
   const outerRadius = 100
   const svgWidth2 = outerRadius * 3
   const svgHeight2 = svgWidth2 * (2 / 3)
@@ -61,6 +62,7 @@
   function getScore(colorGuess) {
     let wScore = 0
     let bScore = 0
+
     const colorGuessCopy = [...colorGuess]
     const colorCodeCopy = [...colorCode]
     colorCode.forEach((d, i) => {
