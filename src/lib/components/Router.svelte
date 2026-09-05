@@ -1,5 +1,5 @@
 <script>
-  import { createShellPaths } from "svelte-lib/functions"
+  import { createShellPaths } from "svelte-lib/functions/routing"
   import { Route, Router } from "svelte-routing"
 
   import Home from "../../routes/+page.svelte"

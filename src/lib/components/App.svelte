@@ -1,8 +1,9 @@
 <script>
   import Pluralize from "pluralize"
   import { createEventDispatcher } from "svelte"
-  import { LinkButton, Text } from "svelte-lib/components"
-  import { tooltip } from "svelte-lib/functions"
+  import LinkButton from "svelte-lib/components/LinkButton"
+  import Text from "svelte-lib/components/Text"
+  import { tooltip } from "svelte-lib/functions/tooltipAction"
 
   export let level = 1
 

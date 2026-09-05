@@ -1,5 +1,5 @@
 <script>
-  import { LinkButton } from "svelte-lib/components"
+  import LinkButton from "svelte-lib/components/LinkButton"
 
   let showLevelsOverview = false
 </script>
