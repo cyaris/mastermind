@@ -21,7 +21,8 @@
     "lint": "eslint '**/*.{cjs,html,js,svelte}'",
     "lint:fix": "eslint --fix '**/*.{cjs,html,js,svelte}'",
     "rollup": "rollup -c rollup.config.js",
-    "rollup:watch": "rollup -c rollup.config.js -w"
+    "rollup:watch": "rollup -c rollup.config.js -w",
+    "test": "node --test"
   },
   "overrides": {
     "cookie": "^0.7.2",

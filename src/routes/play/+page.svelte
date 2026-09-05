@@ -1,5 +1,5 @@
 <script>
-  import { LinkButton } from "svelte-lib/components"
+  import LinkButton from "svelte-lib/components/LinkButton"
 
   let showLevelsOverview = false
 </script>
@@ -16,13 +16,15 @@
     </div>
   </div>
   <div class="mb-8 mt-2 flex-col">
-    <a href="#"
-      ><span class="cursor-pointer text-2xl font-bold" on:click={() => (showLevelsOverview = !showLevelsOverview)}
-        >Breakdown by Level</span
-      ></a
+    <button
+      class="cursor-pointer border-0 bg-transparent p-0 text-2xl font-bold text-link hover:text-link-hover"
+      type="button"
+      aria-controls="level-breakdown"
+      aria-expanded={showLevelsOverview}
+      on:click={() => (showLevelsOverview = !showLevelsOverview)}>Breakdown by Level</button
     >
     {#if showLevelsOverview}
-      <div>
+      <div id="level-breakdown">
         <h4>Level 1</h4>
         <ul>
           <li>4 color code</li>

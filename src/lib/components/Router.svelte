@@ -1,5 +1,5 @@
 <script>
-  import { createShellPaths } from "svelte-lib/functions"
+  import { createShellPaths } from "svelte-lib/functions/routing"
   import { Route, Router } from "svelte-routing"
 
   import Home from "../../routes/+page.svelte"
@@ -11,9 +11,7 @@
   import Level3 from "../../routes/play/level_3/+page.svelte"
   import Level4 from "../../routes/play/level_4/+page.svelte"
 
-  let projectRouteBase = "/mastermind"
-
-  let shellPaths = createShellPaths(projectRouteBase)
+  let shellPaths = createShellPaths("/mastermind")
 
   let routes = [
     { paths: shellPaths(), component: Home },
