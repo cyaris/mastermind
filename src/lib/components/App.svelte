@@ -5,6 +5,8 @@
   import Text from "svelte-lib/components/Text"
   import { tooltip } from "svelte-lib/functions/tooltipAction"
 
+  import { scoreGuess } from "../functions/scoring.js"
+
   export let level = 1
 
   const dispatch = createEventDispatcher()
@@ -60,30 +62,6 @@
   let win = false
   let scores = []
 
-  function getScore(colorGuess) {
-    let wScore = 0
-    let bScore = 0
-
-    const colorGuessCopy = [...colorGuess]
-    const colorCodeCopy = [...colorCode]
-    colorCode.forEach((d, i) => {
-      if (d === colorGuess[i]) {
-        colorGuessCopy.splice(i - bScore, 1)
-        colorCodeCopy.splice(i - bScore, 1)
-        bScore += 1
-      }
-    })
-
-    colorGuessCopy.forEach(d => {
-      if (colorCodeCopy.includes(d)) {
-        colorCodeCopy.splice(colorCodeCopy.indexOf(d), 1)
-        wScore += 1
-      }
-    })
-
-    return [wScore, bScore]
-  }
-
   function getScoreTitle(column, row, colorClicks, scores, turn) {
     if (column < settings.codeLength) {
       return ""
@@ -106,7 +84,7 @@
     colorClicks = [...colorClicks, codeColor]
 
     if (colorClicks.length % settings.codeLength === 0) {
-      scores = [...scores, getScore(colorClicks.slice(-settings.codeLength))]
+      scores = [...scores, scoreGuess(colorCode, colorClicks.slice(-settings.codeLength))]
       turn += 1
     }
 
@@ -115,6 +93,13 @@
       dispatch("win", { value: true })
     } else if (settings.codeLength * settings.maxTurns === colorClicks.length) {
       gameOver = true
+    }
+  }
+
+  function handleColorKeydown(event, codeColor) {
+    if (event.key == "Enter" || event.key == " ") {
+      event.preventDefault()
+      chooseColor(codeColor)
     }
   }
 
@@ -220,11 +205,15 @@
                   Math.sin((circleSepDegrees * i * Math.PI) / 180)})"
               >
                 <circle
-                  class="cursor-pointer hover:stroke-3"
+                  class="cursor-pointer hover:stroke-3 focus-visible:stroke-3 focus-visible:outline-none"
                   r={(svgWidth2 * settings.buttonSpacer) / circleSepDegrees}
                   fill="var(--mastermind-color-{codeColor})"
                   stroke="var(--ui-text)"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Choose color {i + 1}"
                   on:click={() => chooseColor(codeColor)}
+                  on:keydown={event => handleColorKeydown(event, codeColor)}
                 />
               </g>
             {/each}
