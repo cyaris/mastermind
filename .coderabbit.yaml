@@ -66,7 +66,7 @@ reviews:
         - Responsive-layout problems, clipping, overflow, and unexpected horizontal scrolling
         - Route-base or embedded GitHub Pages path mistakes
         - Imports that bypass package exports or depend on unpublished source paths
-        - D3 state, scale, transition, and data-join mistakes that make charts stale or nondeterministic
+        - Derived game, palette, routing, or animation state that becomes stale or nondeterministic
         - Changes that break shared component APIs used by downstream apps
 
     - path: "**/*.{css,scss,svelte}"
@@ -93,6 +93,7 @@ reviews:
         - Game-state transitions that allow impossible guesses, stale results, or incorrect win/loss states
         - Route-base mistakes for the /mastermind GitHub Pages path
         - Fireworks integration changes that break package exports, local file dependencies, or animation cleanup
+        - Level, peg, color-selection, scoring, or reset changes that disagree across the shared game and routed level pages
         - Accessibility regressions in controls needed for keyboard and touch play
 
     - path: "**/.github/workflows/*.{yml,yaml}"
@@ -103,7 +104,8 @@ reviews:
         - Unsafe use of pull_request_target
         - Incorrect branch or path filters
         - Deployment steps that could expose secrets
-        - Rollup upload workflows drifting from the shared svelte-lib composite action contract
+        - Rollup, upstream-watch, release, or validation callers drifting from shared-automation contracts
+        - Staged and production bundle names, fireworks dependency refs, or S3 prefixes diverging from repository guidance
 
     - path: "**/*.{md,markdown}"
       instructions: |
