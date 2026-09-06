@@ -1,5 +1,5 @@
 <script>
-  import { LevelGame } from "../../../lib/components"
+  import LevelGame from "../../../lib/components/LevelGame.svelte"
 </script>
 
 <LevelGame level={2} />

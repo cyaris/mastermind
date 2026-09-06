@@ -1,7 +1,7 @@
 import "svelte-lib/styles/app.css"
 import "svelte-lib/styles/root.css"
 
-import { mountEmbeddedRoot } from "svelte-lib/functions"
+import { mountEmbeddedRoot } from "svelte-lib/functions/dom"
 
 import Router from "./lib/components/Router.svelte"
 

@@ -1,5 +1,5 @@
 <script>
-  import { LinkButton } from "svelte-lib/components"
+  import LinkButton from "svelte-lib/components/LinkButton"
 </script>
 
 <div class="mb-8 flex min-h-[22vh] flex-col items-center justify-center">

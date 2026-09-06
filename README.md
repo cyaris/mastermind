@@ -65,6 +65,7 @@ npm run preview
 Run validation:
 
 ```sh
+npm test
 npm run check
 npm run lint
 npm run format:check
