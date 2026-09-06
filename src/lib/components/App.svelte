@@ -99,7 +99,10 @@
   function handleColorKeydown(event, codeColor) {
     if (event.key == "Enter" || event.key == " ") {
       event.preventDefault()
-      chooseColor(codeColor)
+
+      if (!event.repeat) {
+        chooseColor(codeColor)
+      }
     }
   }
 
