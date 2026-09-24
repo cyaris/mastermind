@@ -100,12 +100,18 @@ behavior, inputs, and secrets.
 Runs on pushes to `dev` and calls the
 [shared auto-create-dev-pr workflow](https://github.com/cyaris/shared-automation#githubworkflowsauto-create-dev-pryml).
 
+### `.github/workflows/ci.yml`
+
+Runs on manual dispatch, then calls the
+[shared CI workflow](https://github.com/cyaris/shared-automation#githubworkflowsciyml) with `svelte-lib` and `fireworks`
+checked out as local dependencies and `npm test` enabled alongside the shared format, lint, check, and build steps.
+
 ### `.github/workflows/rollup.yml`
 
 Calls the [shared rollup workflow](https://github.com/cyaris/shared-automation#githubworkflowsrollupyml) with these
 local details:
 
-- triggers: pushes to `dev` and `master`, plus manual dispatch
+- triggers: pushes to `master`, plus manual and upstream-watch dispatches on `dev` or `master`
 - destination: `s3://cyaris.github.io/mastermind/`
 - production naming: unprefixed bundles from `master`
 - staged naming: `dev_bundle.*` from `dev`
@@ -130,7 +136,7 @@ reviewing the generated plan and explicitly enabling publication for an approved
 
 ### `.github/workflows/workflow-validation.yml`
 
-Runs on `dev` and `master` pushes that change `.github/release-policy.yml`, `.github/workflows/**`, or `renovate.json`,
+Runs on `master` pushes that change `.github/release-policy.yml`, `.github/workflows/**`, or `renovate.json`,
 and on manual dispatch, then calls the
 [shared workflow-validation workflow](https://github.com/cyaris/shared-automation#githubworkflowsworkflow-validationyml)
 to validate rollup upload wrapper logic, release-policy configuration, and Renovate configuration.
