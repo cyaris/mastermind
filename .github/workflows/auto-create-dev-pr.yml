@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - dev
+      - master
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,6 +13,8 @@ permissions:
 
 jobs:
   auto-create-dev-pr:
+    if: ${{ github.event_name != 'push' || github.ref_name != 'dev' || vars.DEV_PR_OPEN != 'true' }}
     uses: cyaris/shared-automation/.github/workflows/auto-create-dev-pr.yml@main
     secrets:
+      CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
