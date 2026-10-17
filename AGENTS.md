@@ -2,12 +2,23 @@
 
 ## Shared Svelte Conventions
 
-- Use `../svelte-lib/AGENTS.md` as the source of truth for shared Svelte formatting, config, lint, dependency, D3, Vite, Rollup, CSS import, and scoped embedded styling conventions.
+- Follow the shared Svelte and JavaScript topics in `../svelte-lib/agents/`, which `CLAUDE.md` imports:
+  - `shared-code.md`
+  - `javascript.md`
+  - `svelte-components.md`
+  - `packages-and-config.md`
+  - `embedded-bundles.md`
+  - `jekyll-hosting.md`
+- Read `../svelte-lib/agents/charts.md` too before changing Canvas or D3 code.
 
 ## Shared Conventions
 
-- Inherit README and Markdown style, GitHub Actions, reusable workflow wrapper, release policy, dispatch, pull-request
-  review, workflow failure, commit, and release-management rules from `../shared-automation/AGENTS.md`.
+- Inherit README and Markdown style, link verification, GitHub Actions, reusable workflow, release policy, dispatch,
+  pull-request review and merge authorization, workflow failure, commit, and release-management rules from the
+  shared topics in `../shared-automation/agents/`, which `CLAUDE.md` imports:
+  - `documentation.md`
+  - `git-and-pull-requests.md`
+  - `workflows.md`
 
 ## Routing And Hosting
 
