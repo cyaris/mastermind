@@ -9,6 +9,7 @@
   - `packages-and-config.md`
   - `embedded-bundles.md`
   - `jekyll-hosting.md`
+  - `web-pages.md`
 - Read `../svelte-lib/agents/charts.md` too before changing Canvas or D3 code.
 
 ## Shared Conventions

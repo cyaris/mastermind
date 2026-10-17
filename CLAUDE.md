@@ -8,3 +8,4 @@
 @../svelte-lib/agents/packages-and-config.md
 @../svelte-lib/agents/embedded-bundles.md
 @../svelte-lib/agents/jekyll-hosting.md
+@../svelte-lib/agents/web-pages.md
