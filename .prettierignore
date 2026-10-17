@@ -1,0 +1,3 @@
+# Prettier pads every Markdown pipe table, and the shared documentation rules require compact tables, so Markdown is
+# formatted by hand. This keeps a direct `prettier --write` on a document from touching it.
+*.md

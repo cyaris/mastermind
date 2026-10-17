@@ -3,7 +3,6 @@ name: Workflow validation
 on:
   push:
     branches:
-      - dev
       - master
     paths:
       - ".github/release-policy.yml"
